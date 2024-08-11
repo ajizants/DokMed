@@ -26,8 +26,8 @@ const PaginatedTable = ({ data, columns }) => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div className="relative overflow-x-auto p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <>
+            <div className=" overflow-x-auto p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 {/* Search Input */}
                 <input
                     type="text"
@@ -88,7 +88,7 @@ const PaginatedTable = ({ data, columns }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
