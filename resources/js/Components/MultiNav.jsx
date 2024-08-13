@@ -70,7 +70,7 @@ const MenuContent = ({
             >
                 <div
                     className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
-                    style={{ left: "100%", top: "0" }}
+                    style={{ left: "300%", top: "0" }}
                     onClick={() => setOpen(false)}
                 >
                     <div

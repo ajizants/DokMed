@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
 use App\Models\Pasien;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PasienController extends Controller
@@ -38,10 +40,20 @@ class PasienController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Pasien $pasien)
+    public function show($id): JsonResponse
     {
-        //
+        // Find the patient by ID
+        $pasien = Pasien::with('user')->find($id);
+
+        if ($pasien) {
+            return response()->json($pasien);
+        } else {
+            return response()->json(['message' => 'No patient found with this ID.'], 404);
+        }
     }
 
     /**

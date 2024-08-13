@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Askep;
 use App\Http\Requests\StoreAskepRequest;
 use App\Http\Requests\UpdateAskepRequest;
+use App\Models\Askep;
+use Inertia\Inertia;
 
 class AskepController extends Controller
 {
@@ -13,7 +14,8 @@ class AskepController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Askep/Index', [
+        ]);
     }
 
     /**

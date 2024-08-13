@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AskepController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+    Route::get('/pasien/{id}', [PasienController::class, 'show'])->name('pasien.show');
+
+    Route::get('/askep', [AskepController::class, 'index'])->name('askep.index');
 
 });
 

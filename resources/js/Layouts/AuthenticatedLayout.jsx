@@ -219,27 +219,29 @@ export default function Authenticated({ user, header, children }) {
                                 </div>
                             </NavLink>
                             <NavLink
-                                href={route("pasien.index")}
-                                active={route().current("pasien.index")}
+                                href={route("askep.index")}
+                                active={route().current("askep.index")}
                                 className="relative flex items-center group"
                             >
                                 <div className="relative flex items-center">
                                     <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-4 whitespace-nowrap hidden group-hover:block bg-gray-200 dark:bg-gray-300 text-black px-2 py-1 rounded z-30">
-                                        Pasien
+                                        Askep
                                     </div>
                                     <svg
-                                        className="w-[28px] h-[28px] text-gray-800 dark:text-white"
+                                        className="w-6 h-6 text-gray-800 dark:text-white"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
                                         height="24"
-                                        fill="currentColor"
+                                        fill="none"
                                         viewBox="0 0 24 24"
                                     >
                                         <path
-                                            fillRule="evenodd"
-                                            d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
-                                            clipRule="evenodd"
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"
                                         />
                                     </svg>
                                 </div>
@@ -371,19 +373,20 @@ export default function Authenticated({ user, header, children }) {
                                     </div>
                                 </SidebarMenu.Trigger>
                                 <SidebarMenu.Content align="right" width="56">
-                                    <SidebarMenu.Link href="#">
-                                        Sub Item 1
+                                    <SidebarMenu.Link
+                                        href={route("pasien.index")}
+                                    >
+                                        Pasien
                                     </SidebarMenu.Link>
-                                    <SidebarMenu.SubMenu>
-                                        <SidebarMenu.Link href="#">
-                                            Sub Sub Item 1
-                                        </SidebarMenu.Link>
-                                        <SidebarMenu.Link href="#">
-                                            Sub Sub Item 2
-                                        </SidebarMenu.Link>
-                                    </SidebarMenu.SubMenu>
+
                                     <SidebarMenu.Link href="#">
-                                        Sub Item 2
+                                        SDKI
+                                    </SidebarMenu.Link>
+                                    <SidebarMenu.Link href="#">
+                                        SLKI
+                                    </SidebarMenu.Link>
+                                    <SidebarMenu.Link href="#">
+                                        SIKI
                                     </SidebarMenu.Link>
                                 </SidebarMenu.Content>
                             </SidebarMenu>
@@ -392,19 +395,6 @@ export default function Authenticated({ user, header, children }) {
                 </aside>
                 {/* </div> */}
                 <main className="flex-1 md:ml-20 px-4 lg:px-2 py-2">
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
-                    {children}
                     {children}
                 </main>
             </div>
