@@ -17,7 +17,10 @@ class SdkiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'kode_dx' => $this->faker->word,
+            'diagnosa' => $this->faker->sentence,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

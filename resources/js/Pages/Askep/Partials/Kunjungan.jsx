@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
-function Kunjungan() {
+function Kunjungan({ sdki }) {
+    console.log("🚀 ~ Kunjungan ~ sdki:", sdki);
     const [bb, setBB] = useState(""); // Weight
     const [tb, setTB] = useState(""); // Height
     const [imt, setIMT] = useState(""); // BMI
-    const diagnosaOptions = [
-        { value: "dx1", label: "Diagnosa 1" },
-        { value: "dx2", label: "Diagnosa 2" },
-        { value: "dx3", label: "Diagnosa 3" },
-    ];
+    const sdkiOptions = sdki.map((sdki) => ({
+        value: sdki.kode_dx,
+        label: sdki.diagnosa,
+    }));
 
     useEffect(() => {
         if (bb && tb) {
@@ -25,9 +25,170 @@ function Kunjungan() {
 
     return (
         <div>
-            <div className="columns-2 flex gap-2">
-                <div className="w-2/5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <form className="space-y-2" action="#">
+                    <div className="lg:flex gap-3">
+                        <div className="lg:flex-1">
+                            <label
+                                htmlFor="subjektif"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                            >
+                                Data Subjektif
+                            </label>
+
+                            <textarea
+                                type="text"
+                                id="subjektif"
+                                name="Data Subjektif"
+                                className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                                placeholder="Tuliskan Data Subjektif"
+                                title="Tuliskan Data Subjektif Pasien"
+                            ></textarea>
+                        </div>
+                        <div className="lg:flex-1">
+                            <label
+                                htmlFor="objektif"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                            >
+                                Data Objektif
+                            </label>
+                            <textarea
+                                type="text"
+                                id="objektif"
+                                name="Data Objektif"
+                                className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                                placeholder="Tuliskan Data Objektif"
+                                title="Tuliskan Data Objektif"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div className="lg:flex gap-2">
+                        <input
+                            type="text"
+                            id="td"
+                            inputMode="numeric"
+                            name="Tekanan Darah"
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="TD"
+                            title="Tuliskan TD Pasien"
+                        />
+                        <input
+                            type="number"
+                            id="nadi"
+                            inputMode="numeric"
+                            name="Nadi"
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="Nadi"
+                            title="Tuliskan Nadi Pasien"
+                        />
+                        <input
+                            type="number"
+                            id="rr"
+                            inputMode="numeric"
+                            name="RR"
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="RR"
+                            title="Tuliskan RR Pasien"
+                        />
+                        <input
+                            type="number"
+                            id="suhu"
+                            inputMode="numeric"
+                            name="Suhu"
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="Suhu"
+                            title="Tuliskan Suhu Pasien"
+                        />
+                        <input
+                            type="number"
+                            id="bb"
+                            inputMode="numeric"
+                            name="BB"
+                            value={bb}
+                            onChange={(e) => setBB(e.target.value)}
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="BB"
+                            title="Tuliskan BB Pasien"
+                        />
+                        <input
+                            type="number"
+                            id="tb"
+                            inputMode="numeric"
+                            name="TB"
+                            value={tb}
+                            onChange={(e) => setTB(e.target.value)}
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="TB"
+                            title="Tuliskan TB Pasien"
+                        />
+                        <input
+                            type="number"
+                            id="imt"
+                            inputMode="numeric"
+                            name="IMT"
+                            value={imt}
+                            readOnly
+                            className="mt-1 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="IMT"
+                            title="IMT (Body Mass Index) pasien"
+                        />
+                    </div>
+                    <label
+                        htmlFor="asesment"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                        Asesment
+                    </label>
+                    <div className="lg:flex gap-3">
+                        <div className="lg:flex-1 w-full">
+                            <Select
+                                name="Diagnosa Primer"
+                                id="dx_1"
+                                options={sdkiOptions}
+                                placeholder="Pilih Diagnosa Primer"
+                            />
+                        </div>
+                        <div className="lg:flex-1 w-full">
+                            <Select
+                                name="Diagnosa Sekunder"
+                                className="z-20"
+                                id="dx_2"
+                                options={sdkiOptions}
+                                placeholder="Pilih Diagnosa Sekunder"
+                            />
+                        </div>
+                    </div>
+                    <label
+                        htmlFor="planing"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                        Planing
+                    </label>
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Tindakan
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Durasi
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </form>
+            </div>
+            {/* <div className="columns-2 flex gap-2">
+                <div className="w-2/5 p-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <form className="space-y-2" action="#">
+                        <label
+                            htmlFor="subjektif"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
+                            Data Subjektif
+                        </label>
+
                         <textarea
                             type="text"
                             id="subjektif"
@@ -36,6 +197,13 @@ function Kunjungan() {
                             placeholder="Tuliskan Data Subjektif"
                             title="Tuliskan Data Subjektif Pasien"
                         ></textarea>
+                        <label
+                            htmlFor="objektif"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
+                            Data Objektif
+                        </label>
+
                         <div className="lg:flex gap-2">
                             <input
                                 type="text"
@@ -117,11 +285,18 @@ function Kunjungan() {
                             placeholder="Tuliskan Data Objektif"
                             title="Tuliskan Data Objektif"
                         ></textarea>
+                        <label
+                            htmlFor="asesment"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
+                            Asesment
+                        </label>
+
                         <div className="w-full">
                             <Select
                                 name="Diagnosa Primer"
                                 id="dx_1"
-                                options={diagnosaOptions}
+                                options={sdkiOptions}
                                 placeholder="Pilih Diagnosa Primer"
                             />
                         </div>
@@ -129,14 +304,32 @@ function Kunjungan() {
                             <Select
                                 name="Diagnosa Sekunder"
                                 id="dx_2"
-                                options={diagnosaOptions}
+                                options={sdkiOptions}
                                 placeholder="Pilih Diagnosa Sekunder"
                             />
                         </div>
+                        <label
+                            htmlFor="planing"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
+                            Planing
+                        </label>
+                        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3">
+                                        Tindakan
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Durasi
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
                     </form>
                 </div>
 
-                <div className="w-4/5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-4/5 p-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Noteworthy technology acquisitions 2021
@@ -168,7 +361,7 @@ function Kunjungan() {
                         </svg>
                     </a>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

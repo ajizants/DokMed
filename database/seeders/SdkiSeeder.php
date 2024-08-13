@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Sdki;
 use Illuminate\Database\Seeder;
 
 class SdkiSeeder extends Seeder
@@ -12,6 +12,7 @@ class SdkiSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Sdki::factory()->count(30)->create();
+
     }
 }

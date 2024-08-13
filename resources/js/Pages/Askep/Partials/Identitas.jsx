@@ -15,12 +15,12 @@ function IdentityForm() {
 
             if (response.ok && data && Object.keys(data).length > 0) {
                 toast.success("Patient found!", {
-                    position: "top-right", // Use string instead of `toast.POSITION.TOP_RIGHT`
+                    position: "top-center", // Use string instead of `toast.POSITION.TOP_center`
                 });
                 setPatientData(data);
             } else {
                 toast.error("No patient found with this ID.", {
-                    position: "top-right", // Use string instead of `toast.POSITION.TOP_RIGHT`
+                    position: "top-center", // Use string instead of `toast.POSITION.TOP_center`
                 });
                 setPatientData(null); // Clear any previous data
             }
@@ -40,6 +40,7 @@ function IdentityForm() {
                     <div className="flex-1">
                         <input
                             type="text"
+                            inputMode="numeric"
                             id="search_id"
                             name="search_id"
                             value={searchId}
@@ -73,6 +74,7 @@ function IdentityForm() {
                                 </label>
                                 <input
                                     type="text"
+                                    inputMode="numeric"
                                     id="nik"
                                     name="nik"
                                     value={patientData.nik || ""}

@@ -5,7 +5,8 @@ import { Head } from "@inertiajs/react";
 import Kunjungan from "./Partials/Kunjungan";
 import Asesment from "./Partials/Asesment";
 
-export default function Index({ auth, mustVerifyEmail, status }) {
+export default function Index({ auth, sdki }) {
+    console.log("🚀 ~ Index ~ sdki:", sdki);
     const [activeSection, setActiveSection] = useState("kunjungan");
 
     const toggleKunjungan = () => {
@@ -27,8 +28,8 @@ export default function Index({ auth, mustVerifyEmail, status }) {
         >
             <Head title="Askep" />
 
-            <div className="py-12">
-                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div className="py-6">
+                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-2">
                     <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <IdentityForm />
                     </div>
@@ -36,7 +37,7 @@ export default function Index({ auth, mustVerifyEmail, status }) {
                     <div className="flex gap-2 mt-1">
                         <button
                             onClick={toggleKunjungan}
-                            className={`text-blue-500 hover:underline mb-4 ${
+                            className={`text-blue-500 hover:underline ${
                                 activeSection === "kunjungan"
                                     ? "font-bold underline"
                                     : ""
@@ -46,7 +47,7 @@ export default function Index({ auth, mustVerifyEmail, status }) {
                         </button>
                         <button
                             onClick={toggleAsesment}
-                            className={`text-blue-500 hover:underline mb-4 ${
+                            className={`text-blue-500 hover:underline ${
                                 activeSection === "asesment"
                                     ? "font-bold underline"
                                     : ""
@@ -57,15 +58,15 @@ export default function Index({ auth, mustVerifyEmail, status }) {
                     </div>
 
                     {activeSection === "kunjungan" && (
-                        <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                             <div id="kunjungan">
-                                <Kunjungan />
+                                <Kunjungan sdki={sdki} />
                             </div>
                         </div>
                     )}
 
                     {activeSection === "asesment" && (
-                        <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                             <div id="asesment">
                                 <Asesment />
                             </div>
