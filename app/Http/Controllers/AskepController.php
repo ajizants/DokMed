@@ -15,10 +15,24 @@ class AskepController extends Controller
      */
     public function index()
     {
+        // Ambil semua data diagnosa dari model Sdki
+        $diagnosa = Sdki::all();
+
+        // Ubah menjadi array dengan hanya mengambil field yang dibutuhkan
+        $sdki = $diagnosa->map(function ($item) {
+            return [
+                'kode_dx' => $item->kode_dx,
+                'diagnosa' => $item->diagnosa,
+                // 'someHiddenData' => $item->someHiddenData, // Jika ada data yang ingin disembunyikan
+            ];
+        });
+
+        // Kirim data ke frontend menggunakan Inertia
         return Inertia::render('Askep/Index', [
-            'sdki' => Sdki::all(),
+            'sdki' => $sdki,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

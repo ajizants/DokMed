@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AskepController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/askep', [AskepController::class, 'index'])->name('askep.index');
 
+    Route::get('/master', [MasterController::class, 'index'])->name('master.index');
 });
 
 require __DIR__ . '/auth.php';

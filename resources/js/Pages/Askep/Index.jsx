@@ -6,7 +6,6 @@ import Kunjungan from "./Partials/Kunjungan";
 import Asesment from "./Partials/Asesment";
 
 export default function Index({ auth, sdki }) {
-    console.log("🚀 ~ Index ~ sdki:", sdki);
     const [activeSection, setActiveSection] = useState("kunjungan");
 
     const toggleKunjungan = () => {
@@ -34,7 +33,7 @@ export default function Index({ auth, sdki }) {
                         <IdentityForm />
                     </div>
 
-                    <div className="flex gap-2 mt-1">
+                    <div className="flex gap-3 mt-1">
                         <button
                             onClick={toggleKunjungan}
                             className={`text-blue-500 hover:underline ${
@@ -53,7 +52,7 @@ export default function Index({ auth, sdki }) {
                                     : ""
                             }`}
                         >
-                            Asesment
+                            Asesment Awal
                         </button>
                     </div>
 

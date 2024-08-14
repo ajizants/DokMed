@@ -1,23 +1,61 @@
-import { Link } from "@inertiajs/react";
+// import { Link } from "@inertiajs/react";
 
-export default function NavLink({
-    active = false,
-    className = "",
-    children,
-    ...props
-}) {
+// export default function NavLink({
+//     active = false,
+//     className = "",
+//     children,
+//     ...props
+// }) {
+//     return (
+//         <Link
+//             {...props}
+//             className={
+//                 "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none " +
+//                 (active
+//                     ? "border-indigo-400 dark:border-indigo-600 text-gray-900 dark:text-gray-100 focus:border-indigo-700 "
+//                     : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 ") +
+//                 className
+//             }
+//         >
+//             {children}
+//         </Link>
+//     );
+// }
+
+import { Link } from "@inertiajs/react";
+import classNames from "classnames";
+
+const NavLink = ({ href, active, icon, label }) => {
+    const linkClasses = classNames(
+        "relative flex items-center group px-2 py-1 transition duration-150 ease-in-out",
+        {
+            "text-blue-500 border-b-2 border-blue-500": active,
+            "text-gray-800 dark:text-white": !active,
+        }
+    );
+    const iconClasses = classNames("w-7 h-7", {
+        "text-blue-500 border-b-2 border-blue-500": active,
+        "text-gray-800 dark:text-white": !active,
+    });
+
     return (
-        <Link
-            {...props}
-            className={
-                "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none " +
-                (active
-                    ? "border-indigo-400 dark:border-indigo-600 text-gray-900 dark:text-gray-100 focus:border-indigo-700 "
-                    : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 ") +
-                className
-            }
-        >
-            {children}
+        <Link href={href} className={linkClasses}>
+            <div className="relative flex items-center hover:scale-110">
+                <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-4 whitespace-nowrap hidden group-hover:block bg-gray-200 dark:bg-gray-300 text-black px-2 py-1 rounded z-30">
+                    {label}
+                </div>
+                <svg
+                    className={iconClasses}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    {icon}
+                </svg>
+            </div>
         </Link>
     );
-}
+};
+
+export default NavLink;
