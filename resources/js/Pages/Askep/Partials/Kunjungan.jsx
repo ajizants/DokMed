@@ -159,8 +159,9 @@ function Kunjungan({ sdki }) {
                         </div>
                         <div className="lg:flex-1 w-full">
                             <Select
+                                className="basic-single"
+                                classNamePrefix="select"
                                 name="Diagnosa Sekunder"
-                                className="z-20"
                                 id="dx_2"
                                 options={sdkiOptions}
                                 placeholder="Pilih Diagnosa Sekunder"
