@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FloatingInput from "@/Components/FloatingInput";
 
 function IdentityForm() {
     const [searchId, setSearchId] = useState("");
@@ -38,15 +39,12 @@ function IdentityForm() {
             <form onSubmit={handleSearch} className="">
                 <div className="flex gap-4 items-center">
                     <div className="flex-1">
-                        <input
+                        <FloatingInput
                             type="text"
-                            inputMode="numeric"
                             id="search_id"
-                            name="search_id"
+                            label="Enter patient ID and press Enter or click Search"
                             value={searchId}
                             onChange={(e) => setSearchId(e.target.value)}
-                            className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="Enter patient ID and press Enter or click Search"
                         />
                     </div>
                     <button
@@ -65,153 +63,89 @@ function IdentityForm() {
                     </h3>
                     <div className="grid grid-cols-1 gap-6">
                         <div className="lg:flex gap-3 sm:mt-0">
-                            <div className="lg:flex-1 mt-2">
-                                <label
-                                    htmlFor="nik"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    NIK
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4">
+                                <FloatingInput
                                     type="text"
-                                    inputMode="numeric"
                                     id="nik"
-                                    name="nik"
+                                    label="NIK"
                                     value={patientData.nik || ""}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
-                            <div className="lg:flex-1 mt-2">
-                                <label
-                                    htmlFor="nama"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    Name
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4">
+                                <FloatingInput
                                     type="text"
                                     id="nama"
-                                    name="nama"
+                                    label="Nama"
                                     value={patientData.nama}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
-                            <div className="lg:flex-1 mt-2">
-                                <label
-                                    htmlFor="alamat"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    Address
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4">
+                                <FloatingInput
                                     type="text"
                                     id="alamat"
-                                    name="alamat"
+                                    label="Alamat"
                                     value={patientData.alamat}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
                         </div>
                         <div className="lg:flex gap-3 sm:mt-0">
-                            <div className="lg:flex-1 mt-2 ">
-                                <label
-                                    htmlFor="no_hp"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    Phone Number
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4 ">
+                                <FloatingInput
                                     type="text"
                                     id="no_hp"
-                                    name="no_hp"
+                                    label="No HP"
                                     value={patientData.no_hp}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
-                            <div className="lg:flex-1 mt-2">
-                                <label
-                                    htmlFor="tgl_lahir"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    Date of Birth
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4">
+                                <FloatingInput
                                     type="date"
                                     id="tgl_lahir"
-                                    name="tgl_lahir"
+                                    label="Tanggal Lahir"
                                     value={patientData.tgl_lahir}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
-                            <div className="lg:flex-1 mt-2 ">
-                                <label
-                                    htmlFor="gender"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    Gender
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4 ">
+                                <FloatingInput
                                     type="text"
                                     id="gender"
-                                    name="gender"
+                                    label="Jenis Kelamin"
                                     value={patientData.gender}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
-                            <div className="lg:flex-1 mt-2 ">
-                                <label
-                                    htmlFor="pekerjaan"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    Occupation
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4 ">
+                                <FloatingInput
                                     type="text"
                                     id="pekerjaan"
-                                    name="pekerjaan"
+                                    label="Pekerjaan"
                                     value={patientData.pekerjaan}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
                         </div>
                         <div className="lg:flex gap-3 sm:mt-0">
-                            <div className="lg:flex-1 mt-2">
-                                <label
-                                    htmlFor="id_user"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    User ID
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4">
+                                <FloatingInput
                                     type="text"
                                     id="id_user"
-                                    name="id_user"
+                                    label="User ID"
                                     value={patientData.id_user}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
-                            <div className="lg:flex-1 mt-2">
-                                <label
-                                    htmlFor="name_user"
-                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                >
-                                    User Name
-                                </label>
-                                <input
+                            <div className="lg:flex-1 mt-4">
+                                <FloatingInput
                                     type="text"
                                     id="name_user"
-                                    name="name_user"
+                                    label="User Name"
                                     value={patientData.user?.name || ""}
                                     readOnly
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                 />
                             </div>
                         </div>

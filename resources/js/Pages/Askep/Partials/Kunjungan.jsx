@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-
+import FloatingTextArea from "@/Components/FloatingTextArea";
+import FloatingInput from "@/Components/FloatingInput";
 function Kunjungan({ sdki }) {
     const sdkiOptions = sdki.map((sdki) => ({
         value: sdki.kode_dx,
@@ -29,115 +30,52 @@ function Kunjungan({ sdki }) {
                 <form className="space-y-2" action="#">
                     <div className="lg:flex gap-3">
                         <div className="lg:flex-1 mb-2 lg:mb-0">
-                            <label
-                                htmlFor="subjektif"
-                                className=" block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >
-                                Data Subjektif
-                            </label>
-
-                            <textarea
+                            <FloatingTextArea
                                 type="text"
                                 id="subjektif"
-                                name="Data Subjektif"
-                                className="mt-2 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                                placeholder="Tuliskan Data Subjektif"
-                                title="Tuliskan Data Subjektif Pasien"
-                            ></textarea>
+                                label="Data Subjektif"
+                            />
                         </div>
                         <div className="lg:flex-1 mb-2 lg:mb-0">
-                            <label
-                                htmlFor="objektif"
-                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >
-                                Data Objektif
-                            </label>
-                            <textarea
+                            <FloatingTextArea
                                 type="text"
                                 id="objektif"
-                                name="Data Objektif"
-                                className="mt-2 h-30 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                                placeholder="Tuliskan Data Objektif"
-                                title="Tuliskan Data Objektif"
-                            ></textarea>
+                                label="Data Objektif"
+                            />
                         </div>
                     </div>
 
-                    <label
-                        htmlFor="tanda vital"
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                    >
-                        Tanda Vital
-                    </label>
-                    <div className="lg:flex gap-2 ">
-                        <input
-                            type="text"
+                    <div className="lg:flex gap-2 space-y-2">
+                        <FloatingInput
                             id="td"
-                            inputMode="numeric"
-                            name="Tekanan Darah"
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="TD"
-                            title="Tuliskan TD Pasien"
+                            label="Tekanan Darah"
+                            type="text"
+                            mode="numeric"
+                            className="lg:flex-1"
                         />
-                        <input
-                            type="number"
-                            id="nadi"
-                            inputMode="numeric"
-                            name="Nadi"
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="Nadi"
-                            title="Tuliskan Nadi Pasien"
-                        />
-                        <input
-                            type="number"
-                            id="rr"
-                            inputMode="numeric"
-                            name="RR"
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="RR"
-                            title="Tuliskan RR Pasien"
-                        />
-                        <input
-                            type="number"
-                            id="suhu"
-                            inputMode="numeric"
-                            name="Suhu"
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="Suhu"
-                            title="Tuliskan Suhu Pasien"
-                        />
-                        <input
-                            type="number"
+                        <FloatingInput id="nadi" label="Nadi" type="number" />
+                        <FloatingInput id="rr" label="RR" type="number" />
+                        <FloatingInput id="suhu" label="Suhu" type="number" />
+                        <FloatingInput
                             id="bb"
-                            inputMode="numeric"
-                            name="BB"
+                            label="BB"
                             value={bb}
+                            type="number"
                             onChange={(e) => setBB(e.target.value)}
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="BB"
-                            title="Tuliskan BB Pasien"
                         />
-                        <input
-                            type="number"
+                        <FloatingInput
                             id="tb"
-                            inputMode="numeric"
-                            name="TB"
+                            label="TB"
                             value={tb}
-                            onChange={(e) => setTB(e.target.value)}
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="TB"
-                            title="Tuliskan TB Pasien"
-                        />
-                        <input
                             type="number"
+                            onChange={(e) => setTB(e.target.value)}
+                        />
+                        <FloatingInput
                             id="imt"
-                            inputMode="numeric"
-                            name="IMT"
+                            label="IMT"
                             value={imt}
                             readOnly
-                            className="my-2 lg:my-0 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="IMT"
-                            title="IMT (Body Mass Index) pasien"
+                            type="number"
                         />
                     </div>
                     <label
