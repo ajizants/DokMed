@@ -4,7 +4,7 @@ const FooterApp = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="md:ml-20 mb-16 sm:mb-0 p-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-cyan-600 shadow ">
+        <footer className="mb-16 sm:mb-0 p-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-cyan-600 shadow ">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full">
                     {/* Left section */}

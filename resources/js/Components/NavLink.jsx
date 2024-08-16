@@ -30,12 +30,12 @@ const NavLink = ({ href, active, icon, label }) => {
         "relative flex items-center group px-2 py-1 transition duration-150 ease-in-out",
         {
             "text-blue-500 border-b-2 border-blue-500": active,
-            "text-gray-800 dark:text-white": !active,
+            "text-white": !active,
         }
     );
     const iconClasses = classNames("w-7 h-7", {
         "text-blue-500 border-b-2 border-blue-500": active,
-        "text-gray-800 dark:text-white": !active,
+        "text-white": !active,
     });
 
     return (

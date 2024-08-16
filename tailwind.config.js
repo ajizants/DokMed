@@ -7,9 +7,8 @@ export default {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
-        "./resources/js/**/*{js,jsx,ts,tsx}",
-        "./node_modules/flowbite/**/*{js,jsx,ts,tsx}",
-        "./node_modules/flowbite/**/*.js",
+        "./resources/js/**/*.{js,jsx,ts,tsx}",
+        "./node_modules/flowbite/**/*.{js,jsx,ts,tsx}",
     ],
 
     theme: {
@@ -22,5 +21,5 @@ export default {
 
     plugins: [forms, require("flowbite/plugin")],
 
-    darkMode: "media",
+    darkMode: "class", // "media" bisa digunakan jika Anda lebih suka mode gelap otomatis
 };

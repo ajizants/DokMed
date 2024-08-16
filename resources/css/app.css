@@ -2,7 +2,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
+@import "flowbite";
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
@@ -34,4 +34,34 @@
 .scrollable-content {
     scrollbar-width: thin;
     scrollbar-color: #888 #f1f1f1;
+}
+
+.reflection::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(214, 224, 26, 0.5);
+    transform-origin: top;
+    filter: blur(3px);
+    opacity: 0.6;
+    animation: ripple 3s infinite;
+    -webkit-transform: scaleY(-10);
+    -moz-transform: scaleY(-10);
+    -ms-transform: scaleY(-10);
+    -o-transform: scaleY(-10);
+    transform: scaleY(-10);
+    transform: scaleX(-1);
+}
+
+@keyframes ripple {
+    0%,
+    100% {
+        transform: scaleY(-1) translateY(0);
+    }
+    50% {
+        transform: scaleY(-1) translateY(5px);
+    }
 }
