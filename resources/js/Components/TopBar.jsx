@@ -51,7 +51,7 @@ const TopBar = ({ user }) => {
                                 <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 <Link href="/">
                                     <h1
-                                        class="ml-2 dark:text-white font-extrabold font-mono text-2xl non-italic hover:italic relative reflection"
+                                        className="ml-2 dark:text-white font-extrabold font-mono text-2xl non-italic hover:italic relative reflection"
                                         data-text="DokMed"
                                     >
                                         DokMed

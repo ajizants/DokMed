@@ -54,7 +54,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     />
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-opacity-75 bg-blend-multiply"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-cyan-400 dark:from-gray-950  to-opacity-75 bg-blend-multiply"></div>
 
                     {/* Content Section */}
                     <section className="relative z-10 h-screen">
