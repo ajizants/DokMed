@@ -18,16 +18,26 @@ class PasienFactory extends Factory
     protected $model = Pasien::class;
 
     /**
+     * Sequence number for generating norm.
+     *
+     * @var int
+     */
+    protected static $sequenceNumber = 1;
+
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
+        $norm = str_pad(self::$sequenceNumber++, 6, '0', STR_PAD_LEFT);
+
         return [
+            'norm' => $norm, // Sequential norm starting from '000001'
             'id_user' => $this->faker->randomElement(['1', '2']),
             'nama' => $this->faker->name,
-            'nik' => $this->faker->unique()->numerify('############'),
+            'nik' => $this->faker->unique()->numerify('################'),
             'alamat' => $this->faker->address,
             'no_hp' => $this->faker->phoneNumber,
             'tgl_lahir' => $this->faker->date,

@@ -27,7 +27,10 @@ class PasienController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Pasien/Index', [
+            'status' => session('status'),
+            'pasien' => Pasien::all(),
+        ]);
     }
 
     /**
@@ -44,15 +47,20 @@ class PasienController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show($id)
     {
-        // Find the patient by ID
-        $pasien = Pasien::with('user')->find($id);
-
-        if ($pasien) {
-            return response()->json($pasien);
+        if (strlen($id) === 16) {
+            $patient = Pasien::with('user')->where('nik', $id)->first();
+        } elseif (strlen($id) === 6) {
+            $patient = Pasien::with('user')->find($id);
         } else {
-            return response()->json(['message' => 'No patient found with this ID.'], 404);
+            return response()->json(['error' => 'Kode salah, NORM kurang dari 6 digit atau NIK kurang dari 16 digit'], 400);
+        }
+
+        if ($patient) {
+            return response()->json($patient);
+        } else {
+            return response()->json(['error' => 'Pasien Tidak Ditemukan'], 404);
         }
     }
 

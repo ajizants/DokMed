@@ -17,7 +17,7 @@ const NavLink = ({ href, active, icon, label }) => {
     return (
         <Link href={href} className={linkClasses}>
             <div className="relative flex items-center hover:scale-110">
-                <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-4 whitespace-nowrap hidden group-hover:block bg-gray-200 dark:bg-gray-300 text-black px-2 py-1 rounded z-30">
+                <div className="absolute left-full top-1/2 transform -translate-y-1/2 ease-in-out ml-4 whitespace-nowrap hidden group-hover:block bg-gray-200 dark:bg-gray-300 text-black px-2 py-1 rounded z-30">
                     {label}
                 </div>
                 <svg

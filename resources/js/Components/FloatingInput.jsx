@@ -11,7 +11,7 @@ const FloatingInput = ({
     mode,
 }) => {
     return (
-        <div className="relative z-0">
+        <div className="relative z-0 mt-2">
             <input
                 type={type}
                 id={id}

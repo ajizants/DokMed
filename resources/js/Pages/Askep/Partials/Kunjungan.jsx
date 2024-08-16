@@ -45,7 +45,7 @@ function Kunjungan({ sdki }) {
                         </div>
                     </div>
 
-                    <div className="lg:flex gap-2 space-y-2">
+                    <div className="lg:flex gap-2 space y-2">
                         <FloatingInput
                             id="td"
                             label="Tekanan Darah"
@@ -95,7 +95,7 @@ function Kunjungan({ sdki }) {
                                 placeholder="Pilih Diagnosa Primer"
                             />
                         </div>
-                        <div className="lg:flex-1 w-full">
+                        <div className="lg:flex-1 w-full dark:bg-gray-700">
                             <Select
                                 className="basic-single"
                                 classNamePrefix="select"

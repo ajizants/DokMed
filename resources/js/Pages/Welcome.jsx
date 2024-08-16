@@ -108,7 +108,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <div className="shrink-0 flex items-center">
                             <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                             <Link href="/">
-                                <h1 className="ml-2 text-gray-800 dark:text-white text-bold font-extrabold font-mono text-2xl non-italic hover:italic">
+                                <h1 className="ml-2 text-gray-800 dark:text-white text-bold font-extrabold font-mono text-2xl non-italic hover:italic hover:translate-x-5 transition-all ease-in-out">
                                     DokMed
                                 </h1>
                             </Link>
