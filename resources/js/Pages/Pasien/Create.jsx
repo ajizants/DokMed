@@ -103,6 +103,8 @@ const CreatePatientForm = () => {
                                 onChange={handleChange}
                             />
                         </div>
+                    </div>
+                    <div className="lg:flex gap-3 sm:mt-0">
                         <div className="lg:flex-initial w-full mt-4">
                             <FloatingInput
                                 type="text"

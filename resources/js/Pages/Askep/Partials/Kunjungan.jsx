@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import FloatingTextArea from "@/Components/FloatingTextArea";
 import FloatingInput from "@/Components/FloatingInput";
+import FloatingSelect from "@/Components/FloatingSelect";
 function Kunjungan({ sdki }) {
     const sdkiOptions = sdki.map((sdki) => ({
         value: sdki.kode_dx,
@@ -86,23 +87,19 @@ function Kunjungan({ sdki }) {
                     </label>
                     <div className="lg:flex gap-3 space-y-2 lg:space-y-0">
                         <div className="lg:flex-1 w-full">
-                            <Select
-                                className="basic-single"
-                                classNamePrefix="select"
+                            <FloatingSelect
                                 name="Diagnosa Primer"
                                 id="dx_1"
                                 options={sdkiOptions}
-                                placeholder="Pilih Diagnosa Primer"
+                                label="Pilih Diagnosa Primer"
                             />
                         </div>
                         <div className="lg:flex-1 w-full dark:bg-gray-700">
-                            <Select
-                                className="basic-single"
-                                classNamePrefix="select"
+                            <FloatingSelect
                                 name="Diagnosa Sekunder"
                                 id="dx_2"
                                 options={sdkiOptions}
-                                placeholder="Pilih Diagnosa Sekunder"
+                                label="Pilih Diagnosa Sekunder"
                             />
                         </div>
                     </div>

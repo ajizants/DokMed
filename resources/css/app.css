@@ -2,7 +2,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "flowbite";
+/* @import "flowbite"; */
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
@@ -64,4 +64,69 @@
     50% {
         transform: scaleY(-1) translateY(5px);
     }
+}
+
+@layer components {
+    /* .my-react-select-container {
+    } */
+    .my-react-select-container .my-react-select__control {
+        @apply bg-white dark:bg-gray-800  border-0 border-b-2 border-neutral-500 hover:border-neutral-400 dark:hover:border-blue-400;
+    }
+
+    .my-react-select-container .my-react-select__control--is-focused {
+        @apply border-neutral-500 hover:border-neutral-500 dark:border-neutral-400 dark:hover:border-neutral-400 shadow-none;
+    }
+
+    .my-react-select-container .my-react-select__menu {
+        @apply bg-neutral-100 dark:bg-gray-800  border-0 border-b-2 border-blue-400;
+    }
+
+    .my-react-select-container .my-react-select__option {
+        @apply text-neutral-600 dark:text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-gray-800 dark:hover:bg-neutral-800;
+    }
+    /* .my-react-select-container .my-react-select__option--is-focused {
+      @apply bg-neutral-200 dark:bg-neutral-800;
+    } */
+
+    .my-react-select-container .my-react-select__indicator-separator {
+        @apply bg-gray-500 dark:bg-neutral-600;
+    }
+
+    .my-react-select-container .my-react-select__input-container,
+    .my-react-select-container .my-react-select__placeholder,
+    .my-react-select-container .my-react-select__single-value {
+        @apply text-neutral-600 dark:text-neutral-200;
+    }
+}
+
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: rgb(0, 0, 0);
+}
+
+.colored-toast .swal2-close {
+    color: rgb(56, 54, 54);
+}
+
+.colored-toast .swal2-html-container {
+    color: rgb(0, 0, 0);
 }

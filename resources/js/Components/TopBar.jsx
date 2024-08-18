@@ -42,7 +42,7 @@ const TopBar = ({ user }) => {
         document.getElementById("background")?.classList.add("!hidden");
     };
     return (
-        <header className="top-0 sticky z-500  bg-cyan-400 dark:bg-gray-900 bg-opacity-75">
+        <header className="top-0 sticky z-500  bg-cyan-400 dark:bg-gray-900 bg-opacity-75 z-50">
             <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between py-2">
                     <div className="flex w-full justify-between py-2">

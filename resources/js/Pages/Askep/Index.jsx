@@ -4,6 +4,7 @@ import IdentityForm from "@/Pages/Askep/Partials/Identitas";
 import { Head } from "@inertiajs/react";
 import Kunjungan from "./Partials/Kunjungan";
 import Asesment from "./Partials/Asesment";
+import NavButton from "@/Components/NavButton";
 
 export default function Index({ auth, sdki }) {
     const [activeSection, setActiveSection] = useState("kunjungan");
@@ -28,49 +29,39 @@ export default function Index({ auth, sdki }) {
             <Head title="Askep" />
 
             <div className="py-6">
-                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-2">
+                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <IdentityForm />
                     </div>
+                </div>
 
-                    <div className="flex gap-3 mt-1">
-                        <button
+                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
+                    <ul className="flex gap-3 ">
+                        <NavButton
+                            label="Kunjungan"
                             onClick={toggleKunjungan}
-                            className={`text-blue-500 hover:underline ${
-                                activeSection === "kunjungan"
-                                    ? "font-bold underline"
-                                    : ""
-                            }`}
-                        >
-                            Kunjungan
-                        </button>
-                        <button
+                            isActive={activeSection === "kunjungan"}
+                        />
+                        <NavButton
+                            label="Asesment Awal"
                             onClick={toggleAsesment}
-                            className={`text-blue-500 hover:underline ${
-                                activeSection === "asesment"
-                                    ? "font-bold underline"
-                                    : ""
-                            }`}
-                        >
-                            Asesment Awal
-                        </button>
-                    </div>
-
-                    {activeSection === "kunjungan" && (
-                        <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                            isActive={activeSection === "asesment"}
+                        />
+                    </ul>
+                    {/* </div>
+                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8"> */}
+                    <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow border-t-2 border-blue-700 sm:rounded-b-lg sm:rounded-r-lg">
+                        {activeSection === "kunjungan" && (
                             <div id="kunjungan">
                                 <Kunjungan sdki={sdki} />
                             </div>
-                        </div>
-                    )}
-
-                    {activeSection === "asesment" && (
-                        <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        )}
+                        {activeSection === "asesment" && (
                             <div id="asesment">
                                 <Asesment />
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>
