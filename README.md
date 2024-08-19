@@ -8,7 +8,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Medical Documentation System
+# Medical Documentation System
 
 This project is a comprehensive medical documentation system built with <a href="https://laravel.com">Laravel </a> on the backend and React on the frontend. It provides an efficient way to manage patient records, medical history, and other healthcare-related data.
 
