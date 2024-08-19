@@ -1,4 +1,3 @@
-
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -14,41 +13,60 @@ This project is a comprehensive medical documentation system built with <a href=
 
 ## Features
 
--  User Authentication: Secure login and registration for users.
--  Patient Management: CRUD operations for patient records, including personal information, medical history, and visits.
--  Medical History Tracking: Track and manage detailed medical histories for each patient.
--  Data Visualization: Visualize patient data through charts and reports.
--  Responsive UI: Mobile-friendly design with a responsive layout.
--  Role-based Access Control: Different access levels for admin, doctors, and other staff.
+-   User Authentication: Secure login and registration for users.
+-   Patient Management: CRUD operations for patient records, including personal information, medical history, and visits.
+-   Medical History Tracking: Track and manage detailed medical histories for each patient.
+-   Data Visualization: Visualize patient data through charts and reports.
+-   Responsive UI: Mobile-friendly design with a responsive layout.
+-   Role-based Access Control: Different access levels for admin, doctors, and other staff.
 
 ## Technology Stack
--  Backend: <a href="https://laravel.com">Laravel 11.x</a>
--  Frontend: <a href="https://react.dev/">React 18.2.0</a>
--  Database: MySQL / MariaDB / SQLite
--  API: RESTful API built with Laravel
--  State Management: Redux / Context API
--  Styling: [Tailwind CSS](https://tailwindcss.com/)
--  Build Tool: Vite
+
+-   Backend: <a href="https://laravel.com">Laravel 11.x</a>
+-   Frontend: <a href="https://react.dev/">React 18.2.0</a>
+-   Database: MySQL / MariaDB / SQLite
+-   API: RESTful API built with Laravel
+-   State Management: Redux / Context API
+-   Styling: [Tailwind CSS](https://tailwindcss.com/)
+-   Build Tool: Vite
 
 ## Getting started
 
 ### Installing
 
-#### Manual
+#### Backend Setup
 
 ```bash
 # Clone the project and run composer
-git clone https://github.com/trumanwong/laravel-vue-admin
-cd laravel-vue-admin
+git clone https://github.com/ajizants/DokMed.git
+
+cd DokMed
+
+#Install PHP dependencies:
+composer install
+
+#Copy the .env.example to .env and configure your environment variables:
+cp .env.example .env
+
+#Generate an application key:
+php artisan key:generate
 
 # Migration and DB seeder (after changing your DB settings in .env)
 php artisan migrate --seed
 
-# Install dependency with NPM
+# Start the development server:
+php artisan serve
+
+```
+
+### Frontend Setup
+
+```bash
+
+# Install JavaScript dependencies:
 npm install
 
-# develop
-php artisan serve
+# Start the development server:
 npm run dev
 
 # Build on production
