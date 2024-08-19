@@ -91,12 +91,12 @@ function IdentityForm() {
 
     return (
         <div>
-            <ConfirmationModal
+            {/* <ConfirmationModal
                 message="Pasien Tidak Ditemukan, Ingin Menambahkan Pasien...?"
                 onConfirm={handleConfirm}
                 onCancel={handleCancel}
                 isVisible={showConfirmation}
-            />
+            /> */}
             <ModalCreatePatientForm isVisible={showConfirmation} />
 
             <form onSubmit={pasienSearch} className="">
@@ -117,7 +117,9 @@ function IdentityForm() {
                         Search
                     </button>
                     <button
-                        onClick={handleConfirm}
+                        // onClick={handleConfirm}
+                        data-modal-target="static-modal"
+                        data-modal-toggle="static-modal"
                         className="inline-flex text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-32"
                         type="button"
                     >

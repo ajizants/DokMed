@@ -2,9 +2,10 @@ import React from "react";
 
 const NavButton = ({ label, onClick, isActive }) => {
     const baseClasses =
-        "flex items-center gap-2 border-gray-700 rounded-t-lg py-1 px-2 text-white group";
+        "flex items-center gap-2 border-black dark:border-gray-500  rounded-t-lg py-1 px-2 text-white group";
     const activeClasses = "bg-blue-700";
-    const hoverClasses = "hover:bg-gray-200 hover:text-black";
+    const hoverClasses =
+        "hover:bg-gray-200 hover:text-black duration-150 ease-in-out";
     const inactiveClasses = "bg-gray-700";
 
     return (
@@ -18,7 +19,7 @@ const NavButton = ({ label, onClick, isActive }) => {
                     onClick={onClick}
                 >
                     <svg
-                        className="w-[26px] h-[26px] text-gray-800 dark:text-white group-hover:text-black"
+                        className="w-[26px] h-[26px] text-white group-hover:text-black"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

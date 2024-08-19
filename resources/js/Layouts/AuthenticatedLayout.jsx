@@ -13,8 +13,9 @@ export default function Authenticated({ user, header, children }) {
         <>
             <div className="min-h-screen bg-gray-200 dark:bg-gray-900">
                 <TopBar user={user} />
+
                 <div className="flex">
-                    <aside className="hidden z-50 sm:block fixed h-screen w-20 pt-2 mx-auto px-1 sm:px-2 lg:px-3 bg-fuchsia-950 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+                    <aside className="hidden z-50 sm:block fixed h-screen w-20 pt-2 mx-auto px-1 sm:px-2 lg:px-3 bg-fuchsia-950 dark:bg-gray-800 border-r border-t border-gray-500">
                         <div className="flex flex-col items-center py-3 space-y-4">
                             <NavLink
                                 href={route("dashboard")}

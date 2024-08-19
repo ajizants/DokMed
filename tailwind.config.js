@@ -9,6 +9,7 @@ export default {
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.{js,jsx,ts,tsx}",
         "./node_modules/flowbite/**/*.{js,jsx,ts,tsx}",
+        "node_modules/flowbite-react/lib/esm/**/*.js",
     ],
 
     theme: {
