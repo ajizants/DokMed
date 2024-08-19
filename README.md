@@ -24,11 +24,36 @@ This project is a comprehensive medical documentation system built with <a href=
 ## Technology Stack
 -  Backend: <a href="https://laravel.com">Laravel 11.x</a>
 -  Frontend: <a href="https://react.dev/">React 18.2.0</a>
--  Database: MySQL / MariaDB
+-  Database: MySQL / MariaDB / SQLite
 -  API: RESTful API built with Laravel
 -  State Management: Redux / Context API
 -  Styling: [Tailwind CSS](https://tailwindcss.com/)
 -  Build Tool: Vite
+
+## Getting started
+
+### Installing
+
+#### Manual
+
+```bash
+# Clone the project and run composer
+git clone https://github.com/trumanwong/laravel-vue-admin
+cd laravel-vue-admin
+
+# Migration and DB seeder (after changing your DB settings in .env)
+php artisan migrate --seed
+
+# Install dependency with NPM
+npm install
+
+# develop
+php artisan serve
+npm run dev
+
+# Build on production
+npm run build
+```
 
 ## License
 
