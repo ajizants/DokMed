@@ -79,17 +79,20 @@ php artisan serve
 ### Frontend Setup
 
 #Install JavaScript dependencies:
+
 ```bash
 npm install
 ```
 
-# Start the development server:
+#Start the development server:
+
 ```bash
 npm run dev
 
 ```
 
 #Build on production
+
 ```bash
 npm run build
 
