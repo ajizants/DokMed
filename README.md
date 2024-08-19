@@ -32,34 +32,45 @@ This project is a comprehensive medical documentation system built with <a href=
 
 ## Getting started
 
-### Installing
+### Backend Setup
 
-#### Backend Setup
-
+### Clone the project and run composer
 ```bash
-# Clone the project and run composer
 git clone https://github.com/ajizants/DokMed.git
-
 cd DokMed
+```
 
 #Install PHP dependencies:
+```bash
 composer install
 
-#Copy the .env.example to .env and configure your environment variables:
+```
+
+### Copy the .env.example to .env and configure your environment variables:
+```bash
 cp .env.example .env
 
-#Generate an application key:
+```
+
+# Generate an application key:
+```bash
 php artisan key:generate
 
-# Migration and DB seeder (after changing your DB settings in .env)
+```
+
+### Migration and DB seeder (after changing your DB settings in .env)
+```bash
 php artisan migrate --seed
 
-# Start the development server:
+```
+
+### Start the development server:
+```bash
 php artisan serve
 
 ```
 
-### Frontend Setup
+## Frontend Setup
 
 ```bash
 
