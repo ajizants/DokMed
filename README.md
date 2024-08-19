@@ -101,3 +101,7 @@ npm run build
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Acknowledgements
+
+Thanks to the Laravel and React communities for their continuous support and development of these powerful frameworks.
