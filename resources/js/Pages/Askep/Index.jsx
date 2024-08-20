@@ -36,7 +36,7 @@ export default function Index({ auth, sdki }) {
                 </div>
 
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                    <ul className="flex gap-3 ">
+                    <ul className="flex gap-3">
                         <NavButton
                             label="Kunjungan"
                             onClick={toggleKunjungan}
@@ -50,7 +50,7 @@ export default function Index({ auth, sdki }) {
                     </ul>
                     {/* </div>
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8"> */}
-                    <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow border-t-2 border-blue-700 sm:rounded-b-lg sm:rounded-r-lg">
+                    <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow  sm:rounded-b-lg">
                         {activeSection === "kunjungan" && (
                             <div id="kunjungan">
                                 <Kunjungan sdki={sdki} />
@@ -58,7 +58,7 @@ export default function Index({ auth, sdki }) {
                         )}
                         {activeSection === "asesment" && (
                             <div id="asesment">
-                                <Asesment />
+                                <Asesment sdki={sdki} />
                             </div>
                         )}
                     </div>

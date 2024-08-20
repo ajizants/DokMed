@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 import FloatingTextArea from "@/Components/FloatingTextArea";
 import FloatingInput from "@/Components/FloatingInput";
 import FloatingSelect from "@/Components/FloatingSelect";

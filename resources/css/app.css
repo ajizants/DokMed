@@ -27,10 +27,107 @@
     background: #555;
 }
 
+/* Targeting the entire document */
+::-webkit-scrollbar {
+    width: 12px; /* Lebar scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #bbacac; /* Warna latar belakang track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #5d5151; /*Warnascrollbar*/
+    border: 2px solid #a19595; /* Warna dan lebar border */
+    /*Membuatsudutmenjadibulat*/
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3b217e; /* Warna scrollbar saat dihover */
+}
+
+/* Target scrollbar di dalam elemen select */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 20px; /* Ruang untuk menampung scrollbar */
+}
+
+/* Target scrollbar untuk select */
+select::-webkit-scrollbar {
+    width: 10px;
+}
+
+select::-webkit-scrollbar-track {
+    background: #978d8d;
+}
+
+select::-webkit-scrollbar-thumb {
+    background-color: #e2dddd;
+    border: 2px solid #7d7676;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border-radius: 20px;
+}
+
+select::-webkit-scrollbar-thumb:hover {
+    background: #232f96;
+}
+
+/* Untuk browser Firefox */
+select {
+    scrollbar-color: #888 #f1f1f1;
+    scrollbar-width: thin;
+}
+
 /* Firefox */
 .scrollable-content {
     scrollbar-width: thin;
     scrollbar-color: #888 #f1f1f1;
+}
+
+@keyframes underline-from-center {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+    100% {
+        width: 100%;
+        left: 0;
+    }
+}
+
+.underline-animation {
+    position: relative;
+    display: inline-block;
+    color: blue;
+}
+
+.underline-animation::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px; /* Sesuaikan ketebalan underline */
+    bottom: 0;
+    left: 50%;
+    background-color: currentColor;
+    transition: all 0.2s ease-in-out;
+}
+
+.underline-animation:hover::after {
+    animation: underline-from-center 0.4s ease-in-out forwards;
 }
 
 .reflection::after {
