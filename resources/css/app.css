@@ -3,6 +3,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "flowbite";
+@import "aos/dist/aos.css";
+
+html {
+    scroll-behavior: smooth;
+}
 
 .scrollable-content {
     overflow-y: auto;
@@ -94,6 +99,7 @@ select {
     scrollbar-color: #888 #f1f1f1;
 }
 
+/* Animation underline */
 @keyframes underline-from-center {
     0% {
         width: 0;
@@ -130,6 +136,7 @@ select {
     animation: underline-from-center 0.4s ease-in-out forwards;
 }
 
+/* Ripple effect */
 .reflection::after {
     content: attr(data-text);
     position: absolute;
@@ -159,6 +166,8 @@ select {
         transform: scaleY(-1) translateY(5px);
     }
 }
+
+/* Select */
 
 @layer components {
     /* .my-react-select-container {
@@ -193,6 +202,7 @@ select {
     }
 }
 
+/* Colored Toast */
 .colored-toast.swal2-icon-success {
     background-color: #a5dc86 !important;
 }

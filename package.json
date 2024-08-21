@@ -22,6 +22,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "aos": "^2.3.4",
         "classnames": "^2.5.1",
         "react-select": "^5.8.0",
         "react-toastify": "^10.0.5",
