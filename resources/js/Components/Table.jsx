@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const PaginatedTable = ({ data, columns }) => {
-    console.log("🚀 ~ PaginatedTable ~ columns:", columns);
-    console.log("🚀 ~ PaginatedTable ~ data:", data);
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -11,7 +9,6 @@ const PaginatedTable = ({ data, columns }) => {
     const filteredData = data.filter((item) =>
         columns.some((column) => {
             const value = item[column.accessor];
-            // Check if value is a string, otherwise convert to string
             return typeof value === "string"
                 ? value.toLowerCase().includes(searchQuery.toLowerCase())
                 : String(value)
@@ -32,12 +29,12 @@ const PaginatedTable = ({ data, columns }) => {
     };
 
     return (
-        <div className="overflow-x-auto p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <div className="overflow-x-auto w-full p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             {/* Search Input */}
             <input
                 type="text"
                 placeholder="Search"
-                className="mb-4 px-4 py-2 border border-gray-300 rounded-md dark:border-gray-700"
+                className="mb-4 px-4 py-2 border border-gray-300 rounded-md dark:border-gray-700 w-full"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -46,13 +43,13 @@ const PaginatedTable = ({ data, columns }) => {
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead className="bg-gray-50 dark:bg-gray-700">
                     <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             No
                         </th>
                         {columns.map((column) => (
                             <th
                                 key={column.accessor}
-                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                                className="px-2 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                             >
                                 {column.Header}
                             </th>
@@ -62,13 +59,13 @@ const PaginatedTable = ({ data, columns }) => {
                 <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                     {currentItems.map((item, index) => (
                         <tr key={index}>
-                            <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                            <td className="px-2 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                 {indexOfFirstItem + index + 1}
                             </td>
                             {columns.map((column) => (
                                 <td
                                     key={column.accessor}
-                                    className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"
+                                    className="px-2 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"
                                 >
                                     {item[column.accessor]}
                                 </td>

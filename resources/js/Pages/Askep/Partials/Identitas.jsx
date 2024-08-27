@@ -129,7 +129,7 @@ function IdentityForm() {
             </form>
 
             {patientData && (
-                <div className="p-2 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 border-blue-600">
+                <div className="p-2 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <h3 className="text-lg font-bold text-center leading-6 text-gray-900 dark:text-gray-100">
                         Patient Identity
                     </h3>

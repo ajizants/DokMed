@@ -142,7 +142,7 @@ const FooterApp = () => {
         //     </div>
         // </footer>
 
-        <footer className="bg-white dark:bg-gray-900">
+        <footer className="bg-white dark:bg-gray-800 text-gray-800 dark:text-cyan-600 shadow">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     <div className="grid items-center mb-6 md:mb-0">
