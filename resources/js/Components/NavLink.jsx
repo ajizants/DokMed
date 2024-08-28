@@ -35,7 +35,7 @@ const NavLink = ({ href, active, icon, label }) => {
                             />
                         </svg>
                     </div>
-                    <span className=" bg-gray-200 dark:bg-gray-300 text-black px-2 py-1 rounded z-30">
+                    <span className=" bg-gray-800 dark:bg-gray-300 text-white dark:text-black px-2 py-1 rounded z-30">
                         {label}
                     </span>
                 </div>

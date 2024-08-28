@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FloatingInput from "@/Components/FloatingInput";
+import ButtonGreen from "@/Components/ButtonGreen";
+import ButtonRed from "@/Components/ButtonRed";
+import ButtonBlue from "@/Components/ButtonBlue";
 
-const CreatePatientForm = () => {
+const CreatePatientForm = (user) => {
     const [formData, setFormData] = useState({
         norm: "",
         nik: "",
@@ -70,10 +73,10 @@ const CreatePatientForm = () => {
     return (
         <div className="p-2 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <ToastContainer />
-            <h3 className="mb-3 text-lg font-bold text-center leading-6 text-gray-900 dark:text-gray-100">
+            <h2 className="mb-7 text-xl font-bold text-center leading-6 text-gray-900 dark:text-gray-100">
                 Pendaftaran Pasien
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4 mt-3">
                 <div className="grid grid-cols-2 gap-4">
                     <div className="grid-flow-col">
                         <FloatingInput
@@ -84,14 +87,13 @@ const CreatePatientForm = () => {
                         />
                     </div>
                     <div className="grid-flow-col">
-                        <button
+                        <ButtonBlue
+                            type="button"
                             data-modal-target="default-modal"
                             data-modal-toggle="default-modal"
-                            type="button"
-                            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                         >
                             <svg
-                                className="w-6 h-6 text-gray-800 dark:text-white"
+                                className="bi bi-volume-up-fille"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -103,15 +105,27 @@ const CreatePatientForm = () => {
                                 <path
                                     fillRule="evenodd"
                                     d="M14.786 7.658a.988.988 0 0 1 1.414-.014A6.135 6.135 0 0 1 18 12c0 1.662-.655 3.17-1.715 4.27a.989.989 0 0 1-1.414.014 1.029 1.029 0 0 1-.014-1.437A4.085 4.085 0 0 0 16 12a4.085 4.085 0 0 0-1.2-2.904 1.029 1.029 0 0 1-.014-1.438Z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                                 <path
                                     fillRule="evenodd"
                                     d="M17.657 4.811a.988.988 0 0 1 1.414 0A10.224 10.224 0 0 1 22 12c0 2.807-1.12 5.35-2.929 7.189a.988.988 0 0 1-1.414 0 1.029 1.029 0 0 1 0-1.438A8.173 8.173 0 0 0 20 12a8.173 8.173 0 0 0-2.343-5.751 1.029 1.029 0 0 1 0-1.438Z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
-                        </button>
+                        </ButtonBlue>
+                        <ButtonRed type="button">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                className="bi bi-skip-forward-fill"
+                                viewBox="0 0 16 16"
+                            >
+                                <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.753l-6.267 3.636c-.54.313-1.233-.066-1.233-.697v-2.94l-6.267 3.636C.693 12.703 0 12.324 0 11.693V4.308c0-.63.693-1.01 1.233-.696L7.5 7.248v-2.94c0-.63.693-1.01 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5" />
+                            </svg>
+                        </ButtonRed>
                         {/* <!-- Main modal --> */}
                         <div
                             id="default-modal"
@@ -123,7 +137,7 @@ const CreatePatientForm = () => {
                                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                                            Terms of Service
+                                            Daftar Nomor Antrian
                                         </h3>
                                         <button
                                             type="button"
@@ -151,27 +165,230 @@ const CreatePatientForm = () => {
                                         </button>
                                     </div>
                                     <div className="p-4 md:p-5 space-y-4">
-                                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                            With less than a month to go before
-                                            the European Union enacts new
-                                            consumer privacy laws for its
-                                            citizens, companies around the world
-                                            are updating their terms of service
-                                            agreements to comply.
-                                        </p>
-                                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                            The European Union’s General Data
-                                            Protection Regulation (G.D.P.R.)
-                                            goes into effect on May 25 and is
-                                            meant to ensure a common set of data
-                                            rights in the European Union. It
-                                            requires organizations to notify
-                                            users as soon as possible of
-                                            high-risk data breaches that could
-                                            personally affect them.
-                                        </p>
+                                        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                    <tr>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-6 py-3"
+                                                        >
+                                                            Product name
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-6 py-3"
+                                                        >
+                                                            Color
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-6 py-3"
+                                                        >
+                                                            Category
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-6 py-3"
+                                                        >
+                                                            Price
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-6 py-3"
+                                                        >
+                                                            Action
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                                        <th
+                                                            scope="row"
+                                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                        >
+                                                            Apple MacBook Pro
+                                                            17"
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            Silver
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            Laptop
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            $2999
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            <a
+                                                                href="#"
+                                                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                            >
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="currentColor"
+                                                                    className="bi bi-volume-up-fill"
+                                                                    viewBox="0 0 16 16"
+                                                                >
+                                                                    <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+                                                                    <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+                                                                    <path d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                                        <th
+                                                            scope="row"
+                                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                        >
+                                                            Microsoft Surface
+                                                            Pro
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            White
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            Laptop PC
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            $1999
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            <a
+                                                                href="#"
+                                                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                            >
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="currentColor"
+                                                                    className="bi bi-volume-up-fill"
+                                                                    viewBox="0 0 16 16"
+                                                                >
+                                                                    <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+                                                                    <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+                                                                    <path d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                                        <th
+                                                            scope="row"
+                                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                        >
+                                                            Magic Mouse 2
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            Black
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            Accessories
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            $99
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            <a
+                                                                href="#"
+                                                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                            >
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="currentColor"
+                                                                    className="bi bi-volume-up-fill"
+                                                                    viewBox="0 0 16 16"
+                                                                >
+                                                                    <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+                                                                    <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+                                                                    <path d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                                        <th
+                                                            scope="row"
+                                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                        >
+                                                            Google Pixel Phone
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            Gray
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            Phone
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            $799
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            <a
+                                                                href="#"
+                                                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                            >
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="currentColor"
+                                                                    className="bi bi-volume-up-fill"
+                                                                    viewBox="0 0 16 16"
+                                                                >
+                                                                    <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+                                                                    <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+                                                                    <path d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th
+                                                            scope="row"
+                                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                        >
+                                                            Apple Watch 5
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            Red
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            Wearables
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            $999
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            <a
+                                                                href="#"
+                                                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                            >
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="currentColor"
+                                                                    className="bi bi-volume-up-fill"
+                                                                    viewBox="0 0 16 16"
+                                                                >
+                                                                    <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+                                                                    <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+                                                                    <path d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                    {/* <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                         <button
                                             data-modal-hide="default-modal"
                                             type="button"
@@ -186,12 +403,13 @@ const CreatePatientForm = () => {
                                         >
                                             Decline
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <FloatingInput
                     type="text"
                     id="norm"
@@ -220,54 +438,56 @@ const CreatePatientForm = () => {
                     value={formData.alamat}
                     onChange={handleChange}
                 />
-                <FloatingInput
-                    type="text"
-                    id="no_hp"
-                    label="No HP"
-                    value={formData.no_hp}
-                    onChange={handleChange}
-                />
-                <FloatingInput
-                    type="date"
-                    id="tgl_lahir"
-                    label="Tanggal Lahir"
-                    value={formData.tgl_lahir}
-                    onChange={handleChange}
-                />
-                <FloatingInput
-                    type="text"
-                    id="gender"
-                    label="Jenis Kelamin"
-                    value={formData.gender}
-                    onChange={handleChange}
-                />
-                <FloatingInput
-                    type="text"
-                    id="pekerjaan"
-                    label="Pekerjaan"
-                    value={formData.pekerjaan}
-                    onChange={handleChange}
-                />
-                <FloatingInput
-                    type="text"
-                    id="id_user"
-                    label="User ID"
-                    value={formData.id_user}
-                    onChange={handleChange}
-                />
-                <FloatingInput
-                    type="text"
-                    id="name_user"
-                    label="User Name"
-                    value={formData.name_user}
-                    onChange={handleChange}
-                />
-                <button
-                    type="submit"
-                    className="inline-flex items-center px-4 py-2 bg-green-500 text-white border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                >
-                    Create Patient
-                </button>
+                <div className="grid grid-cols-2 gap-6">
+                    <FloatingInput
+                        type="text"
+                        id="pekerjaan"
+                        label="Pekerjaan"
+                        value={formData.pekerjaan}
+                        onChange={handleChange}
+                    />
+                    <FloatingInput
+                        type="text"
+                        id="no_hp"
+                        label="No HP"
+                        value={formData.no_hp}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                    <FloatingInput
+                        type="text"
+                        id="gender"
+                        label="Jenis Kelamin"
+                        value={formData.gender}
+                        onChange={handleChange}
+                    />
+                    <FloatingInput
+                        type="date"
+                        id="tgl_lahir"
+                        label="Tanggal Lahir"
+                        value={formData.tgl_lahir}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                    <FloatingInput
+                        type="text"
+                        id="id_user"
+                        label="User ID"
+                        value={user.user.id}
+                        onChange={handleChange}
+                    />
+                    <FloatingInput
+                        type="text"
+                        id="name_user"
+                        label="User Name"
+                        value={user.user.name}
+                        onChange={handleChange}
+                    />
+                </div>
+                <ButtonGreen type="submit">Create Patient</ButtonGreen>
             </form>
         </div>
     );

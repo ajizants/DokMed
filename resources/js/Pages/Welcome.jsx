@@ -61,11 +61,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     {/* Content Section */}
                     <section className="relative z-10 h-screen">
                         <div className="px-4 mx-auto h-screen max-w-screen-xl text-center py-24 lg:py-56">
-                            <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+                            <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none dark:text-white text-slate-900 md:text-5xl lg:text-6xl">
                                 Transformasi Dokumen Medis Anda dengan
                                 Dokumentasi yang Aman dan Mudah Diakses
                             </h1>
-                            <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+                            <p className="mb-8 text-lg font-normal dark:text-gray-300 text-slate-900 lg:text-xl sm:px-16 lg:px-48">
                                 Permudah praktik kesehatan Anda dengan layanan
                                 dokumentasi medis kami yang komprehensif,
                                 memastikan catatan pasien yang akurat dan aman

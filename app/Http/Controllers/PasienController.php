@@ -38,8 +38,31 @@ class PasienController extends Controller
      */
     public function store(StorePasienRequest $request)
     {
-        //
+        // Validate the request data
+        $validatedData = $request->validated();
+
+        // Create a new patient record in the database
+        $pasien = new Pasien(); // Assuming `Pasien` is your model
+        $pasien->norm = $validatedData['norm'];
+        $pasien->nik = $validatedData['nik'];
+        $pasien->nama = $validatedData['nama'];
+        $pasien->alamat = $validatedData['alamat'];
+        $pasien->no_hp = $validatedData['no_hp'];
+        $pasien->tgl_lahir = $validatedData['tgl_lahir'];
+        $pasien->gender = $validatedData['gender'];
+        $pasien->pekerjaan = $validatedData['pekerjaan'];
+        $pasien->id_user = $validatedData['id_user']; // Assuming user ID is optional and defaulting to the current authenticated user
+        // $pasien->id_user = $validatedData['id_user'] ?? auth()->id(); // Assuming user ID is optional and defaulting to the current authenticated user
+
+        $pasien->save(); // Save the patient record
+
+        // You can also return a response or redirect
+        return response()->json([
+            'message' => 'Patient data successfully stored',
+            'data' => $pasien,
+        ], 201); // HTTP 201 indicates a resource has been created
     }
+
 
     /**
      * Display the specified resource.

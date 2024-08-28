@@ -29,7 +29,7 @@ const PaginatedTable = ({ data, columns }) => {
     };
 
     return (
-        <div className="overflow-x-auto w-full p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <div className="scrollable-content w-full p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             {/* Search Input */}
             <input
                 type="text"

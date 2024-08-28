@@ -12,7 +12,7 @@ const columns = [
     { Header: "No HP", accessor: "no_hp" },
 ];
 
-export default function Index({ auth, status, pasien }) {
+export default function Index({ auth, pasien }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -28,7 +28,7 @@ export default function Index({ auth, status, pasien }) {
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="md:grid md:grid-cols-2 md:space-x-2 space-y-4 md:space-y-0">
                         <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg w-full">
-                            <CreatePatientForm status={status} />
+                            <CreatePatientForm user={auth.user} />
                         </div>
                         <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg w-full">
                             <PaginatedTable data={pasien} columns={columns} />

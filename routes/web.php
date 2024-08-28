@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+    Route::post('/pasien', [PasienController::class, 'store'])->name('pasien.store');
     Route::get('/pasien/create', [PasienController::class, 'create'])->name('pasien.create');
     Route::get('/pasien/{id}', [PasienController::class, 'show'])->name('pasien.show');
 
