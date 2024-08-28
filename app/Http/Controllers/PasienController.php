@@ -39,6 +39,7 @@ class PasienController extends Controller
     public function store(StorePasienRequest $request)
     {
         // Validate the request data
+        dd($request->all());
         $validatedData = $request->validated();
 
         // Create a new patient record in the database
