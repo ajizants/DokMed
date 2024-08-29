@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Siki;
 use Illuminate\Database\Seeder;
 
 class SikiSeeder extends Seeder
@@ -12,6 +12,6 @@ class SikiSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Siki::factory()->count(30)->create();
     }
 }

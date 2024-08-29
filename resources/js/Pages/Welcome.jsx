@@ -60,7 +60,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                     {/* Content Section */}
                     <section className="relative z-10 h-screen">
-                        <div className="px-4 mx-auto h-screen max-w-screen-xl text-center py-24 lg:py-56">
+                        <div className="px-4 mx-auto h-screen max-w-screen-xl text-center py-24 md:py-56 lg:py-56">
                             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none dark:text-white text-slate-900 md:text-5xl lg:text-6xl">
                                 Transformasi Dokumen Medis Anda dengan
                                 Dokumentasi yang Aman dan Mudah Diakses
@@ -174,79 +174,41 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         )}
                     </nav>
                 </header>
-                <main className="min-h-screen max-w-7xl mx-auto mt-8">
+                <main className="min-h-screen max-w-6xl mx-auto mt-8">
                     <div className="p-4 space-y-32">
                         {/* <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700"> */}
                         <div
                             data-aos="fade-up"
                             data-aos-duration="2000"
                             data-aos-once="true"
-                            className="grid grid-cols-2 gap-4 mb-4"
+                            className="space-y-4 gap-4 mb-4 md:grid md:grid-cols-2 md:space-y-0"
                         >
-                            <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                                <p className="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg
-                                        className="w-3.5 h-3.5"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 18 18"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 1v16M1 9h16"
-                                        />
-                                    </svg>
-                                </p>
+                            <div className="flex items-center justify-center rounded">
+                                <img className="w-96 h-96 rounded-xl" src="https://blog-edutore-partner.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2020/06/01210902/Profesi-Instruktur-Perawat_626-x-626-px.png" />
+
                             </div>
-                            <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                                <p className="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg
-                                        className="w-3.5 h-3.5"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 18 18"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 1v16M1 9h16"
-                                        />
-                                    </svg>
+                            <div className="flex items-center justify-center rounded p-8 md:p-4">
+                                <p className="lg:text-xl text-center md:text-right  font-serif text-gray-700 dark:text-gray-200">
+                                    Dokumentasi medis dalam asuhan keperawatan adalah catatan yang sangat penting dalam memberikan perawatan yang berkualitas
+                                    kepada pasien. Dokumentasi ini mencakup berbagai aspek dari proses keperawatan, mulai dari pengkajian awal, rencana perawatan,
+                                    pelaksanaan intervensi, hingga evaluasi hasil. Dengan dokumentasi yang lengkap dan akurat, perawat dapat memastikan kontinuitas
+                                    perawatan, mengidentifikasi perubahan kondisi pasien, dan memberikan informasi yang relevan kepada tim kesehatan lainnya.
+                                    Selain itu, dokumentasi medis yang baik juga berfungsi sebagai bukti hukum dan membantu dalam pengambilan keputusan klinis,
+                                    serta mendukung komunikasi yang efektif antara perawat dan profesional kesehatan lainnya.
                                 </p>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="space-y-4 gap-4  mb-4 md:grid md:grid-cols-2 md:space-y-0">
                             <div
                                 data-aos="fade-right"
                                 data-aos-duration="2000"
                                 data-aos-once="true"
                                 data-aos-easing="ease-in-sine"
-                                className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
+                               className="flex items-center justify-center rounded p-8 md:p-4"
                             >
-                                <p className="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg
-                                        className="w-3.5 h-3.5"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 18 18"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 1v16M1 9h16"
-                                        />
-                                    </svg>
+                                <p className="lg:text-xl text-center md:text-left  font-serif text-gray-700 dark:text-gray-200">
+                                Digitalisasi dokumentasi medis merupakan transformasi penting dalam dunia kesehatan yang mengubah cara informasi medis dicatat, disimpan, dan diakses. Dengan beralih dari catatan fisik ke sistem elektronik, digitalisasi memungkinkan pencatatan data pasien secara lebih efisien, akurat, dan mudah diakses oleh tenaga kesehatan. Teknologi ini mendukung integrasi informasi dari berbagai sumber, memungkinkan akses cepat ke riwayat medis pasien, dan meningkatkan koordinasi antarprofesional dalam perawatan pasien. Selain itu, digitalisasi mengurangi risiko kesalahan medis yang disebabkan oleh ketidakjelasan tulisan tangan atau kehilangan dokumen fisik, serta memastikan keamanan dan privasi data pasien melalui enkripsi dan kontrol akses yang ketat. Di era modern ini, digitalisasi dokumentasi medis juga membuka peluang untuk analisis data secara lebih mendalam, yang dapat digunakan untuk penelitian, pengembangan kebijakan kesehatan, dan peningkatan kualitas layanan kesehatan secara keseluruhan.
                                 </p>
                             </div>
                             <div
@@ -254,25 +216,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 data-aos-duration="2000"
                                 data-aos-once="true"
                                 data-aos-easing="ease-in-sine"
-                                className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
+                                className="flex items-center justify-center rounded"
                             >
-                                <p className="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg
-                                        className="w-3.5 h-3.5"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 18 18"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 1v16M1 9h16"
-                                        />
-                                    </svg>
-                                </p>
+                                   <img className="h-96 rounded-xl" src="https://doctortool.id/wp-content/uploads/2024/05/Website-Digitalisasi-Rekam-Medis-1-1024x576.webp"/>
                             </div>
                         </div>
                         <div

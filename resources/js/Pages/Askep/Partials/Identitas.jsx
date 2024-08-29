@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
 import Swal from "sweetalert2";
-
 import FloatingInput from "@/Components/FloatingInput";
-import ConfirmationModal from "@/Components/ConfirmationModal";
 import ModalCreatePatientForm from "@/Pages/Pasien/ModalCreatePasien";
+import ButtonBlue from "@/Components/ButtonBlue";
 
-function IdentityForm() {
+function IdentityForm(user) {
     const [searchId, setSearchId] = useState("");
     const [patientData, setPatientData] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -25,6 +23,10 @@ function IdentityForm() {
 
     const pasienSearch = async (event) => {
         event.preventDefault();
+        Toast.fire({
+            title: "Loading...",
+            icon: "info",
+        });
 
         const paddedSearchId = searchId.padStart(6, "0");
 
@@ -62,7 +64,7 @@ function IdentityForm() {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         const modal = document.getElementById("static-modal");
-                        modal.classList.remove("hidden"); // Menampilkan modal
+                        modal.classList.remove("hidden");
                         modal.classList.add("flex");
                     }
                 });
@@ -78,30 +80,16 @@ function IdentityForm() {
         }
     };
 
-    const handleConfirm = () => {
-        const modal = document.getElementById("static-modal");
-        modal.classList.remove("hidden"); // Menampilkan modal
-        modal.classList.add("flex");
-        setShowConfirmation(false);
-    };
-
-    const handleCancel = () => {
-        setShowConfirmation(false);
-    };
-
     return (
-        <div>
-            {/* <ConfirmationModal
-                message="Pasien Tidak Ditemukan, Ingin Menambahkan Pasien...?"
-                onConfirm={handleConfirm}
-                onCancel={handleCancel}
+        <div className="rounded-xl p-3">
+            <ModalCreatePatientForm
                 isVisible={showConfirmation}
-            /> */}
-            <ModalCreatePatientForm isVisible={showConfirmation} />
+                user={user.user}
+            />
 
-            <form onSubmit={pasienSearch} className="">
+            <form onSubmit={pasienSearch}>
                 <div className="flex gap-4 items-center">
-                    <div className="flex-initial w-full">
+                    <div className="flex-initial w-full lg:min-w-fit">
                         <FloatingInput
                             type="text"
                             id="search_id"
@@ -110,21 +98,18 @@ function IdentityForm() {
                             onChange={(e) => setSearchId(e.target.value)}
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="inline-flex items-center px-4 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                        Search
-                    </button>
-                    <button
-                        // onClick={handleConfirm}
-                        data-modal-target="static-modal"
-                        data-modal-toggle="static-modal"
-                        className="inline-flex text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-32"
-                        type="button"
-                    >
-                        Add Pasien
-                    </button>
+                    <ButtonBlue type="submit" className="mt-3">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-search"
+                            viewBox="0 0 16 16"
+                        >
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </ButtonBlue>
                 </div>
             </form>
 
@@ -135,23 +120,25 @@ function IdentityForm() {
                     </h3>
                     <div className="grid grid-cols-1 gap-6">
                         <div className="lg:flex gap-3 sm:mt-0">
-                            <div className="lg:flex-initial w-64 mt-4">
-                                <FloatingInput
-                                    type="text"
-                                    id="norm"
-                                    label="NORM"
-                                    value={patientData.norm || ""}
-                                    readOnly
-                                />
-                            </div>
-                            <div className="lg:flex-initial w-2/4 mt-4">
-                                <FloatingInput
-                                    type="text"
-                                    id="nik"
-                                    label="NIK"
-                                    value={patientData.nik || ""}
-                                    readOnly
-                                />
+                            <div className="grid grid-col-2">
+                                <div className="lg:flex-initial lg:w-64 mt-4">
+                                    <FloatingInput
+                                        type="text"
+                                        id="norm"
+                                        label="NORM"
+                                        value={patientData.norm || ""}
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="lg:flex-initial lg:w-2/4 mt-4">
+                                    <FloatingInput
+                                        type="text"
+                                        id="nik"
+                                        label="NIK"
+                                        value={patientData.nik || ""}
+                                        readOnly
+                                    />
+                                </div>
                             </div>
                             <div className="lg:flex-initial w-full mt-4">
                                 <FloatingInput

@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/askep', [AskepController::class, 'index'])->name('askep.index');
 
     Route::get('/master', [MasterController::class, 'index'])->name('master.index');
+
+    Route::post('/perawat/soap', [AskepController::class, 'store'])->name('askep.store');
 });
 
 require __DIR__ . '/auth.php';

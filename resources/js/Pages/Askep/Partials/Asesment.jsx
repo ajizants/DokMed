@@ -2,124 +2,30 @@ import React, { useState, useEffect } from "react";
 import FloatingTextArea from "@/Components/FloatingTextArea";
 import FloatingInput from "@/Components/FloatingInput";
 import FloatingSelect from "@/Components/FloatingSelect";
+import VitalSign from "./VitalSign";
 function Asesment({ sdki }) {
-    const sdkiOptions = sdki.map((sdki) => ({
-        value: sdki.kode_dx,
-        label: sdki.diagnosa,
-    }));
-
-    const [bb, setBB] = useState(""); // Weight
-    const [tb, setTB] = useState(""); // Height
-    const [imt, setIMT] = useState(""); // BMI
-
-    useEffect(() => {
-        if (bb && tb) {
-            const heightInMeters = tb / 100; // assuming TB is in cm, convert to meters
-            const calculatedIMT = calculateIMT(bb, heightInMeters);
-            setIMT(calculatedIMT.toFixed(2)); // round to 2 decimal places
-        }
-    }, [bb, tb]);
-
-    function calculateIMT(weight, height) {
-        return weight / (height * height);
-    }
-
     return (
         <div>
             <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <form className="space-y-2" action="#">
-                    <div className="lg:flex gap-6 spacey-4">
-                        <div className="lg:flex-1 mb-2 lg:mb-0">
-                            <FloatingTextArea
-                                type="text"
-                                id="subjektif"
-                                label="Data Subjektif"
-                            />
-                        </div>
-                        <div className="lg:flex-1 mb-2 lg:mb-0">
-                            <FloatingTextArea
-                                type="text"
-                                id="objektif"
-                                label="Data Objektif"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="lg:flex gap-6 space-y-4">
-                        <div className="mt-2">
-                            <FloatingInput
-                                id="td"
-                                label="Tekanan Darah"
-                                type="text"
-                                mode="numeric"
-                                className="lg:flex-1"
-                            />
-                        </div>
-                        <FloatingInput id="nadi" label="Nadi" type="number" />
-                        <FloatingInput id="rr" label="RR" type="number" />
-                        <FloatingInput id="suhu" label="Suhu" type="number" />
-                        <FloatingInput
-                            id="bb"
-                            label="BB"
-                            value={bb}
-                            type="number"
-                            onChange={(e) => setBB(e.target.value)}
-                        />
-                        <FloatingInput
-                            id="tb"
-                            label="TB"
-                            value={tb}
-                            type="number"
-                            onChange={(e) => setTB(e.target.value)}
-                        />
-                        <FloatingInput
-                            id="imt"
-                            label="IMT"
-                            value={imt}
-                            readOnly
-                            type="number"
-                        />
-                    </div>
+                    <VitalSign sdki={sdki} idDx={"awal"} />
                     <div className="lg:flex gap-6 space-y-4">
                         <div className="lg:flex-1 lg:mt-4 mb-2 lg:mb-0">
                             <FloatingTextArea
                                 type="text"
                                 id="riwayat_penyakit"
-                                label="Data Riwayat Penyakit"
+                                label="Riwayat Penyakit Dahulu"
                             />
                         </div>
                         <div className="lg:flex-1 mb-2 lg:mb-0">
                             <FloatingTextArea
                                 type="text"
                                 id="riwayat_penyakit_keluarga"
-                                label="Data Objektif_keluarga"
+                                label="Riwayat Penyakit Keluarga"
                             />
                         </div>
                     </div>
-                    <label
-                        htmlFor="asesment"
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                    >
-                        Asesment
-                    </label>
-                    <div className="lg:flex gap-6 space-y-4 lg:space-y-0">
-                        <div className="lg:flex-1 w-full">
-                            <FloatingSelect
-                                name="Diagnosa Primer"
-                                id="dx_1"
-                                options={sdkiOptions}
-                                label="Pilih Diagnosa Primer"
-                            />
-                        </div>
-                        <div className="lg:flex-1 w-full dark:bg-gray-700">
-                            <FloatingSelect
-                                name="Diagnosa Sekunder"
-                                id="dx_2"
-                                options={sdkiOptions}
-                                label="Pilih Diagnosa Sekunder"
-                            />
-                        </div>
-                    </div>
+
                     <label
                         htmlFor="planing"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"

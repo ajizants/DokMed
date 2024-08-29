@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const PaginatedTable = ({ data, columns }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 5;
 
     // Filter data based on search query
     const filteredData = data.filter((item) =>
@@ -29,7 +29,7 @@ const PaginatedTable = ({ data, columns }) => {
     };
 
     return (
-        <div className="w-full p-4 sm:grid-cols-1 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <div className="w-full p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             {/* Search Input */}
             <input
                 type="text"
@@ -43,8 +43,6 @@ const PaginatedTable = ({ data, columns }) => {
             <div className="relative scrollable-content shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        {/* <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="w-full bg-gray-50 dark:bg-gray-700"> */}
                         <tr>
                             <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                 No
@@ -60,19 +58,18 @@ const PaginatedTable = ({ data, columns }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tbody className="w-full bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"> */}
                         {currentItems.map((item, index) => (
                             <tr
                                 key={index}
                                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                             >
-                                <td className="px-2 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                <td className="px-2 py-3  text-sm text-gray-500 dark:text-gray-400">
                                     {indexOfFirstItem + index + 1}
                                 </td>
                                 {columns.map((column) => (
                                     <td
                                         key={column.accessor}
-                                        className="px-2 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"
+                                        className="px-2 py-3  text-sm text-gray-500 dark:text-gray-400"
                                     >
                                         {item[column.accessor]}
                                     </td>

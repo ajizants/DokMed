@@ -30,13 +30,13 @@ export default function Index({ auth, sdki }) {
 
             <div className="py-6">
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                    <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <IdentityForm />
+                    <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-xl ">
+                        <IdentityForm user={auth.user} />
                     </div>
                 </div>
 
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                    <ul className="flex gap-3">
+                    <ul className="flex gap-3 ms-3">
                         <NavButton
                             label="Kunjungan"
                             onClick={toggleKunjungan}
@@ -48,9 +48,7 @@ export default function Index({ auth, sdki }) {
                             isActive={activeSection === "asesment"}
                         />
                     </ul>
-                    {/* </div>
-                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8"> */}
-                    <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow  sm:rounded-b-lg">
+                    <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow rounded-xl ">
                         {activeSection === "kunjungan" && (
                             <div id="kunjungan">
                                 <Kunjungan sdki={sdki} />

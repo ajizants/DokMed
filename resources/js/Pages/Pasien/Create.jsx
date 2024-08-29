@@ -2,8 +2,24 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FloatingInput from "@/Components/FloatingInput";
+import FloatingSelect from "@/Components/FloatingSelect";
 
-const CreatePatientForm = () => {
+const jkOptions = [
+    { value: "L", label: "Laki-laki" },
+    { value: "P", label: "Perempuan" },
+];
+
+const pekerjaanOptions = [
+    { value: "PNS", label: "PNS" },
+    { value: "TNI", label: "TNI" },
+    { value: "POLRI", label: "POLRI" },
+    { value: "Petani", label: "Petani" },
+    { value: "Pedagang", label: "Pedagang" },
+    { value: "Buruh", label: "Buruh" },
+    { value: "Lainnya", label: "Lainnya" },
+];
+
+const CreatePatientForm = (user) => {
     const [formData, setFormData] = useState({
         norm: "",
         nik: "",
@@ -80,7 +96,7 @@ const CreatePatientForm = () => {
                             <FloatingInput
                                 type="text"
                                 id="norm"
-                                label="NORM"
+                                label="NO RM"
                                 value={formData.norm}
                                 onChange={handleChange}
                             />
@@ -97,14 +113,23 @@ const CreatePatientForm = () => {
                         <div className="lg:flex-initial w-full mt-4">
                             <FloatingInput
                                 type="text"
+                                id="no_hp"
+                                label="No HP"
+                                value={formData.no_hp}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="lg:flex gap-3 sm:mt-0">
+                        <div className="lg:flex-initial w-full mt-4">
+                            <FloatingInput
+                                type="text"
                                 id="nama"
                                 label="Nama"
                                 value={formData.nama}
                                 onChange={handleChange}
                             />
                         </div>
-                    </div>
-                    <div className="lg:flex gap-3 sm:mt-0">
                         <div className="lg:flex-initial w-full mt-4">
                             <FloatingInput
                                 type="text"
@@ -114,15 +139,8 @@ const CreatePatientForm = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="lg:flex-initial w-full mt-4">
-                            <FloatingInput
-                                type="text"
-                                id="no_hp"
-                                label="No HP"
-                                value={formData.no_hp}
-                                onChange={handleChange}
-                            />
-                        </div>
+                    </div>
+                    <div className="lg:flex gap-3 sm:mt-0">
                         <div className="lg:flex-initial w-full mt-4">
                             <FloatingInput
                                 type="date"
@@ -133,21 +151,21 @@ const CreatePatientForm = () => {
                             />
                         </div>
                         <div className="lg:flex-initial w-full mt-4">
-                            <FloatingInput
-                                type="text"
+                            <FloatingSelect
                                 id="gender"
                                 label="Jenis Kelamin"
                                 value={formData.gender}
                                 onChange={handleChange}
+                                options={jkOptions}
                             />
                         </div>
                         <div className="lg:flex-initial w-full mt-4">
-                            <FloatingInput
-                                type="text"
+                            <FloatingSelect
                                 id="pekerjaan"
                                 label="Pekerjaan"
                                 value={formData.pekerjaan}
                                 onChange={handleChange}
+                                options={pekerjaanOptions}
                             />
                         </div>
                         <div className="lg:flex-initial w-full mt-4">
@@ -155,7 +173,7 @@ const CreatePatientForm = () => {
                                 type="text"
                                 id="id_user"
                                 label="User ID"
-                                value={formData.id_user}
+                                value={user.user.id}
                                 onChange={handleChange}
                             />
                         </div>
@@ -164,18 +182,18 @@ const CreatePatientForm = () => {
                                 type="text"
                                 id="name_user"
                                 label="User Name"
-                                value={formData.name_user}
+                                value={user.user.name}
                                 onChange={handleChange}
                             />
                         </div>
-                        <button
-                            type="submit"
-                            className="inline-flex items-center px-4 py-2 bg-green-500 text-white border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                        >
-                            Create Patient
-                        </button>
                     </div>
                 </div>
+                <button
+                    type="submit"
+                    className="inline-flex items-center px-4 py-2 bg-green-500 text-white border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                    Create Patient
+                </button>
             </form>
         </div>
     );

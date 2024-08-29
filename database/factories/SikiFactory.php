@@ -17,7 +17,11 @@ class SikiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'kode_siki' => $this->faker->regexify('[a-zA-Z]\.\d{5}'),
+            'intervensi' => $this->faker->sentence,
+            'definisi' => $this->faker->sentence,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

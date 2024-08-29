@@ -17,7 +17,12 @@ class SlkiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'kode_slki' => $this->faker->regexify('[a-zA-Z]\.\d{5}'),
+            'luaran' => $this->faker->sentence,
+            'definisi' => $this->faker->sentence,
+            'ekspetasi' => $this->faker->sentence,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

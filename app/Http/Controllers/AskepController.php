@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAskepRequest;
 use App\Http\Requests\UpdateAskepRequest;
 use App\Models\Askep;
 use App\Models\Sdki;
+use App\Models\Slki;
 use Inertia\Inertia;
 
 class AskepController extends Controller
@@ -15,8 +16,8 @@ class AskepController extends Controller
      */
     public function index()
     {
-        // Ambil semua data diagnosa dari model Sdki
         $diagnosa = Sdki::all();
+        $slki = Slki::all();
 
         // Ubah menjadi array dengan hanya mengambil field yang dibutuhkan
         $sdki = $diagnosa->map(function ($item) {
@@ -30,9 +31,9 @@ class AskepController extends Controller
         // Kirim data ke frontend menggunakan Inertia
         return Inertia::render('Askep/Index', [
             'sdki' => $sdki,
+            'slki' => $slki,
         ]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +48,7 @@ class AskepController extends Controller
      */
     public function store(StoreAskepRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

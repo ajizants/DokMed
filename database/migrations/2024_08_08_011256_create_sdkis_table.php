@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sdki', function (Blueprint $table) {
+        Schema::create('sdkis', function (Blueprint $table) {
             $table->id();
             $table->string('kode_dx');
             $table->string('diagnosa');

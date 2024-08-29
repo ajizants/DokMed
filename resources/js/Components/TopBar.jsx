@@ -95,7 +95,7 @@ const TopBar = ({ user }) => {
                         </div>
                     </div>
 
-                    <div className="hidden sm:flex sm:w-2/12 sm:items-center sm:justify-end">
+                    <div className="hidden sm:flex sm:min-w-fit sm:items-center sm:justify-end">
                         <div className="ms-3 relative">
                             <Dropdown>
                                 <Dropdown.Trigger>
@@ -186,7 +186,7 @@ const TopBar = ({ user }) => {
 
             <div
                 className={
-                    (showingNavigationDropdown ? "block" : "hidden") +
+                    (showingNavigationDropdown ? "block bg-gray-300 dark:bg-gray-800" : "hidden") +
                     " sm:hidden"
                 }
             >
@@ -205,7 +205,7 @@ const TopBar = ({ user }) => {
                     </ResponsiveNavLink>
                 </div>
 
-                <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                <div className="pt-4 pb-1 border-t border-gray-900 dark:border-gray-600 bg-gray-100 dark:bg-gray-600">
                     <div className="px-4">
                         <div className="font-medium text-base text-gray-800 dark:text-gray-200">
                             {user.name}

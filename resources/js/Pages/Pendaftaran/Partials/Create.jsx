@@ -32,7 +32,6 @@ const CreatePatientForm = (user) => {
         event.preventDefault();
 
         try {
-            console.log("🚀 ~ handleSubmit ~ formData:", formData);
             const response = await fetch("/pasien", {
                 method: "POST",
                 headers: {

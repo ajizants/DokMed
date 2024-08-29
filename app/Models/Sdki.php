@@ -8,6 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Sdki extends Model
 {
     use HasFactory;
-
-    protected $table = 'sdki';
 }
