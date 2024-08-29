@@ -13,6 +13,7 @@ function Kunjungan({ sdki }) {
         suhu: "",
         bb: "",
         tb: "",
+        imt: "", // Add IMT to the form state
         dx_1: "",
         dx_2: "",
     });
@@ -32,7 +33,12 @@ function Kunjungan({ sdki }) {
                     onSubmit={simpanKunjungan}
                     id="form_Kunjungan"
                 >
-                    <VitalSign sdki={sdki} data={data} setData={setData} />
+                    <VitalSign
+                        sdki={sdki}
+                        data={data}
+                        setData={setData}
+                        ket={""}
+                    />
                     <label
                         htmlFor="planing"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -50,13 +56,6 @@ function Kunjungan({ sdki }) {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {/* Map through your actions here */}
-                            <tr>
-                                <td className="px-6 py-4">Contoh Tindakan</td>
-                                <td className="px-6 py-4">30 Menit</td>
-                            </tr>
-                        </tbody>
                     </table>
                     <ButtonGreen>Simpan</ButtonGreen>
                 </form>

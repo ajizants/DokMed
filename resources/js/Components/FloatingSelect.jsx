@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-function FloatingSelect({ label, options, id, name }) {
+function FloatingSelect({ label, options, id, name, value, onChange }) {
     const customStyles = {
         menu: (provided) => ({
             ...provided,
@@ -52,6 +52,14 @@ function FloatingSelect({ label, options, id, name }) {
                 name={name}
                 placeholder=""
                 isClearable
+                value={
+                    options
+                        ? options.find((option) => option.value === value)
+                        : null
+                }
+                onChange={(selectedOption) =>
+                    onChange(selectedOption ? selectedOption.value : "")
+                }
             />
             <label
                 htmlFor={id}

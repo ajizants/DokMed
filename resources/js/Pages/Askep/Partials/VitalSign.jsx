@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import FloatingTextArea from "@/Components/FloatingTextArea";
 import FloatingInput from "@/Components/FloatingInput";
 import FloatingSelect from "@/Components/FloatingSelect";
 
-export default function VitalSign({ sdki, data, setData }) {
+export default function VitalSign({ sdki, ket, data, setData }) {
     const sdkiOptions = sdki.map((sdki) => ({
         value: sdki.kode_dx,
         label: sdki.diagnosa,
     }));
 
-    const [bb, setBB] = useState(""); // Weight
-    const [tb, setTB] = useState(""); // Height
-    const [imt, setIMT] = useState(""); // BMI
-
     useEffect(() => {
-        if (bb && tb) {
-            const heightInMeters = tb / 100; // Convert height from cm to meters
-            const calculatedIMT = calculateIMT(bb, heightInMeters);
-            setIMT(calculatedIMT.toFixed(2)); // Round to 2 decimal places
+        if (data.bb && data.tb) {
+            const heightInMeters = data.tb / 100; // assuming TB is in cm, convert to meters
+            const calculatedIMT = calculateIMT(data.bb, heightInMeters);
+            setData("imt", calculatedIMT.toFixed(2)); // round to 2 decimal places
         }
-    }, [bb, tb]);
+    }, [data.bb, data.tb]);
 
     function calculateIMT(weight, height) {
         return weight / (height * height);
@@ -80,27 +76,21 @@ export default function VitalSign({ sdki, data, setData }) {
                 <FloatingInput
                     id="bb"
                     label="BB"
-                    value={bb}
                     type="number"
-                    onChange={(e) => {
-                        setBB(e.target.value);
-                        setData("bb", e.target.value); // Update form data
-                    }}
+                    value={data.bb}
+                    onChange={(e) => setData("bb", e.target.value)}
                 />
                 <FloatingInput
                     id="tb"
                     label="TB"
-                    value={tb}
                     type="number"
-                    onChange={(e) => {
-                        setTB(e.target.value);
-                        setData("tb", e.target.value); // Update form data
-                    }}
+                    value={data.tb}
+                    onChange={(e) => setData("tb", e.target.value)}
                 />
                 <FloatingInput
                     id="imt"
                     label="IMT"
-                    value={imt}
+                    value={data.imt}
                     readOnly
                     type="number"
                 />
@@ -119,7 +109,7 @@ export default function VitalSign({ sdki, data, setData }) {
                         options={sdkiOptions}
                         label="Pilih Diagnosa Primer"
                         value={data.dx_1}
-                        onChange={(e) => setData("dx_1", e.target.value)}
+                        onChange={(value) => setData("dx_1", value)}
                     />
                 </div>
                 <div className="lg:flex-1 w-full">
@@ -129,7 +119,7 @@ export default function VitalSign({ sdki, data, setData }) {
                         options={sdkiOptions}
                         label="Pilih Diagnosa Sekunder"
                         value={data.dx_2}
-                        onChange={(e) => setData("dx_2", e.target.value)}
+                        onChange={(value) => setData("dx_2", value)}
                     />
                 </div>
             </div>
