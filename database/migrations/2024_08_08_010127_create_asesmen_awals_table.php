@@ -13,15 +13,22 @@ return new class extends Migration
     {
         Schema::create('asesmen_awals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pasiens_id')->constrained();
             $table->foreignId('users_id')->constrained();
-            $table->string('riwayat_penyakit_sekarang');
+            $table->string('no_trans')->unique();
+            $table->foreignId('norm')->constrained();
+            $table->string('data_subjektif');
+            $table->string('data_objektif');
+            $table->string('td');
+            $table->decimal('nadi');
+            $table->decimal('rr');
+            $table->decimal('suhu');
+            $table->decimal('bb');
+            $table->decimal('tb');
+            $table->decimal('imt');
+            $table->string('dx_1')->
+            $table->string('dx_2');
             $table->string('riwayat_penyakit_dahulu');
             $table->string('riwayat_penyakit_keluarga');
-            $table->string('dx_keperawatan');
-            $table->string('tindakan');
-            $table->string('obat');
-            $table->string('tindak_lanjut');
             $table->timestamps();
         });
     }
