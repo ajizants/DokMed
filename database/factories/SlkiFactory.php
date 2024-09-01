@@ -18,7 +18,7 @@ class SlkiFactory extends Factory
     {
         return [
             'kode_slki' => $this->faker->regexify('[a-zA-Z]\.\d{5}'),
-            'luaran' => $this->faker->sentence,
+            'nama_slki' => $this->faker->sentence,
             'definisi' => $this->faker->sentence,
             'ekspetasi' => $this->faker->sentence,
             'created_at' => now(),

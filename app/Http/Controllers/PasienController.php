@@ -16,10 +16,12 @@ class PasienController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Pasien/Index', [
-            'status' => session('status'),
-            'pasien' => Pasien::all(),
-        ]);
+        // return Inertia::render('Pasien/Index', [
+        //     'status' => session('status'),
+        //     'pasien' => Pasien::all(),
+        // ]);
+        $pasien = Pasien::all();
+        return response($pasien, 200);
     }
 
     /**
@@ -31,6 +33,7 @@ class PasienController extends Controller
             'status' => session('status'),
             'pasien' => Pasien::all(),
         ]);
+
     }
 
     /**
@@ -63,7 +66,6 @@ class PasienController extends Controller
             'data' => $pasien,
         ], 201); // HTTP 201 indicates a resource has been created
     }
-
 
     /**
      * Display the specified resource.
