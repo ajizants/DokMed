@@ -16,15 +16,19 @@ class AskepController extends Controller
      */
     public function index()
     {
-        $diagnosa = Sdki::all();
-        $slki = Slki::all();
+        $dataSdki = Sdki::all();
+        $dataSlki = Slki::all();
+        $slki = $dataSlki->map(function ($item) {
+            return [
+                'kode_slki' => $item->kode_slki,
+                'nama_slki' => $item->nama_slki,
+            ];
+        });
 
-        // Ubah menjadi array dengan hanya mengambil field yang dibutuhkan
-        $sdki = $diagnosa->map(function ($item) {
+        $sdki = $dataSdki->map(function ($item) {
             return [
                 'kode_dx' => $item->kode_dx,
                 'diagnosa' => $item->diagnosa,
-                // 'someHiddenData' => $item->someHiddenData, // Jika ada data yang ingin disembunyikan
             ];
         });
 

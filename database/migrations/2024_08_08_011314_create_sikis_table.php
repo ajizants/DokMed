@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sikis', function (Blueprint $table) {
             $table->id();
             $table->string('kode_siki');
-            $table->string('intervensi');
+            $table->string('nama_siki');
             $table->string('definisi');
             $table->timestamps();
         });

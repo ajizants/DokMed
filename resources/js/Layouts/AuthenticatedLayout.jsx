@@ -73,7 +73,7 @@ export default function Authenticated({ user, header, children }) {
             </div>
 
             <MobileNav user={user} />
-            <div className="lg:ml-20">
+            <div className="lg:ml-20 mb-16 lg:mb-0">
                 <FooterApp />
             </div>
         </>

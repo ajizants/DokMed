@@ -146,17 +146,23 @@ const FooterApp = () => {
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     <div className="grid items-center mb-6 md:mb-0">
-                        <ApplicationLogo className="grid-flow-col h-6 sm:h-9" />
-                        <strong className="text-sm grid-flow-col">
-                            <a
-                                href="#"
-                                className="hover:underline text-ellipsis hover:text-fuchsia-500 text-xl font-bold"
-                            >
-                                Dokumentasi Medik.
-                            </a>
-                        </strong>
+                        <div className="max-w-full lg:max-w-72">
+                            <ApplicationLogo className="grid-flow-col h-6 sm:h-9" />
+                            <strong className="text-sm grid-flow-col">
+                                <a
+                                    href="#"
+                                    className="hover:underline text-ellipsis hover:text-fuchsia-500 text-xl font-bold"
+                                >
+                                    Dokumentasi Medik.
+                                </a>
+                            </strong>
+                            <p className="mt-2">
+                                Dibuat untuk teman-teman nakes yang membutuhkan
+                                penulisan dokumentasi pasien secara digital
+                            </p>
+                        </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 lg:mt-5">
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                                 Resources

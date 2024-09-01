@@ -20,6 +20,14 @@ export default function VitalSign({ sdki, ket, data, setData }) {
     function calculateIMT(weight, height) {
         return weight / (height * height);
     }
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const formElements = Array.from(event.target.form.elements);
+            const index = formElements.indexOf(event.target);
+            formElements[index + 1]?.focus(); // Fokus ke elemen berikutnya
+        }
+    };
 
     return (
         <div className="space-y-4">
@@ -46,6 +54,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
 
             <div className="lg:flex gap-2 space-y-4 lg:space-y-0">
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="td"
                     label="Tekanan Darah"
                     type="text"
@@ -53,6 +62,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
                     onChange={(e) => setData("td", e.target.value)}
                 />
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="nadi"
                     label="Nadi"
                     type="number"
@@ -60,6 +70,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
                     onChange={(e) => setData("nadi", e.target.value)}
                 />
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="rr"
                     label="RR"
                     type="number"
@@ -67,6 +78,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
                     onChange={(e) => setData("rr", e.target.value)}
                 />
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="suhu"
                     label="Suhu"
                     type="number"
@@ -74,6 +86,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
                     onChange={(e) => setData("suhu", e.target.value)}
                 />
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="bb"
                     label="BB"
                     type="number"
@@ -81,6 +94,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
                     onChange={(e) => setData("bb", e.target.value)}
                 />
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="tb"
                     label="TB"
                     type="number"
@@ -88,6 +102,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
                     onChange={(e) => setData("tb", e.target.value)}
                 />
                 <FloatingInput
+                    onKeyDown={handleKeyDown}
                     id="imt"
                     label="IMT"
                     value={data.imt}
@@ -97,7 +112,7 @@ export default function VitalSign({ sdki, ket, data, setData }) {
             </div>
             <label
                 htmlFor="asesment"
-                className="block mb-3 text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block my-3 text-lg font-medium text-gray-700 dark:text-gray-300"
             >
                 Asesment
             </label>

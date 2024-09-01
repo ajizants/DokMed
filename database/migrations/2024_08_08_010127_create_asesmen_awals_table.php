@@ -25,8 +25,10 @@ return new class extends Migration
             $table->decimal('bb');
             $table->decimal('tb');
             $table->decimal('imt');
-            $table->string('dx_1')->
+            $table->string('dx_1');
             $table->string('dx_2');
+            $table->string('alergi_obat');
+            $table->string('alergi_makanan');
             $table->string('riwayat_penyakit_dahulu');
             $table->string('riwayat_penyakit_keluarga');
             $table->timestamps();

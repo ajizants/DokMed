@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slkis', function (Blueprint $table) {
+        Schema::create('slki_kriteria_hasils', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_slki');
-            $table->string('nama_slki');
-            $table->string('definisi');
-            $table->string('ekspetasi');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slkis');
+        Schema::dropIfExists('slki_kriteria_hasils');
     }
 };
