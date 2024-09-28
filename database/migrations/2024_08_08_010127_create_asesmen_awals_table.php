@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained();
             $table->string('no_trans')->unique();
-            $table->foreignId('norm')->constrained();
+            $table->foreignId('no_rm')->constrained();
             $table->string('data_subjektif');
             $table->string('data_objektif');
             $table->string('td');

@@ -42,12 +42,12 @@ function FloatingSelect({ label, options, id, name, value, onChange }) {
     };
 
     return (
-        <div className="relative mt-6">
+        <div className="relative">
             <Select
                 id={id}
                 options={options}
                 styles={customStyles}
-                className="my-react-select-container mt-3"
+                className="my-react-select-container mt-1"
                 classNamePrefix="my-react-select"
                 name={name}
                 placeholder=""

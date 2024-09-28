@@ -18,7 +18,7 @@ class PasienFactory extends Factory
     protected $model = Pasien::class;
 
     /**
-     * Sequence number for generating norm.
+     * Sequence number for generating no_rm.
      *
      * @var int
      */
@@ -31,10 +31,10 @@ class PasienFactory extends Factory
      */
     public function definition(): array
     {
-        $norm = str_pad(self::$sequenceNumber++, 6, '0', STR_PAD_LEFT);
+        $no_rm = str_pad(self::$sequenceNumber++, 6, '0', STR_PAD_LEFT);
 
         return [
-            'norm' => $norm, // Sequential norm starting from '000001'
+            'no_rm' => $no_rm, // Sequential no_rm starting from '000001'
             'id_user' => $this->faker->randomElement(['1', '2']),
             'nama' => $this->faker->name,
             'nik' => $this->faker->unique()->numerify('################'),

@@ -21,7 +21,7 @@ const pekerjaanOptions = [
 
 const CreatePatientForm = (user) => {
     const [formData, setFormData] = useState({
-        norm: "",
+        no_rm: "",
         nik: "",
         nama: "",
         alamat: "",
@@ -59,7 +59,7 @@ const CreatePatientForm = (user) => {
                     position: "top-center",
                 });
                 setFormData({
-                    norm: "",
+                    no_rm: "",
                     nik: "",
                     nama: "",
                     alamat: "",
@@ -95,9 +95,9 @@ const CreatePatientForm = (user) => {
                         <div className="lg:flex-initial w-64 mt-4">
                             <FloatingInput
                                 type="text"
-                                id="norm"
+                                id="no_rm"
                                 label="NO RM"
-                                value={formData.norm}
+                                value={formData.no_rm}
                                 onChange={handleChange}
                             />
                         </div>

@@ -1,10 +1,6 @@
-import { useState, useEffect } from "react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
+import React from "react";
 import FooterApp from "@/Components/Footer";
-import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
 import MobileNav from "@/Components/MobileNav";
 import TopBar from "@/Components/TopBar";
 

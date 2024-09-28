@@ -29,7 +29,7 @@ class AsesmenAwalController extends Controller
      */
     public function store(StoreAsesmenAwalRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

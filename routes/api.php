@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/pasien/all', [PasienController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/pasien/all', [PasienController::class, 'dataPasien'])->middleware('auth:sanctum');

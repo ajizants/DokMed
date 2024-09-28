@@ -124,9 +124,9 @@ function IdentityForm(user) {
                                 <div className="lg:flex-initial lg:w-64 mt-4">
                                     <FloatingInput
                                         type="text"
-                                        id="norm"
-                                        label="NORM"
-                                        value={patientData.norm || ""}
+                                        id="no_rm"
+                                        label="No Rekam Medis"
+                                        value={patientData.no_rm || ""}
                                         readOnly
                                     />
                                 </div>

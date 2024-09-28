@@ -25,7 +25,7 @@ function Asesment({ sdki }) {
 
     const simpanAssesment = async (event) => {
         event.preventDefault();
-        post(route("askep.store"), {
+        post(route("asesmen.store"), {
             onFinish: () => reset(),
         });
     };

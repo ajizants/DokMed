@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pasiens', function (Blueprint $table) {
+        Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
-            $table->string('no_rm')->unique();
+            $table->string('no_antri');
+            $table->string('no_trans');
+            $table->string('no_rm');
             $table->string('id_user');
-            $table->string('nama');
-            $table->string('nik')->unique()->nullable();
-            $table->string('alamat');
-            $table->string('no_hp')->nullable();
-            $table->date('tgl_lahir');
-            $table->string('gender');
-            $table->string('pekerjaan')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pasiens');
+        Schema::dropIfExists('pendaftarans');
     }
 };

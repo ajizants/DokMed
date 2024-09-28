@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 
 const FloatingInput = ({
@@ -9,9 +10,13 @@ const FloatingInput = ({
     readOnly,
     title,
     mode,
+    kelas,
 }) => {
     return (
-        <div className="relative z-0">
+        <div
+            className={`${kelas ? `${kelas} ` : ""}relative z-0`}
+            id={`input-${id}`}
+        >
             <input
                 type={type}
                 id={id}

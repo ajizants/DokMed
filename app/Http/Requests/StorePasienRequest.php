@@ -11,7 +11,7 @@ class StorePasienRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,15 +22,15 @@ class StorePasienRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'norm' => 'required|string|max:10|unique:pasiens,norm',
+            'no_rm' => 'required|string|max:6|unique:pasiens,no_rm',
             'nik' => 'required|string|max:16|unique:pasiens,nik',
             'nama' => 'required|string|max:255',
-            'alamat' => 'nullable|string|max:255',
+            'alamat' => 'required|string|max:255',
             'no_hp' => 'nullable|string|max:15',
             'tgl_lahir' => 'required|date',
             'gender' => 'required|in:male,female',
             'pekerjaan' => 'nullable|string|max:255',
-            'id_user' => 'nullable|exists:users,id',
+            'id_user' => 'required|exists:users,id',
         ];
     }
 }

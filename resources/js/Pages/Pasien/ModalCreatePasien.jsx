@@ -4,7 +4,7 @@ import CreatePatientForm from "./Create";
 
 const ModalCreatePatientForm = (user) => {
     const [formData, setFormData] = useState({
-        norm: "",
+        no_rmm: "",
         nik: "",
         nama: "",
         alamat: "",

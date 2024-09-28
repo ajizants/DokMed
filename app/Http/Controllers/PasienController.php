@@ -16,12 +16,19 @@ class PasienController extends Controller
      */
     public function index()
     {
-        // return Inertia::render('Pasien/Index', [
-        //     'status' => session('status'),
-        //     'pasien' => Pasien::all(),
-        // ]);
+        $token = session('api_token');
+        return Inertia::render('Pasien/Index', [
+            'status' => session('status'),
+            'pasien' => Pasien::all(),
+        ]);
+    }
+
+    public function dataPasien()
+    {
         $pasien = Pasien::all();
-        return response($pasien, 200);
+        return response()->json([
+            'data' => $pasien,
+        ]);
     }
 
     /**
@@ -47,7 +54,7 @@ class PasienController extends Controller
 
         // Create a new patient record in the database
         $pasien = new Pasien(); // Assuming `Pasien` is your model
-        $pasien->norm = $validatedData['norm'];
+        $pasien->no_rm = $validatedData['no_rm'];
         $pasien->nik = $validatedData['nik'];
         $pasien->nama = $validatedData['nama'];
         $pasien->alamat = $validatedData['alamat'];
@@ -80,7 +87,7 @@ class PasienController extends Controller
         } elseif (strlen($id) === 6) {
             $patient = Pasien::with('user')->find($id);
         } else {
-            return response()->json(['error' => 'Kode salah, NORM kurang dari 6 digit atau NIK kurang dari 16 digit'], 400);
+            return response()->json(['error' => 'Kode salah, no_rm kurang dari 6 digit atau NIK kurang dari 16 digit'], 400);
         }
 
         if ($patient) {
