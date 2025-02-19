@@ -16,15 +16,15 @@ class UserController extends Controller
             ->get()
             ->map(function ($user) {
                 return [
-                    'id'    => $user->id,
-                    'name'  => $user->name,
+                    'id' => $user->id,
+                    'name' => $user->name,
                     'email' => $user->email,
                     'roles' => $user->roles->pluck('name')->implode(', ') ?: '-',
                 ];
             });
 
         return response()->json([
-            'data'    => $users,
+            'data' => $users,
             'columns' => [
                 ['key' => 'id', 'label' => 'ID'],
                 ['key' => 'name', 'label' => 'Nama'],
@@ -74,21 +74,21 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if (! $user) {
+        if (!$user) {
             return response()->json(['message' => 'User tidak ditemukan'], 404);
         }
 
         $validatedData = $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email|unique:users,email,' . $id,
-            'roles'   => 'required|array',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'roles' => 'required|array',
             'roles.*' => 'exists:roles,name', // Validasi nama role harus ada di database
         ]);
 
         try {
             // Update nama & email
             $user->update([
-                'name'  => $validatedData['name'],
+                'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
             ]);
 
@@ -97,7 +97,7 @@ class UserController extends Controller
 
             return response()->json([
                 'message' => 'User berhasil diperbarui',
-                'user'    => $user->load('roles'),
+                'user' => $user->load('roles'),
             ]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Gagal memperbarui user', 'error' => $e->getMessage()], 500);
@@ -111,7 +111,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if (! $user) {
+        if (!$user) {
             return response()->json(['message' => 'User tidak ditemukan'], 404);
         }
 
