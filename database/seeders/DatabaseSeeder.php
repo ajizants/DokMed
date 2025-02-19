@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,7 +16,7 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
+            'name'  => 'Test User',
             'email' => 'test@example.com',
         ]);
 
@@ -26,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SdkiSeeder::class);
         $this->call(SlkiSeeder::class);
         $this->call(SikiSeeder::class);
+        $this->call(RoleAndPermissionSeeder::class);
     }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->string('no_rm')->unique();
-            $table->string('id_user');
-            $table->string('nama');
+            $table->string('no_rm')->unique()->index();
+            $table->string('user_id');
+            $table->string('nama')->index(); // Tambahkan index pada kolom nama
             $table->string('nik')->unique()->nullable();
             $table->string('alamat');
             $table->string('no_hp')->nullable();

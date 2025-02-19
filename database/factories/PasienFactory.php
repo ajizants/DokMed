@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Factories;
 
 use App\Models\Pasien;
@@ -34,14 +33,14 @@ class PasienFactory extends Factory
         $no_rm = str_pad(self::$sequenceNumber++, 6, '0', STR_PAD_LEFT);
 
         return [
-            'no_rm' => $no_rm, // Sequential no_rm starting from '000001'
-            'id_user' => $this->faker->randomElement(['1', '2']),
-            'nama' => $this->faker->name,
-            'nik' => $this->faker->unique()->numerify('################'),
-            'alamat' => $this->faker->address,
-            'no_hp' => $this->faker->phoneNumber,
+            'no_rm'     => $no_rm, // Sequential no_rm starting from '000001'
+            'user_id'   => $this->faker->randomElement(['1', '2']),
+            'nama'      => $this->faker->name,
+            'nik'       => $this->faker->unique()->numerify('################'),
+            'alamat'    => $this->faker->address,
+            'no_hp'     => $this->faker->phoneNumber,
             'tgl_lahir' => $this->faker->date,
-            'gender' => $this->faker->randomElement(['male', 'female']),
+            'gender'    => $this->faker->randomElement(['male', 'female']),
             'pekerjaan' => $this->faker->jobTitle,
         ];
     }

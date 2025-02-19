@@ -2,22 +2,21 @@
 
 use App\Http\Controllers\AsesmenAwalController;
 use App\Http\Controllers\AskepController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use App\Models\AsesmenAwal;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canLogin'       => Route::has('login'),
+        'canRegister'    => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion'     => PHP_VERSION,
     ]);
 })->name('home');
 
@@ -39,6 +38,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
     Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+
+    Route::get('/Kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
+    Route::post('/Kegiatan', [KegiatanController::class, 'store'])->name('kegiatan.store');
 
     Route::get('/askep', [AskepController::class, 'index'])->name('askep.index');
     Route::post('/askep', [AskepController::class, 'store'])->name('askep.store');

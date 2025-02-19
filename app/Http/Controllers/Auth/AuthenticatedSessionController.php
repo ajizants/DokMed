@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -20,7 +19,7 @@ class AuthenticatedSessionController extends Controller
     {
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
+            'status'           => session('status'),
         ]);
     }
 
@@ -28,22 +27,14 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        // Menghasilkan token API setelah login berhasil
         $user = Auth::user();
-        // $token = $user->createToken('API Token')->plainTextToken;
-        // dd($token);
-
-        // Menyimpan token ke dalam session
-        // $request->session()->put('api_token', $token);
-
-        // Redirect ke dashboard
         return redirect()->intended(route('dashboard', absolute: false));
+
     }
 
     /**

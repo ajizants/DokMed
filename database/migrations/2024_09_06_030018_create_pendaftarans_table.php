@@ -12,11 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pendaftarans', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Primary key (sudah otomatis indexed)
             $table->string('no_antri');
-            $table->string('no_trans');
+            $table->string('no_trans')->unique(); // Unique index untuk memastikan tidak ada duplikasi
             $table->string('no_rm');
-            $table->string('id_user');
+            $table->foreign('no_rm')->references('no_rm')->on('pasiens')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+
+            // Menambahkan index untuk mempercepat pencarian
+            $table->index('no_rm');
+            $table->index('user_id');
+
             $table->timestamps();
         });
     }

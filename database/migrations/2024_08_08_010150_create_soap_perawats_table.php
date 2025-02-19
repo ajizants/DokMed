@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('soap_perawats', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_pendaftaran')->constrained('pendaftarans')->onDelete('cascade');
+            $table->string('no_trans')->index(); // Tetap gunakan indeks untuk performa
             $table->string('subjektif');
             $table->string('objektif');
             $table->string('dx_keperawatan');

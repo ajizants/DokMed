@@ -13,24 +13,27 @@ return new class extends Migration
     {
         Schema::create('asesmen_awals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
+            $table->foreignId('users_id')->constrained()->onDelete('cascade');
             $table->string('no_trans')->unique();
-            $table->foreignId('no_rm')->constrained();
-            $table->string('data_subjektif');
-            $table->string('data_objektif');
+            $table->string('no_rm'); // Ubah tipe ke string agar cocok dengan pasiens.no_rm
+            $table->foreign('no_rm')->references('no_rm')->on('pasiens')->onDelete('cascade');
+            $table->index('no_rm'); // Tambahkan index untuk mempercepat pencarian berdasarkan no_rm
+
+            $table->text('data_subjektif');
+            $table->text('data_objektif');
             $table->string('td');
-            $table->decimal('nadi');
-            $table->decimal('rr');
-            $table->decimal('suhu');
-            $table->decimal('bb');
-            $table->decimal('tb');
-            $table->decimal('imt');
+            $table->decimal('nadi', 5, 2);
+            $table->decimal('rr', 5, 2);
+            $table->decimal('suhu', 5, 2);
+            $table->decimal('bb', 5, 2);
+            $table->decimal('tb', 5, 2);
+            $table->decimal('imt', 5, 2);
             $table->string('dx_1');
-            $table->string('dx_2');
-            $table->string('alergi_obat');
-            $table->string('alergi_makanan');
-            $table->string('riwayat_penyakit_dahulu');
-            $table->string('riwayat_penyakit_keluarga');
+            $table->string('dx_2')->nullable();
+            $table->string('alergi_obat')->nullable();
+            $table->string('alergi_makanan')->nullable();
+            $table->text('riwayat_penyakit_dahulu')->nullable();
+            $table->text('riwayat_penyakit_keluarga')->nullable();
             $table->timestamps();
         });
     }
