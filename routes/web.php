@@ -13,10 +13,10 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canLogin'       => Route::has('login'),
+        'canRegister'    => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion'     => PHP_VERSION,
     ]);
 })->name('home');
 
@@ -29,8 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::get('/user', [UserController::class, 'index'])->name('user.index');
-
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
     Route::get('/pasien/create', [PasienController::class, 'create'])->name('pasien.create');
     Route::get('/pasien/{id}', [PasienController::class, 'show'])->name('pasien.show');
@@ -41,6 +39,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
     Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('kegiatan.store');
+    Route::put('/kegiatan/{id}', [KegiatanController::class, 'update'])->name('kegiatan.update');
+    Route::delete('/kegiatan/{id}', [KegiatanController::class, 'destroy'])->name('kegiatan.destroy');
+    Route::get('/kegiatan/laporan', [KegiatanController::class, 'show'])->name('laporan_kegiatan.show');
 
     Route::get('/askep', [AskepController::class, 'index'])->name('askep.index');
     Route::post('/askep', [AskepController::class, 'store'])->name('askep.store');

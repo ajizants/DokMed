@@ -107,10 +107,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                 <header
                     id="main"
-                    data-aos="fade-up"
-                    data-aos-duration="2000"
-                    data-aos-easing="ease-in-sine"
-                    data-aos-delay="500"
+                    // data-aos="fade-up"
+                    // data-aos-duration="2000"
+                    // data-aos-easing="ease-in-sine"
+                    // data-aos-delay="500"
                     className="top-0 sticky z-50 flex justify-between gap-2 py-3 px-8 lg:grid-cols-3 shadow-lg bg-cyan-400 dark:bg-gray-950 bg-transparent-10"
                 >
                     <div className="flex">
