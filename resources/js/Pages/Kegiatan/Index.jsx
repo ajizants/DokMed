@@ -1,30 +1,47 @@
 import PaginatedTable from "@/Components/Table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import CreateKegiatanForm from "./Partials/Create";
 import Swal from "sweetalert2";
 import { router } from "@inertiajs/react";
 import Toast from "@/Components/Toast";
 import FloatingInput from "@/Components/FloatingInput";
 import ButtonBlue from "@/Components/ButtonBlue";
-
-const columns = [
-    {
-        Header: "Actions",
-        accessor: "actions",
-        disableSortBy: true,
-    },
-    { Header: "Kegiatan", accessor: "kegiatan" },
-    { Header: "Keterangan", accessor: "keterangan" },
-    { Header: "Tanggal", accessor: "tanggal" },
-    { Header: "Waktu Mulai", accessor: "waktu_mulai" },
-    { Header: "Waktu Selesai", accessor: "waktu_selesai" },
-    { Header: "Nama User", accessor: "name_user" },
-    { Header: "ID", accessor: "id" },
-];
+import DownloadPdfButton from "@/Components/DownloadPdfButton";
 
 export default function Index({ auth, data_kegiatan }) {
+    const columns = [
+        {
+            Header: "Actions",
+            accessor: "actions",
+            disableSortBy: true,
+            Cell: ({ row }) => (
+                <div className="flex space-x-2">
+                    <button
+                        onClick={() => handleEdit(row.original)}
+                        className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
+                    >
+                        Edit
+                    </button>
+                    <button
+                        onClick={() => handleDelete(row.original.id)}
+                        className="px-2 py-1 text-sm bg-red-500 text-white rounded"
+                    >
+                        Delete
+                    </button>
+                </div>
+            ),
+        },
+        { Header: "Kegiatan", accessor: "kegiatan" },
+        { Header: "Keterangan", accessor: "keterangan" },
+        { Header: "Tanggal", accessor: "tanggal" },
+        { Header: "Waktu Mulai", accessor: "waktu_mulai" },
+        { Header: "Waktu Selesai", accessor: "waktu_selesai" },
+        { Header: "Nama User", accessor: "name_user" },
+        { Header: "ID", accessor: "id" },
+    ];
     const [editMode, setEditMode] = useState(false);
     const [selectedData, setSelectedData] = useState({
         kegiatan: "",
@@ -35,10 +52,19 @@ export default function Index({ auth, data_kegiatan }) {
         user_id: "",
         name_user: "",
     });
+    const [kegiatan, setKegiatan] = useState(data_kegiatan);
     const [tanggal, setTanggal] = useState({
         tanggal_awal: new Date().toISOString().split("T")[0],
         tanggal_akhir: new Date().toISOString().split("T")[0],
     });
+
+    const [btnLoading, setBtnLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const resetEditMode = () => {
+        setEditMode(false);
+        setSelectedData(null);
+    };
 
     const handleEdit = (data) => {
         console.log("🚀 ~ handleEdit ~ data:", data);
@@ -53,8 +79,6 @@ export default function Index({ auth, data_kegiatan }) {
         // Scroll ke atas
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
-
-    const [kegiatan, setKegiatan] = useState([]);
 
     const handleDelete = async (id) => {
         Swal.fire({
@@ -106,37 +130,53 @@ export default function Index({ auth, data_kegiatan }) {
         setTanggal({ ...tanggal, [event.target.id]: event.target.value });
     };
 
-    const handleFilter = () => {
-        router.get(route("kegiatan.index"), {
-            tanggal_awal: tanggal.tanggal_awal,
-            tanggal_akhir: tanggal.tanggal_akhir,
-        });
+    const handleFilter = async () => {
+        setBtnLoading(true);
+        try {
+            const response = await axios.post("/api/kegiatan/filter", {
+                tanggal_awal: tanggal.tanggal_awal,
+                tanggal_akhir: tanggal.tanggal_akhir,
+            });
+
+            setKegiatan(response.data); // ✅ Perbarui data tabel
+        } catch (error) {
+            console.error("Gagal memuat data:", error);
+            if (error.response && error.response.status === 404) {
+                Toast.fire({
+                    icon: "warning",
+                    title: error.response.data.message,
+                });
+                setErrorMessage(error.response.data.message); // Simpan pesan error
+                setKegiatan([]); // Kosongkan data tabel
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: "Terjadi kesalahan!",
+                });
+            }
+        }
+        setBtnLoading(false);
     };
 
-    const resetEditMode = () => {
-        setEditMode(false);
-        setSelectedData(null);
-    };
-
-    const kegiatanDatas = data_kegiatan.map((data) => ({
-        ...data,
-        actions: (
-            <div className="flex space-x-2">
-                <button
-                    onClick={() => handleEdit(data)}
-                    className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-                >
-                    Edit
-                </button>
-                <button
-                    onClick={() => handleDelete(data.id)}
-                    className="px-2 py-1 text-sm bg-red-500 text-white rounded"
-                >
-                    Delete
-                </button>
-            </div>
-        ),
-    }));
+    // const kegiatanDatas = data_kegiatan.map((data) => ({
+    //     ...data,
+    //     actions: (
+    //         <div className="flex space-x-2">
+    //             <button
+    //                 onClick={() => handleEdit(data)}
+    //                 className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
+    //             >
+    //                 Edit
+    //             </button>
+    //             <button
+    //                 onClick={() => handleDelete(data.id)}
+    //                 className="px-2 py-1 text-sm bg-red-500 text-white rounded"
+    //             >
+    //                 Delete
+    //             </button>
+    //         </div>
+    //     ),
+    // }));
 
     return (
         <AuthenticatedLayout
@@ -185,24 +225,23 @@ export default function Index({ auth, data_kegiatan }) {
                                                 onChange={handleChange}
                                             />
                                         </div>
-                                        <div className="relative">
-                                            <ButtonBlue
-                                                type="submit"
-                                                onClick={handleFilter}
-                                            >
-                                                Filter
-                                            </ButtonBlue>
-                                        </div>
+                                        <ButtonBlue
+                                            type="submit"
+                                            onClick={handleFilter}
+                                            disabled={btnLoading}
+                                        >
+                                            {btnLoading
+                                                ? "Sedang Mencari Data..."
+                                                : "Filter"}
+                                        </ButtonBlue>
+                                        <DownloadPdfButton />
                                     </div>
                                 </div>
                             </div>
-                            <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
+                            <h2 className="mt-6 font-bold text-2xl text-center text-gray-800 dark:text-gray-200 leading-tight">
                                 Data Kegiatan
                             </h2>
-                            <PaginatedTable
-                                data={kegiatanDatas}
-                                columns={columns}
-                            />
+                            <PaginatedTable data={kegiatan} columns={columns} />
                         </div>
                     </div>
                 </div>

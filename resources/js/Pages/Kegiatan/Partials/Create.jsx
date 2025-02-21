@@ -96,9 +96,14 @@ const CreateKegiatanForm = ({
         });
     };
 
+    const [loadReset, setLoadReset] = useState(false);
     const resetForm = () => {
+        setLoadReset(true);
         reset();
         resetEditMode();
+        setTimeout(() => {
+            setLoadReset(false);
+        }, 1000);
     };
 
     return (
@@ -167,8 +172,12 @@ const CreateKegiatanForm = ({
                     <ButtonGreen type="submit" disabled={processing}>
                         {editMode ? "Update" : "Simpan"}
                     </ButtonGreen>
-                    <ButtonRed type="button" onClick={resetForm}>
-                        Reset
+                    <ButtonRed
+                        type="button"
+                        onClick={resetForm}
+                        disabled={loadReset}
+                    >
+                        {loadReset ? "Sedang Reset Form..." : "Reset"}
                     </ButtonRed>
                 </div>
             </form>

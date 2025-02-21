@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -19,4 +20,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
+    Route::post('/kegiatan/filter', [KegiatanController::class, 'filterData']);
 });

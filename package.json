@@ -28,6 +28,7 @@
         "classnames": "^2.5.1",
         "react-select": "^5.8.0",
         "react-toastify": "^10.0.5",
+        "recharts": "^2.15.1",
         "sweetalert2": "^11.6.13"
     }
 }

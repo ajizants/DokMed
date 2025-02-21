@@ -37,12 +37,32 @@ class KegiatanController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function filterData(Request $request)
     {
-        //
+        // dd($request->all());
+        $dataKegiatan = Kegiatan::with('user')
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->whereBetween('tanggal', [$request->tanggal_awal, $request->tanggal_akhir])
+            ->get()
+            ->map(function ($data) {
+                return [
+                    'id'            => $data->id,
+                    'kegiatan'      => $data->kegiatan,
+                    'tanggal'       => $data->tanggal,
+                    'waktu_mulai'   => $data->waktu_mulai,
+                    'waktu_selesai' => $data->waktu_selesai,
+                    'keterangan'    => $data->keterangan,
+                    'name_user'     => $data->user->name,
+                    'user_id'       => $data->user_id,
+                ];
+            });
+
+        if (empty($dataKegiatan) || $dataKegiatan->isEmpty() || $dataKegiatan->count() === 0 || $dataKegiatan === []) {
+            return response()->json(['message' => 'Data Kegiatan dari tanggal ' . $request->tanggal_awal . ' sampai ' . $request->tanggal_akhir . ' tidak ditemukan'], 404);
+        }
+
+        return response()->json($dataKegiatan);
     }
 
     /**

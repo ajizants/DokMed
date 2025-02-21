@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PaginatedTable = ({ data, columns }) => {
+const PaginatedTable = ({ data, columns, errorMessage }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
@@ -58,28 +58,41 @@ const PaginatedTable = ({ data, columns }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentItems.map((item, index) => (
-                            <tr
-                                key={index}
-                                className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-                            >
-                                <td className="px-2 py-3  text-sm text-gray-500 dark:text-gray-400">
-                                    {indexOfFirstItem + index + 1}
-                                </td>
-                                {columns.map((column) => (
-                                    <td
-                                        key={column.accessor}
-                                        className="px-2 py-3  text-sm text-gray-500 dark:text-gray-400"
-                                    >
-                                        {item[column.accessor]}
+                        {currentItems.length > 0 ? (
+                            currentItems.map((item, index) => (
+                                <tr
+                                    key={index}
+                                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                                >
+                                    <td className="px-2 py-3 text-sm text-gray-500 dark:text-gray-400">
+                                        {indexOfFirstItem + index + 1}
                                     </td>
-                                ))}
+                                    {columns.map((column) => (
+                                        <td
+                                            key={column.accessor}
+                                            className="px-2 py-3 text-sm text-gray-500 dark:text-gray-400"
+                                        >
+                                            {item[column.accessor]}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td
+                                    colSpan={columns.length + 1}
+                                    className="text-center text-red-500 p-4 border"
+                                >
+                                    {errorMessage || "Tidak ada data tersedia."}
+                                </td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
+
             {/* Pagination */}
+            {/* {totalPages > 1 && ( */}
             <div className="mt-4 flex justify-between items-center">
                 <button
                     className="px-4 py-2 bg-gray-300 dark:bg-gray-600 rounded-md"
@@ -99,6 +112,7 @@ const PaginatedTable = ({ data, columns }) => {
                     Next
                 </button>
             </div>
+            {/* )} */}
         </div>
     );
 };
