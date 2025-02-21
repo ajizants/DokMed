@@ -25,4 +25,8 @@ class PdfController extends Controller
             'url' => asset("storage/pdfs/{$filename}"),
         ]);
     }
+    public function view()
+    {
+        
+    }
 }

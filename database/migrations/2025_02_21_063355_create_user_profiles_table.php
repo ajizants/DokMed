@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Hubungkan dengan users
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->index(); // Hubungkan dengan users
             $table->string('hp')->nullable();
             $table->string('nip')->nullable();
             $table->string('atasan')->nullable();

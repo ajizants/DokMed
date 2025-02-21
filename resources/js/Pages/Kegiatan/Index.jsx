@@ -75,7 +75,6 @@ export default function Index({ auth, data_kegiatan }) {
             user_id: data.user_id || prev.user_id, // ⏳ Pertahankan user_id jika tidak ada di data
             name_user: data.name_user || prev.name_user, // ⏳ Pertahankan name_user jika tidak ada di data
         }));
-
         // Scroll ke atas
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -149,10 +148,7 @@ export default function Index({ auth, data_kegiatan }) {
                 setErrorMessage(error.response.data.message); // Simpan pesan error
                 setKegiatan([]); // Kosongkan data tabel
             } else {
-                Toast.fire({
-                    icon: "error",
-                    title: "Terjadi kesalahan!",
-                });
+                Toast.fire({ icon: "error", title: "Terjadi kesalahan!" });
             }
         }
         setBtnLoading(false);
@@ -201,8 +197,9 @@ export default function Index({ auth, data_kegiatan }) {
                             />
                         </div>
                         <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg w-full md:col-span-2">
-                            <div className="mb-2">
+                            <div className="my-2">
                                 <div>
+                                    {/* <div className="flex items-center"> */}
                                     <div className="flex items-center">
                                         <div className="relative">
                                             <FloatingInput
@@ -225,6 +222,8 @@ export default function Index({ auth, data_kegiatan }) {
                                                 onChange={handleChange}
                                             />
                                         </div>
+                                    </div>
+                                    <div className="mt-4 w-full sm:mt-0">
                                         <ButtonBlue
                                             type="submit"
                                             onClick={handleFilter}
@@ -236,6 +235,7 @@ export default function Index({ auth, data_kegiatan }) {
                                         </ButtonBlue>
                                         <DownloadPdfButton />
                                     </div>
+                                    {/* </div> */}
                                 </div>
                             </div>
                             <h2 className="mt-6 font-bold text-2xl text-center text-gray-800 dark:text-gray-200 leading-tight">
