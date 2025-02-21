@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
+        $middleware->trustProxies(at: '*');
+
         $middleware->statefulApi();
 
         $middleware->trustProxies(
@@ -29,7 +31,6 @@ return Application::configure(basePath: dirname(__DIR__))
             Request::HEADER_X_FORWARDED_AWS_ELB
         );
 
-        //
     })
 
     ->withExceptions(function (Exceptions $exceptions) {
