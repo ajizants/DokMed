@@ -15,10 +15,10 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin'       => Route::has('login'),
-        'canRegister'    => Route::has('register'),
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion'     => PHP_VERSION,
+        'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
 
@@ -54,7 +54,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/master', [MasterController::class, 'index'])->name('master.index');
 
-    Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
+    Route::get('/generate-pdf', [PdfController::class, 'view']);
+    // Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
     Route::get('/view-pdf', [PdfController::class, 'view']);
 
 });

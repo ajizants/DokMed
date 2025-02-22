@@ -20,8 +20,13 @@ class PdfController extends Controller
      */
     public function generatePDF(Request $request)
     {
-        // Ambil parameter dari request
-        $params = $request->all();
+        $tanggalAwal = $request->query('tanggal_awal');
+        $tanggalAkhir = $request->query('tanggal_akhir');
+
+        $params = [
+            'tanggal_awal' => $tanggalAwal,
+            'tanggal_akhir' => $tanggalAkhir,
+        ];
 
         // Ambil data untuk PDF
         $data = $this->data($params);
@@ -46,13 +51,17 @@ class PdfController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function view()
+    public function view(Request $request)
     {
         // Contoh request untuk view
+        $tanggalAwal = $request->query('tanggal_awal');
+        $tanggalAkhir = $request->query('tanggal_akhir');
+
         $request = [
-            'tanggal_awal'  => '2025-02-01',
-            'tanggal_akhir' => '2025-02-28',
+            'tanggal_awal' => $tanggalAwal,
+            'tanggal_akhir' => $tanggalAkhir,
         ];
+        dd($request);
 
         // Ambil data untuk view
         $data = $this->data($request);
@@ -83,7 +92,7 @@ class PdfController extends Controller
             ->get();
 
         // Format bulan dan tahun dalam bahasa Indonesia
-        $tgl        = $request['tanggal_awal'];
+        $tgl = $request['tanggal_awal'];
         $bulanTahun = Carbon::parse($tgl)->translatedFormat('F Y');
 
         // Ambil profil user
@@ -91,10 +100,10 @@ class PdfController extends Controller
 
         // Siapkan data identitas
         $identitas = (object) [
-            'nama'       => $user->name,
-            'nip'        => $profil->nip,
+            'nama' => $user->name,
+            'nip' => $profil->nip,
             'unit_kerja' => $profil->unit_kerja,
-            'atasan'     => $profil->atasan,
+            'atasan' => $profil->atasan,
             'nip_atasan' => $profil->nip_atasan,
         ];
 
@@ -102,9 +111,9 @@ class PdfController extends Controller
         if ($dataKegiatans->isEmpty()) {
             return [
                 'dataKegiatans' => [],
-                'identitas'     => $identitas,
-                'bulanTahun'    => $bulanTahun,
-                'error'         => 'Tidak ada data kegiatan dalam rentang tanggal yang diberikan.',
+                'identitas' => $identitas,
+                'bulanTahun' => $bulanTahun,
+                'error' => 'Tidak ada data kegiatan dalam rentang tanggal yang diberikan.',
             ];
         }
 

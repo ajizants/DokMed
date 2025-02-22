@@ -157,6 +157,8 @@ export default function Index({ auth, data_kegiatan }) {
         ),
     }));
 
+    //
+
     return (
         <AuthenticatedLayout
             user={auth.user}
