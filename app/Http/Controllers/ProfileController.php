@@ -26,10 +26,10 @@ class ProfileController extends Controller
         // dd($profile);
 
         return Inertia::render('Profile/Edit', [
-            'user'            => $user,                         // Data user utama
-            'userProfile'     => $profile ?? new UserProfile(), // Data profil pengguna
+            'user' => $user, // Data user utama
+            'userProfile' => $profile ?? new UserProfile(), // Data profil pengguna
             'mustVerifyEmail' => $user instanceof MustVerifyEmail,
-            'status'          => session('status'),
+            'status' => session('status'),
         ]);
     }
 
@@ -38,22 +38,23 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-
+        // Ambil ID pengguna yang sedang login
+        $userId = $request->user()->id;
         // Validasi data untuk kedua tabel
         $validated = $request->validate([
-            'name'       => 'required|string|max:255',
-            'email'      => 'required|string|email|max:255|unique:users,email',
-            'hp'         => 'nullable|numeric|digits_between:10,15', // No HP harus angka, 10-15 digit
-            'nip'        => 'nullable|numeric|digits_between:10,18', // NIP harus angka, 10-18 digit
-            'atasan'     => 'nullable|string|max:255',
-            'nip_atasan' => 'nullable|numeric|digits_between:10,18', // NIP atasan harus angka, 10-18 digit
-            'jabatan'    => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $userId, // Mengecualikan email pengguna yang sedang diupdate            'hp'         => 'nullable|numeric|digits_between:10,15', // No HP harus angka, 10-15 digit
+            'hp' => 'nullable|numeric|digits_between:10,14', // hp harus angka, 10-18 digit
+            'nip' => 'nullable|numeric|digits_between:5,18', // NIP harus angka, 10-18 digit
+            'atasan' => 'nullable|string|max:255',
+            'nip_atasan' => 'nullable|numeric|digits_between:5,18', // NIP atasan harus angka, 10-18 digit
+            'jabatan' => 'nullable|string|max:255',
             'unit_kerja' => 'nullable|string|max:255',
         ]);
-
+        // dd($validated);
         $user = User::findOrFail($request->user()->id);
         $user->update([
-            'name'  => $validated['name'],
+            'name' => $validated['name'],
             'email' => $validated['email'],
         ]);
 
@@ -66,10 +67,12 @@ class ProfileController extends Controller
         UserProfile::updateOrCreate(
             ['user_id' => $user->id], // Kondisi pencarian
             [
-                'hp'         => $validated['hp'] ?? null,
-                'nip'        => $validated['nip'] ?? null,
-                'atasan'     => $validated['atasan'] ?? null,
+                'hp' => $validated['hp'] ?? null,
+                'nip' => $validated['nip'] ?? null,
+                'atasan' => $validated['atasan'] ?? null,
                 'nip_atasan' => $validated['nip_atasan'] ?? null,
+                'jabatan' => $validated['jabatan'] ?? null,
+                'unit_kerja' => $validated['unit_kerja'] ?? null,
             ]
         );
 

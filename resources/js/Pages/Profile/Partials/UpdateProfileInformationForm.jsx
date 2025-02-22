@@ -136,28 +136,6 @@ export default function UpdateProfileInformation({
                 </div>
 
                 <div>
-                    <InputLabel
-                        htmlFor="nip_atasan"
-                        value="Nomor Pegawai Atasan"
-                    />
-                    <TextInput
-                        id="nip_atasan"
-                        className="mt-1 block w-full"
-                        value={data.nip_atasan}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            if (/^\d*$/.test(value)) {
-                                // Hanya menerima angka
-                                setData("nip_atasan", value);
-                            }
-                        }}
-                        required
-                        autoComplete="nip_atasan"
-                    />
-                    <InputError className="mt-2" message={errors.nip_atasan} />
-                </div>
-
-                <div>
                     <InputLabel htmlFor="atasan" value="Nama Atasan" />
                     <TextInput
                         id="atasan"
@@ -173,7 +151,7 @@ export default function UpdateProfileInformation({
                 <div>
                     <InputLabel
                         htmlFor="nip_atasan"
-                        value="Nomor Pegawai Atasan"
+                        value="Nomor Induk Atasan"
                     />
                     <TextInput
                         id="nip_atasan"
@@ -198,7 +176,7 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="unit_kerja"
                     />
-                    <InputError className="mt-2" message={errors.nip_atasan} />
+                    <InputError className="mt-2" message={errors.unit_kerja} />
                 </div>
                 <div>
                     <InputLabel htmlFor="jabatan" value="Jabatan" />
@@ -210,7 +188,7 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="jabatan"
                     />
-                    <InputError className="mt-2" message={errors.nip_atasan} />
+                    <InputError className="mt-2" message={errors.jabatan} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
