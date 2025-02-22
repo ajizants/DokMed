@@ -8,6 +8,7 @@ import { Transition } from "@headlessui/react";
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
+    userProfile, // Terima userProfile dari prop
     className = "",
 }) {
     const user = usePage().props.auth.user;
@@ -16,11 +17,16 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            hp: userProfile?.hp || "", // Gunakan userProfile untuk nilai awal
+            nip: userProfile?.nip || "",
+            atasan: userProfile?.atasan || "",
+            nip_atasan: userProfile?.nip_atasan || "",
+            jabatan: userProfile?.jabatan || "",
+            unit_kerja: userProfile?.unit_kerja || "",
         });
 
     const submit = (e) => {
         e.preventDefault();
-
         patch(route("profile.update"));
     };
 
@@ -39,7 +45,6 @@ export default function UpdateProfileInformation({
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         className="mt-1 block w-full"
@@ -49,13 +54,11 @@ export default function UpdateProfileInformation({
                         isFocused
                         autoComplete="name"
                     />
-
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -65,12 +68,11 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="username"
                     />
-
                     <InputError className="mt-2" message={errors.email} />
                 </div>
-                <div>
-                    <InputLabel htmlFor="hp" value="Nomor HP" />
 
+                {/* <div>
+                    <InputLabel htmlFor="hp" value="Nomor HP" />
                     <TextInput
                         id="hp"
                         className="mt-1 block w-full"
@@ -79,12 +81,11 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="hp"
                     />
+                    <InputError className="mt-2" message={errors.hp} />
+                </div> */}
 
-                    <InputError className="mt-2" message={errors.nip} />
-                </div>
-                <div>
+                {/* <div>
                     <InputLabel htmlFor="nip" value="Nomor Pegawai" />
-
                     <TextInput
                         id="nip"
                         className="mt-1 block w-full"
@@ -93,12 +94,71 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="nip"
                     />
+                    <InputError className="mt-2" message={errors.nip} />
+                </div> */}
 
+                <div>
+                    <InputLabel htmlFor="hp" value="Nomor HP" />
+                    <TextInput
+                        id="hp"
+                        className="mt-1 block w-full"
+                        value={data.hp}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (/^\d*$/.test(value)) {
+                                // Hanya menerima angka
+                                setData("hp", value);
+                            }
+                        }}
+                        required
+                        autoComplete="hp"
+                    />
+                    <InputError className="mt-2" message={errors.hp} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="nip" value="Nomor Pegawai" />
+                    <TextInput
+                        id="nip"
+                        className="mt-1 block w-full"
+                        value={data.nip}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (/^\d*$/.test(value)) {
+                                // Hanya menerima angka
+                                setData("nip", value);
+                            }
+                        }}
+                        required
+                        autoComplete="nip"
+                    />
                     <InputError className="mt-2" message={errors.nip} />
                 </div>
+
+                <div>
+                    <InputLabel
+                        htmlFor="nip_atasan"
+                        value="Nomor Pegawai Atasan"
+                    />
+                    <TextInput
+                        id="nip_atasan"
+                        className="mt-1 block w-full"
+                        value={data.nip_atasan}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (/^\d*$/.test(value)) {
+                                // Hanya menerima angka
+                                setData("nip_atasan", value);
+                            }
+                        }}
+                        required
+                        autoComplete="nip_atasan"
+                    />
+                    <InputError className="mt-2" message={errors.nip_atasan} />
+                </div>
+
                 <div>
                     <InputLabel htmlFor="atasan" value="Nama Atasan" />
-
                     <TextInput
                         id="atasan"
                         className="mt-1 block w-full"
@@ -107,15 +167,14 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="atasan"
                     />
-
-                    <InputError className="mt-2" message={errors.nip} />
+                    <InputError className="mt-2" message={errors.atasan} />
                 </div>
+
                 <div>
                     <InputLabel
                         htmlFor="nip_atasan"
                         value="Nomor Pegawai Atasan"
                     />
-
                     <TextInput
                         id="nip_atasan"
                         className="mt-1 block w-full"
@@ -124,8 +183,34 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="nip_atasan"
                     />
-
-                    <InputError className="mt-2" message={errors.nip} />
+                    <InputError className="mt-2" message={errors.nip_atasan} />
+                </div>
+                <div>
+                    <InputLabel
+                        htmlFor="unit_kerja"
+                        value="Unit Kerja / Tempat Bekerja"
+                    />
+                    <TextInput
+                        id="unit_kerja"
+                        className="mt-1 block w-full"
+                        value={data.unit_kerja}
+                        onChange={(e) => setData("unit_kerja", e.target.value)}
+                        required
+                        autoComplete="unit_kerja"
+                    />
+                    <InputError className="mt-2" message={errors.nip_atasan} />
+                </div>
+                <div>
+                    <InputLabel htmlFor="jabatan" value="Jabatan" />
+                    <TextInput
+                        id="jabatan"
+                        className="mt-1 block w-full"
+                        value={data.jabatan}
+                        onChange={(e) => setData("jabatan", e.target.value)}
+                        required
+                        autoComplete="jabatan"
+                    />
+                    <InputError className="mt-2" message={errors.nip_atasan} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
@@ -153,7 +238,6 @@ export default function UpdateProfileInformation({
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
-
                     <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"

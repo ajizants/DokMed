@@ -67,6 +67,9 @@ class RegisteredUserController extends Controller
             'user_id' => $user->id,
         ]);
 
+        //buat role otomatis ke user
+        $user->assignRole('user');
+
         event(new Registered($user));
         Auth::login($user);
 

@@ -16,23 +16,6 @@ export default function Index({ auth, data_kegiatan }) {
         {
             Header: "Actions",
             accessor: "actions",
-            disableSortBy: true,
-            Cell: ({ row }) => (
-                <div className="flex space-x-2">
-                    <button
-                        onClick={() => handleEdit(row.original)}
-                        className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-                    >
-                        Edit
-                    </button>
-                    <button
-                        onClick={() => handleDelete(row.original.id)}
-                        className="px-2 py-1 text-sm bg-red-500 text-white rounded"
-                    >
-                        Delete
-                    </button>
-                </div>
-            ),
         },
         { Header: "Kegiatan", accessor: "kegiatan" },
         { Header: "Keterangan", accessor: "keterangan" },
@@ -154,25 +137,25 @@ export default function Index({ auth, data_kegiatan }) {
         setBtnLoading(false);
     };
 
-    // const kegiatanDatas = data_kegiatan.map((data) => ({
-    //     ...data,
-    //     actions: (
-    //         <div className="flex space-x-2">
-    //             <button
-    //                 onClick={() => handleEdit(data)}
-    //                 className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-    //             >
-    //                 Edit
-    //             </button>
-    //             <button
-    //                 onClick={() => handleDelete(data.id)}
-    //                 className="px-2 py-1 text-sm bg-red-500 text-white rounded"
-    //             >
-    //                 Delete
-    //             </button>
-    //         </div>
-    //     ),
-    // }));
+    const kegiatanDatas = data_kegiatan.map((data) => ({
+        ...data,
+        actions: (
+            <div className="flex space-x-2">
+                <button
+                    onClick={() => handleEdit(data)}
+                    className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
+                >
+                    Edit
+                </button>
+                <button
+                    onClick={() => handleDelete(data.id)}
+                    className="px-2 py-1 text-sm bg-red-500 text-white rounded"
+                >
+                    Delete
+                </button>
+            </div>
+        ),
+    }));
 
     return (
         <AuthenticatedLayout
@@ -196,10 +179,12 @@ export default function Index({ auth, data_kegiatan }) {
                                 resetEditMode={resetEditMode}
                             />
                         </div>
-                        <div className="p-2 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg w-full md:col-span-2">
+                        <div className="p-2 sm:p-8 space-y-3 bg-white dark:bg-gray-800 shadow sm:rounded-lg w-full md:col-span-2">
+                            <h2 className="my-2 font-bold text-2xl text-center text-gray-800 dark:text-gray-200 leading-tight">
+                                Cari Data Kegiatan
+                            </h2>
                             <div className="my-2">
-                                <div>
-                                    {/* <div className="flex items-center"> */}
+                                <div className="sm:flex sm:items-center">
                                     <div className="flex items-center">
                                         <div className="relative">
                                             <FloatingInput
@@ -235,13 +220,12 @@ export default function Index({ auth, data_kegiatan }) {
                                         </ButtonBlue>
                                         <DownloadPdfButton />
                                     </div>
-                                    {/* </div> */}
                                 </div>
                             </div>
-                            <h2 className="mt-6 font-bold text-2xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-                                Data Kegiatan
-                            </h2>
-                            <PaginatedTable data={kegiatan} columns={columns} />
+                            <PaginatedTable
+                                data={kegiatanDatas}
+                                columns={columns}
+                            />
                         </div>
                     </div>
                 </div>

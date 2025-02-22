@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -16,20 +17,17 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    // public function edit(Request $request): Response
-    // {
-    // return Inertia::render('Profile/Edit', [
-    //     'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-    //     'status' => session('status'),
-    // ]);
-    // }
+
     public function edit(Request $request): Response
     {
         $user = Auth::user();
+        // dd($user);
+        $profile = User::find($user->id)->profile;
+        // dd($profile);
 
         return Inertia::render('Profile/Edit', [
-            'user'            => $user,
-            'profile'         => $user->profile ?? new UserProfile(), // Cegah error jika belum ada data profil
+            'user'            => $user,                         // Data user utama
+            'userProfile'     => $profile ?? new UserProfile(), // Data profil pengguna
             'mustVerifyEmail' => $user instanceof MustVerifyEmail,
             'status'          => session('status'),
         ]);
@@ -40,15 +38,42 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Validasi data untuk kedua tabel
+        $validated = $request->validate([
+            'name'       => 'required|string|max:255',
+            'email'      => 'required|string|email|max:255|unique:users,email',
+            'hp'         => 'nullable|numeric|digits_between:10,15', // No HP harus angka, 10-15 digit
+            'nip'        => 'nullable|numeric|digits_between:10,18', // NIP harus angka, 10-18 digit
+            'atasan'     => 'nullable|string|max:255',
+            'nip_atasan' => 'nullable|numeric|digits_between:10,18', // NIP atasan harus angka, 10-18 digit
+            'jabatan'    => 'nullable|string|max:255',
+            'unit_kerja' => 'nullable|string|max:255',
+        ]);
+
+        $user = User::findOrFail($request->user()->id);
+        $user->update([
+            'name'  => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
+        $user->save();
 
-        $request->user()->save();
+        // Update atau buat data di tabel user_profiles
+        UserProfile::updateOrCreate(
+            ['user_id' => $user->id], // Kondisi pencarian
+            [
+                'hp'         => $validated['hp'] ?? null,
+                'nip'        => $validated['nip'] ?? null,
+                'atasan'     => $validated['atasan'] ?? null,
+                'nip_atasan' => $validated['nip_atasan'] ?? null,
+            ]
+        );
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit')->with('status', 'Update Profile Berhasil..');
     }
 
     /**

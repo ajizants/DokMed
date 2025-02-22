@@ -10,11 +10,13 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->index(); // Hubungkan dengan users
-            $table->string('hp')->nullable();
-            $table->string('nip')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->index();
+            $table->bigInteger('hp')->nullable();
+            $table->bigInteger('nip')->nullable();
             $table->string('atasan')->nullable();
-            $table->string('nip_atasan')->nullable();
+            $table->bigInteger('nip_atasan')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('unit_kerja')->nullable();
             $table->timestamps();
         });
     }
