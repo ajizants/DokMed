@@ -49,7 +49,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <img
                         src="/jumbotron-bg.jpg"
                         alt="Jumbotron Background"
-                        className="absolute inset-0 h-screen w-full object-left object-cover"
+                        className="absolute inset-0 h-screen w-full object-center object-cover"
                     />
 
                     {/* Overlay */}
@@ -237,31 +237,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 className="flex items-center justify-center rounded p-8 md:p-4"
                             >
                                 <p className="lg:text-xl text-center md:text-left  font-serif text-gray-700 dark:text-gray-200">
-                                    Digitalisasi dokumentasi medis merupakan
-                                    transformasi penting dalam dunia kesehatan
-                                    yang mengubah cara informasi medis dicatat,
-                                    disimpan, dan diakses. Dengan beralih dari
-                                    catatan fisik ke sistem elektronik,
-                                    digitalisasi memungkinkan pencatatan data
-                                    pasien secara lebih efisien, akurat, dan
-                                    mudah diakses oleh tenaga kesehatan.
-                                    Teknologi ini mendukung integrasi informasi
-                                    dari berbagai sumber, memungkinkan akses
-                                    cepat ke riwayat medis pasien, dan
-                                    meningkatkan koordinasi antarprofesional
-                                    dalam perawatan pasien. Selain itu,
-                                    digitalisasi mengurangi risiko kesalahan
-                                    medis yang disebabkan oleh ketidakjelasan
-                                    tulisan tangan atau kehilangan dokumen
-                                    fisik, serta memastikan keamanan dan privasi
-                                    data pasien melalui enkripsi dan kontrol
-                                    akses yang ketat. Di era modern ini,
-                                    digitalisasi dokumentasi medis juga membuka
-                                    peluang untuk analisis data secara lebih
-                                    mendalam, yang dapat digunakan untuk
-                                    penelitian, pengembangan kebijakan
-                                    kesehatan, dan peningkatan kualitas layanan
-                                    kesehatan secara keseluruhan.
+                                    Digitalisasi dokumentasi medis mengubah
+                                    pencatatan, penyimpanan, dan akses informasi
+                                    kesehatan secara lebih efisien dan akurat.
+                                    Dengan sistem elektronik, tenaga kesehatan
+                                    dapat mengakses riwayat pasien dengan cepat,
+                                    meningkatkan koordinasi, serta mengurangi
+                                    risiko kesalahan medis. Selain memastikan
+                                    keamanan data melalui enkripsi, digitalisasi
+                                    juga mendukung analisis data untuk
+                                    penelitian, kebijakan kesehatan, dan
+                                    peningkatan layanan.
                                 </p>
                             </div>
                         </div>
