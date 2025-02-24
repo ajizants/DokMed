@@ -72,7 +72,9 @@ const MobileNav = ({ user }) => {
                 </div>
             )}
             <div className="lg:hidden fixed bottom-0 left-0 z-20 w-full h-16 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-600">
-                <div className="grid h-full max-w-lg grid-cols-5 mt-2 mx-auto font-medium">
+                <div
+                    className={`grid h-full max-w-lg mt-2 mx-auto font-medium ${userRole === "user" ? "grid-cols-3" : "grid-cols-5"}`}
+                >
                     <NavButton
                         iconPath="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"
                         label="Home"
@@ -80,31 +82,30 @@ const MobileNav = ({ user }) => {
                         active={route().current("dashboard")}
                     />
                     {(userRole === "admin" || userRole === "nakes") && (
-                        <NavButton
-                            iconPath="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Z"
-                            label="Pendaftaran"
-                            href={route("pendaftaran.index")}
-                            active={route().current("pendaftaran.index")}
-                        />
-                    )}
-                    {(userRole === "admin" || userRole === "nakes") && (
-                        <NavButton
-                            iconPath="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"
-                            label="Askep"
-                            href={route("askep.index")}
-                            active={route().current("askep.index")}
-                        />
-                    )}
-                    {(userRole === "admin" || userRole === "user") && (
-                        <NavButton
-                            iconPath="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"
-                            label="Kegiatan"
-                            href={route("kegiatan.index")}
-                            active={route().current("kegiatan.index")}
-                        />
+                        <>
+                            <NavButton
+                                iconPath="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Z"
+                                label="Pendaftaran"
+                                href={route("pendaftaran.index")}
+                                active={route().current("pendaftaran.index")}
+                            />
+
+                            <NavButton
+                                iconPath="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"
+                                label="Askep"
+                                href={route("askep.index")}
+                                active={route().current("askep.index")}
+                            />
+                        </>
                     )}
                     <NavButton
-                        iconPath="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"
+                        iconPath="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"
+                        label="Kegiatan"
+                        href={route("kegiatan.index")}
+                        active={route().current("kegiatan.index")}
+                    />
+                    <NavButton
+                        iconPath="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"
                         label="Lainnya"
                         onClick={() => setShowingNavigationUp((prev) => !prev)}
                     />
