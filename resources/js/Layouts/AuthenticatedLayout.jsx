@@ -5,7 +5,7 @@ import TopBar from "@/Components/TopBar";
 import SideBar from "@/Components/SideBar";
 
 export default function Authenticated({ user, header, children }) {
-    console.log("🚀 ~ Authenticated ~ user:", user);
+    // console.log("🚀 ~ Authenticated ~ user:", user);
     const userRole = user.roles[0];
     return (
         <>

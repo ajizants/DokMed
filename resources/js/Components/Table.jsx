@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 const PaginatedTable = ({ data, columns, errorMessage }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 
-    // Filter data based on search query
-    const filteredData = data.filter((item) =>
-        columns.some((column) => {
-            const value = item[column.accessor];
-            return typeof value === "string"
-                ? value.toLowerCase().includes(searchQuery.toLowerCase())
-                : String(value)
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase());
-        }),
-    );
+    // Filter data based on search query (optimized with useMemo)
+    const filteredData = useMemo(() => {
+        return data.filter((item) =>
+            columns.some((column) => {
+                const value = item[column.accessor];
+                return value
+                    ? value
+                          .toString()
+                          .toLowerCase()
+                          .includes(searchQuery.toLowerCase())
+                    : false;
+            }),
+        );
+    }, [data, searchQuery, columns]);
+    console.log("🚀 ~ PaginatedTable ~ errorMessage:", errorMessage);
 
     // Calculate pagination data
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
     // Handle page change
     const handlePageChange = (page) => {
-        setCurrentPage(page);
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
     };
 
     return (
@@ -33,24 +39,27 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
             {/* Search Input */}
             <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search..."
                 className="mb-4 px-4 py-2 border border-gray-300 rounded-md dark:border-gray-700 w-full"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setCurrentPage(1); // Reset to first page on search
+                }}
             />
 
             {/* Table */}
-            <div className="relative scrollable-content shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left text-gray-700 dark:text-gray-100">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-100 tracking-wider">
                                 No
                             </th>
                             {columns.map((column) => (
                                 <th
                                     key={column.accessor}
-                                    className="px-2 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                                    className="px-2 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-100 tracking-wider"
                                 >
                                     {column.Header}
                                 </th>
@@ -58,11 +67,20 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentItems.length > 0 ? (
+                        {errorMessage !== "" ? (
+                            <tr>
+                                <td
+                                    colSpan={columns.length + 1}
+                                    className="text-center text-red-500 p-4 border"
+                                >
+                                    {errorMessage}
+                                </td>
+                            </tr>
+                        ) : currentItems.length > 0 ? (
                             currentItems.map((item, index) => (
                                 <tr
                                     key={index}
-                                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                                    className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700"
                                 >
                                     <td className="px-2 py-3 text-sm text-gray-500 dark:text-gray-400">
                                         {indexOfFirstItem + index + 1}
@@ -72,7 +90,7 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
                                             key={column.accessor}
                                             className="px-2 py-3 text-sm text-gray-500 dark:text-gray-400"
                                         >
-                                            {item[column.accessor]}
+                                            {item[column.accessor] || "-"}
                                         </td>
                                     ))}
                                 </tr>
@@ -83,7 +101,7 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
                                     colSpan={columns.length + 1}
                                     className="text-center text-red-500 p-4 border"
                                 >
-                                    {errorMessage || "Tidak ada data tersedia."}
+                                    Tidak ada data tersedia.
                                 </td>
                             </tr>
                         )}
@@ -91,28 +109,58 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
                 </table>
             </div>
 
-            {/* Pagination */}
-            {/* {totalPages > 1 && ( */}
-            <div className="mt-4 flex justify-between items-center">
-                <button
-                    className="px-4 py-2 bg-gray-300 dark:bg-gray-600 rounded-md"
-                    disabled={currentPage === 1}
-                    onClick={() => handlePageChange(currentPage - 1)}
-                >
-                    Previous
-                </button>
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Page {currentPage} of {totalPages}
-                </span>
-                <button
-                    className="px-4 py-2 bg-gray-300 dark:bg-gray-600 rounded-md"
-                    disabled={currentPage === totalPages}
-                    onClick={() => handlePageChange(currentPage + 1)}
-                >
-                    Next
-                </button>
-            </div>
-            {/* )} */}
+            {totalPages > 1 && (
+                <div className="mt-4 flex flex-wrap justify-center items-center gap-2 sm:gap-4">
+                    {/* Tombol pertama */}
+                    <button
+                        className="dark:text-gray-300 px-2 py-2 sm:px-3 bg-gray-300 dark:bg-gray-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-400 dark:hover:bg-gray-500 text-sm sm:text-base"
+                        disabled={currentPage === 1}
+                        onClick={() => handlePageChange(1)}
+                        aria-label="First Page"
+                    >
+                        <span className="sm:block hidden">« First</span>
+                        <span className="sm:hidden">«</span>
+                    </button>
+
+                    {/* Tombol sebelumnya */}
+                    <button
+                        className="dark:text-gray-300 px-2 py-2 sm:px-3 bg-gray-300 dark:bg-gray-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-400 dark:hover:bg-gray-500 text-sm sm:text-base"
+                        disabled={currentPage === 1}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        aria-label="Previous Page"
+                    >
+                        <span className="sm:block hidden">‹ Prev</span>
+                        <span className="sm:hidden">◀</span>
+                    </button>
+
+                    {/* Nomor halaman */}
+                    <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                        Page {currentPage} of {totalPages}
+                    </span>
+
+                    {/* Tombol berikutnya */}
+                    <button
+                        className="dark:text-gray-300 px-2 py-2 sm:px-3 bg-gray-300 dark:bg-gray-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-400 dark:hover:bg-gray-500 text-sm sm:text-base"
+                        disabled={currentPage === totalPages}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        aria-label="Next Page"
+                    >
+                        <span className="sm:block hidden">Next ›</span>
+                        <span className="sm:hidden">▶</span>
+                    </button>
+
+                    {/* Tombol terakhir */}
+                    <button
+                        className="dark:text-gray-300 px-2 py-2 sm:px-3 bg-gray-300 dark:bg-gray-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-400 dark:hover:bg-gray-500 text-sm sm:text-base"
+                        disabled={currentPage === totalPages}
+                        onClick={() => handlePageChange(totalPages)}
+                        aria-label="Last Page"
+                    >
+                        <span className="sm:block hidden">Last »</span>
+                        <span className="sm:hidden">»</span>
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

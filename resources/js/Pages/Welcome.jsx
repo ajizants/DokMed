@@ -1,9 +1,6 @@
 import { Link, Head } from "@inertiajs/react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import { useEffect, useState } from "react";
-// import { AOS } from "aos";
-// import "aos/dist/aos.css";
-
 import FooterApp from "@/Components/Footer";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
@@ -46,13 +43,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
-            <div className=" bg-gray-50 text-black/50 dark:bg-gray-950 dark:text-white/50">
+            <div className=" bg-gray-50 text-black dark:bg-gray-950">
                 <div className="relative">
                     {/* Background Image */}
                     <img
                         src="/jumbotron-bg.jpg"
                         alt="Jumbotron Background"
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="absolute inset-0 h-screen w-full object-left object-cover"
                     />
 
                     {/* Overlay */}
@@ -60,12 +57,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                     {/* Content Section */}
                     <section className="relative z-10 h-screen">
-                        <div className="px-4 mx-auto h-screen max-w-screen-xl text-center py-24 md:py-32">
-                            <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none dark:text-white text-slate-900 md:text-5xl lg:text-6xl">
-                                Transformasi Dokumen Medis Anda dengan
-                                Dokumentasi yang Aman dan Mudah Diakses
-                            </h1>
-                            <p className="mb-8 text-lg font-normal dark:text-gray-300 text-slate-900 lg:text-xl sm:px-16 lg:px-48">
+                        <div className="px-4 mx-auto h-screen max-w-screen-xl py-24 md:py-32">
+                            <div className="flex justify-start w-1/2">
+                                <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-slate-900 md:text-5xl lg:text-6xl [text-shadow:_-1px_-1px_0_white,_1px_-1px_0_white,_-1px_1px_0_white,_1px_1px_0_white]">
+                                    Transformasi Dokumen Medis Anda dengan
+                                    Dokumentasi yang Aman dan Mudah Diakses
+                                </h1>
+                            </div>
+                            <p className="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 lg:px-48">
                                 Permudah praktik kesehatan Anda dengan layanan
                                 dokumentasi medis kami yang komprehensif,
                                 memastikan catatan pasien yang akurat dan aman
@@ -181,13 +180,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         )}
                     </nav>
                 </header>
-                <main className="min-h-screen max-w-6xl mx-auto mt-10">
+                <main className="min-h-screen max-w-5xl mx-auto mt-10">
                     <div className="p-4 space-y-32">
                         <div
                             data-aos="fade-up"
                             data-aos-duration="2000"
                             data-aos-easing="ease-in-sine"
-                            data-aos-delay="500"
+                            // data-aos-delay="500"
                             className="space-y-4 gap-4 mb-4 md:grid md:grid-cols-2 md:space-y-0"
                         >
                             <div className="flex items-center justify-center rounded">
@@ -221,6 +220,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                         <div className="space-y-4 gap-4  mb-4 md:grid md:grid-cols-2 md:space-y-0">
                             <div
+                                data-aos="fade-in"
+                                data-aos-duration="2000"
+                                data-aos-easing="ease-in-sine"
+                                className="flex items-center justify-center rounded"
+                            >
+                                <img
+                                    src="/RME.jpg"
+                                    className="w-96 h-96 rounded-xl"
+                                />
+                            </div>
+                            <div
                                 data-aos="fade-right"
                                 data-aos-duration="2000"
                                 data-aos-easing="ease-in-sine"
@@ -253,18 +263,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     kesehatan, dan peningkatan kualitas layanan
                                     kesehatan secara keseluruhan.
                                 </p>
-                            </div>
-                            <div
-                                data-aos="fade-left"
-                                data-aos-duration="2000"
-                                data-aos-once="true"
-                                data-aos-easing="ease-in-sine"
-                                className="flex items-center justify-center rounded"
-                            >
-                                <img
-                                    className="h-96 rounded-xl"
-                                    src="https://doctortool.id/wp-content/uploads/2024/05/Website-Digitalisasi-Rekam-Medis-1-1024x576.webp"
-                                />
                             </div>
                         </div>
                     </div>

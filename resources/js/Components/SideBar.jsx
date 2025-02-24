@@ -2,9 +2,9 @@ import React from "react";
 import NavLink from "@/Components/NavLink";
 
 const SideBar = ({ userRole }) => {
-    console.log("🚀 ~ SideBar ~ userRole:", userRole);
+    // console.log("🚀 ~ SideBar ~ userRole:", userRole);
     const user = userRole;
-    console.log("🚀 ~ SideBar ~ user:", userRole === "admin");
+    // console.log("🚀 ~ SideBar ~ user:", userRole === "admin");
     return (
         <aside className="hidden z-50 lg:block fixed h-screen w-20 pt-2 mx-auto px-1 sm:px-2 lg:px-3 bg-fuchsia-950 dark:bg-gray-800 border-r border-t border-gray-500">
             <div className="flex flex-col items-center py-3 space-y-4">

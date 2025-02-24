@@ -5,90 +5,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Kegiatan Harian - {{ $bulanTahun }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @page {
-            size: 220mm 330mm;
-            margin: 20mm;
-        }
-    </style>
+
 </head>
 
-<body class="bg-white text-gray-800">
-    <div class="container mx-auto p-8">
+<body style="background-color: white; color: black; font-family: Arial, sans-serif; margin: 0; padding: 20px;
+">
+    <div style="max-width: 800px; margin: auto;">
+
         <!-- Judul Laporan -->
-        <h1 class="text-2xl font-bold text-center mb-2">Laporan Kegiatan Harian</h1>
-        <h2 class="text-xl text-center mb-3">Bulan {{ $bulanTahun }}</h2>
+        <h1 style="text-align: center; font-size: 14pt; font-weight: bold;">Laporan Kegiatan Harian
+        </h1>
+        <h2 style="text-align: center; font-size: 13pt; ">Bulan {{ $bulanTahun }}</h2>
 
         <!-- Informasi Pegawai -->
-        <div class="mb-8 grid grid-cols-2 gap-2 w-1/3">
-            <p class="font-semibold">Nama</p>
-            <p>: {{ $identitas->nama }}</p>
-
-            <p class="font-semibold">Nomor Induk Pegawai</p>
-            <p>: {{ $identitas->nip }}</p>
-
-            <p class="font-semibold">Unit Kerja</p>
-            <p>: {{ $identitas->unit_kerja }}</p>
-
-            <p class="font-semibold">Hari/Tanggal</p>
-            <p>: {{ $bulanTahun }}</p>
+        <div style="margin-bottom: 20px; width: 60%; font-size: 12pt;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="font-weight: bold;">Nama</td>
+                    <td>: {{ $identitas->nama }}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Nomor Induk Pegawai</td>
+                    <td>: {{ $identitas->nip }}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Unit Kerja</td>
+                    <td>: {{ $identitas->unit_kerja }}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Hari/Tanggal</td>
+                    <td>: {{ $bulanTahun }}</td>
+                </tr>
+            </table>
         </div>
 
         <!-- Tabel Kegiatan -->
-        @if (isset($error))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <strong>Error:</strong> {{ $error }}
-            </div>
-        @else
-            <table class="w-full border-collapse border border-gray-400 mb-8">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border border-gray-400 px-4 py-2" rowspan="2">NO.</th>
-                        <th class="border border-gray-400 px-4 py-2" rowspan="2">KEGIATAN DINAS</th>
-                        <th class="border border-gray-400 px-4 py-2" rowspan="2">TANGGAL KEGIATAN DINAS</th>
-                        <th class="border border-gray-400 px-4 py-2" colspan="2">WAKTU</th>
-                        <th class="border border-gray-400 px-4 py-2" rowspan="2">KETERANGAN</th>
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid black; font-size: 12pt;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="border: 1px solid black; padding: 6px;" rowspan="2">NO.</th>
+                    <th style="border: 1px solid black; padding: 6px;" rowspan="2">KEGIATAN DINAS</th>
+                    <th style="border: 1px solid black; padding: 6px;" rowspan="2">TANGGAL KEGIATAN DINAS</th>
+                    <th style="border: 1px solid black; padding: 6px;" colspan="2">WAKTU</th>
+                    <th style="border: 1px solid black; padding: 6px;" rowspan="2">KETERANGAN</th>
+                </tr>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="border: 1px solid black; padding: 6px;">MULAI</th>
+                    <th style="border: 1px solid black; padding: 6px;">SELESAI</th>
+                </tr>
+            </thead>
+            @if (isset($error))
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid black; text-align: center; padding: 20px;" colspan="6">
+                            <div
+                                style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 10px; border-radius: 5px;">
+                                <strong> {{ $error }} </strong>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="bg-gray-200">
-                        <th class="border border-gray-400 px-4 py-2">MULAI</th>
-                        <th class="border border-gray-400 px-4 py-2">SELESAI</th>
-                    </tr>
-                </thead>
+                </tbody>
+            @else
                 <tbody>
                     @foreach ($dataKegiatans as $index => $kegiatan)
                         <tr>
-                            <td class="border border-gray-400 px-4 py-2 text-center">{{ $index + 1 }}</td>
-                            <td class="border border-gray-400 px-4 py-2">{{ $kegiatan->kegiatan }}</td>
-                            <td class="border border-gray-400 px-4 py-2">
+                            <td style="border: 1px solid black; padding: 6px; text-align: center;">{{ $index + 1 }}
+                            </td>
+                            <td style="border: 1px solid black; padding: 6px;">{{ $kegiatan->kegiatan }}</td>
+                            <td style="border: 1px solid black; padding: 6px;">
                                 {{ \Carbon\Carbon::parse($kegiatan->tanggal)->translatedFormat('d F Y') }}
                             </td>
-                            <td class="border border-gray-400 px-4 py-2 text-center">{{ $kegiatan->waktu_mulai }} WIB
-                            </td>
-                            <td class="border border-gray-400 px-4 py-2 text-center">{{ $kegiatan->waktu_selesai }} WIB
-                            </td>
-                            <td class="border border-gray-400 px-4 py-2">{{ $kegiatan->keterangan }}</td>
+                            <td style="border: 1px solid black; padding: 6px; text-align: center;">
+                                {{ $kegiatan->waktu_mulai }} WIB</td>
+                            <td style="border: 1px solid black; padding: 6px; text-align: center;">
+                                {{ $kegiatan->waktu_selesai }} WIB</td>
+                            <td style="border: 1px solid black; padding: 6px;">{{ $kegiatan->keterangan }}</td>
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
-        @endif
+            @endif
+        </table>
+
         <!-- Tanda Tangan -->
-        <div class="flex justify-between mt-12">
-            <div>
-                <p class="text-white">.</p>
-                <p class="font-semibold">Yang Melapor</p>
-                <p class="mt-4 underline">{{ $identitas->nama }}</p>
-                <p>NIP. {{ $identitas->nip }}</p>
-            </div>
-            <div>
-                <p class="font-semibold">Mengetahui</p>
-                <p class="font-semibold">Atasan Langsung</p>
-                <p class="mt-4 underline">{{ $identitas->atasan }}</p>
-                <p>NIP. {{ $identitas->nip_atasan }}</p>
-            </div>
-        </div>
-    </div>
+        <table style="width: 100%; margin-top: 40px; border-collapse: collapse; text-align: center;">
+            <tr>
+                <td style="font-weight: bold;"></td>
+
+                <td style="font-weight: bold;">Mengetahui</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Yang Melapor</td>
+                <td style="font-weight: bold;">Atasan Langsung</td>
+            </tr>
+            <tr>
+                <td style="height: 80px;"></td> <!-- Ruang untuk tanda tangan -->
+                <td></td>
+            </tr>
+            <tr>
+                <td style="text-decoration: underline;">{{ $identitas->nama }}</td>
+                <td style="text-decoration: underline;">{{ $identitas->atasan }}</td>
+            </tr>
+            <tr>
+                <td>NIP. {{ $identitas->nip }}</td>
+                <td>NIP. {{ $identitas->nip_atasan }}</td>
+            </tr>
+        </table>
 </body>
 
 </html>

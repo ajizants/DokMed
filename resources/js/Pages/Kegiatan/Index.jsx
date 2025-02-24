@@ -12,6 +12,8 @@ import ButtonBlue from "@/Components/ButtonBlue";
 import DownloadPdfButton from "@/Components/DownloadPdfButton";
 
 export default function Index({ auth, data_kegiatan }) {
+    let tanggal_awal = new Date().toISOString().split("T")[0];
+    let tanggal_akhir = new Date().toISOString().split("T")[0];
     const columns = [
         {
             Header: "Actions",
@@ -40,9 +42,11 @@ export default function Index({ auth, data_kegiatan }) {
         tanggal_awal: new Date().toISOString().split("T")[0],
         tanggal_akhir: new Date().toISOString().split("T")[0],
     });
+    console.log("🚀 ~ Index ~ tanggal_awal:", tanggal.tanggal_awal);
 
     const [btnLoading, setBtnLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    console.log("🚀 ~ Index ~ errorMessage:", errorMessage);
 
     const resetEditMode = () => {
         setEditMode(false);
@@ -112,28 +116,65 @@ export default function Index({ auth, data_kegiatan }) {
         setTanggal({ ...tanggal, [event.target.id]: event.target.value });
     };
 
+    // const handleFilter = async () => {
+    //     setBtnLoading(true);
+    //     try {
+    //         const response = await axios.post("/api/kegiatan/filter", {
+    //             tanggal_awal: tanggal.tanggal_awal,
+    //             tanggal_akhir: tanggal.tanggal_akhir,
+    //         });
+
+    //         setKegiatan(response.data); // ✅ Perbarui data tabel
+    //     } catch (error) {
+    //         console.error("Gagal memuat data:", error);
+    //         if (error.response && error.response.status === 404) {
+    //             Toast.fire({
+    //                 icon: "warning",
+    //                 title: error.response.data.message,
+    //             });
+    //             setErrorMessage(error.response.data.message); // Simpan pesan error
+    //             setKegiatan([]); // Kosongkan data tabel
+    //         } else {
+    //             Toast.fire({ icon: "error", title: "Terjadi kesalahan!" });
+    //         }
+    //     }
+    //     setBtnLoading(false);
+    // };
+
     const handleFilter = async () => {
         setBtnLoading(true);
+        setErrorMessage(""); // Reset error message sebelum request
+
         try {
             const response = await axios.post("/api/kegiatan/filter", {
                 tanggal_awal: tanggal.tanggal_awal,
                 tanggal_akhir: tanggal.tanggal_akhir,
             });
 
-            setKegiatan(response.data); // ✅ Perbarui data tabel
+            if (response.data.length === 0) {
+                Toast.fire({
+                    icon: "warning",
+                    title: "Tidak ada data kegiatan dalam rentang tanggal ini.",
+                });
+                setErrorMessage("Tidak ada data kegiatan yang ditemukan.");
+            }
+
+            setKegiatan(response.data); // ✅ Pastikan state diperbarui
         } catch (error) {
             console.error("Gagal memuat data:", error);
+            setKegiatan([]); // Pastikan tabel diperbarui dengan data kosong
+
             if (error.response && error.response.status === 404) {
                 Toast.fire({
                     icon: "warning",
                     title: error.response.data.message,
                 });
-                setErrorMessage(error.response.data.message); // Simpan pesan error
-                setKegiatan([]); // Kosongkan data tabel
+                setErrorMessage(error.response.data.message);
             } else {
                 Toast.fire({ icon: "error", title: "Terjadi kesalahan!" });
             }
         }
+
         setBtnLoading(false);
     };
 
@@ -182,7 +223,7 @@ export default function Index({ auth, data_kegiatan }) {
                             />
                         </div>
                         <div className="p-2 sm:p-8 space-y-3 bg-white dark:bg-gray-800 shadow sm:rounded-lg w-full md:col-span-2">
-                            <h2 className="my-2 font-bold text-2xl text-center text-gray-800 dark:text-gray-200 leading-tight">
+                            <h2 className="mx-2 mb-8  font-bold text-2xl text-center text-gray-800 dark:text-gray-200 leading-tight">
                                 Cari Data Kegiatan
                             </h2>
                             <div className="my-2">
@@ -210,7 +251,7 @@ export default function Index({ auth, data_kegiatan }) {
                                             />
                                         </div>
                                     </div>
-                                    <div className="mt-4 w-full sm:mt-0">
+                                    <div className="mt-4 w-full sm:mt-0 flex items-center">
                                         <ButtonBlue
                                             type="submit"
                                             onClick={handleFilter}
@@ -220,13 +261,14 @@ export default function Index({ auth, data_kegiatan }) {
                                                 ? "Sedang Mencari Data..."
                                                 : "Filter"}
                                         </ButtonBlue>
-                                        <DownloadPdfButton />
+                                        <DownloadPdfButton tanggal={tanggal} />
                                     </div>
                                 </div>
                             </div>
                             <PaginatedTable
                                 data={kegiatanDatas}
                                 columns={columns}
+                                errorMessage={errorMessage}
                             />
                         </div>
                     </div>

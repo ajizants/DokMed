@@ -15,14 +15,12 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canLogin'       => Route::has('login'),
+        'canRegister'    => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion'     => PHP_VERSION,
     ]);
 })->name('home');
-
-Route::get('/pdf', [PdfController::class, 'view'])->name('pdf.tes');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -54,8 +52,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/master', [MasterController::class, 'index'])->name('master.index');
 
-    Route::get('/generate-pdf', [PdfController::class, 'view']);
-    // Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
+    // Route::get('/generate-pdf', [PdfController::class, 'view']);
+    Route::get('/kegiatanPDF', [PdfController::class, 'kegiatanPDF']);
     Route::get('/view-pdf', [PdfController::class, 'view']);
 
 });

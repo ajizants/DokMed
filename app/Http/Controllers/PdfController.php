@@ -18,15 +18,16 @@ class PdfController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function generatePDF(Request $request)
+    public function kegiatanPDF(Request $request)
     {
-        $tanggalAwal = $request->query('tanggal_awal');
+        $tanggalAwal  = $request->query('tanggal_awal');
         $tanggalAkhir = $request->query('tanggal_akhir');
 
         $params = [
-            'tanggal_awal' => $tanggalAwal,
+            'tanggal_awal'  => $tanggalAwal,
             'tanggal_akhir' => $tanggalAkhir,
         ];
+        // dd($params);
 
         // Ambil data untuk PDF
         $data = $this->data($params);
@@ -35,8 +36,14 @@ class PdfController extends Controller
         $pdf = Pdf::loadView('pdf.laporanKegiatan', $data);
 
         // Buat nama file PDF
+        // $filename = 'Laporan Kegiatan ' . $data['identitas']->nama . ', Tgl ' . Carbon::parse($request['tanggal_awal'])->translatedFormat('d-m-Y') . ' s.d. ' . Carbon::parse($request['tanggal_akhir'])->translatedFormat('d-m-Y') . '.pdf';
         $filename = 'laporan-' . Str::random(10) . '.pdf';
-
+        //cek jika sudah ada file tidak usag generate lagi
+        if (Storage::exists("public/pdfs/{$filename}")) {
+            return response()->json([
+                'url' => asset("storage/pdfs/{$filename}"),
+            ]);
+        };
         // Simpan PDF ke penyimpanan sementara
         Storage::put("public/pdfs/{$filename}", $pdf->output());
 
@@ -54,18 +61,20 @@ class PdfController extends Controller
     public function view(Request $request)
     {
         // Contoh request untuk view
-        $tanggalAwal = $request->query('tanggal_awal');
+        $tanggalAwal  = $request->query('tanggal_awal');
         $tanggalAkhir = $request->query('tanggal_akhir');
 
         $request = [
-            'tanggal_awal' => $tanggalAwal,
+            'tanggal_awal'  => $tanggalAwal,
             'tanggal_akhir' => $tanggalAkhir,
         ];
-        dd($request);
+        // dd($request);
 
         // Ambil data untuk view
         $data = $this->data($request);
 
+        $namaFile = 'laporan kegiatan ' . $data['identitas']->nama . ', Tgl ' . Carbon::parse($request['tanggal_awal'])->translatedFormat('d-m-Y') . ' s.d. ' . Carbon::parse($request['tanggal_akhir'])->translatedFormat('d-m-Y') . '.pdf';
+        // dd($namaFile);
         // Jika ada error, tampilkan pesan error
         if (isset($data['error'])) {
             return view('pdf.laporanKegiatan', $data)->with('error', $data['error']);
@@ -92,7 +101,7 @@ class PdfController extends Controller
             ->get();
 
         // Format bulan dan tahun dalam bahasa Indonesia
-        $tgl = $request['tanggal_awal'];
+        $tgl        = $request['tanggal_awal'];
         $bulanTahun = Carbon::parse($tgl)->translatedFormat('F Y');
 
         // Ambil profil user
@@ -100,20 +109,20 @@ class PdfController extends Controller
 
         // Siapkan data identitas
         $identitas = (object) [
-            'nama' => $user->name,
-            'nip' => $profil->nip,
-            'unit_kerja' => $profil->unit_kerja,
-            'atasan' => $profil->atasan,
-            'nip_atasan' => $profil->nip_atasan,
+            'nama'       => $user->name,
+            'nip'        => $profil->nip ?? "-",
+            'unit_kerja' => $profil->unit_kerja ?? "-",
+            'atasan'     => $profil->atasan ?? "-",
+            'nip_atasan' => $profil->nip_atasan ?? "-",
         ];
 
         // Jika tidak ada data kegiatan, kembalikan pesan error
         if ($dataKegiatans->isEmpty()) {
             return [
                 'dataKegiatans' => [],
-                'identitas' => $identitas,
-                'bulanTahun' => $bulanTahun,
-                'error' => 'Tidak ada data kegiatan dalam rentang tanggal yang diberikan.',
+                'identitas'     => $identitas,
+                'bulanTahun'    => $bulanTahun,
+                'error'         => 'Tidak ada data kegiatan dalam rentang tanggal : ' . Carbon::parse($request['tanggal_awal'])->translatedFormat('d F Y') . ' sampai ' . Carbon::parse($request['tanggal_akhir'])->translatedFormat('d F Y'),
             ];
         }
 

@@ -4,6 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import { useState } from "react";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -11,7 +12,12 @@ export default function UpdateProfileInformation({
     userProfile, // Terima userProfile dari prop
     className = "",
 }) {
+    console.log("🚀 ~ status:", status);
+
     const user = usePage().props.auth.user;
+    const [message, setMessage] = useState(
+        "Update your account's profile information and email address.",
+    );
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -24,6 +30,7 @@ export default function UpdateProfileInformation({
             jabatan: userProfile?.jabatan || "",
             unit_kerja: userProfile?.unit_kerja || "",
         });
+    console.log("🚀 ~ errors:", errors);
 
     const submit = (e) => {
         e.preventDefault();
@@ -36,9 +43,15 @@ export default function UpdateProfileInformation({
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                     Profile Information
                 </h2>
+                {/* Tampilkan pesan status jika ada */}
+                {status && (
+                    <div className="mt-1 text-sm text-green-600 dark:text-green-400">
+                        {status}
+                    </div>
+                )}
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                    Update data profil pengguna.
                 </p>
             </header>
 
