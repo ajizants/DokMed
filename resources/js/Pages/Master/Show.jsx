@@ -20,19 +20,18 @@ const Toast = Swal.mixin({
 
 export default function Index({ auth }) {
     const userRole = auth.user.roles?.includes("admin") ? "admin" : "user";
-    console.log("🚀 ~ Index ~ auth:", auth);
     const [activeSection, setActiveSection] = useState("SDKI");
     const [users, setUsers] = useState([]);
     const [columns, setColumns] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleClick = (label) => {
         setActiveSection(label);
     };
 
     const handleEdit = (user) => {
-        console.log("🚀 ~ handleEdit ~ user:", user);
+        // console.log("🚀 ~ handleEdit ~ user:", user);
         Swal.fire({
             title: "Edit User",
             html: `
@@ -93,7 +92,7 @@ export default function Index({ auth }) {
                         console.error("Gagal mengupdate user:", error);
                         Swal.fire(
                             "Error!",
-                            "Gagal memperbarui data user.",
+                            "Gagal memperbarui data user." + error,
                             "error",
                         );
                     });
@@ -203,11 +202,28 @@ export default function Index({ auth }) {
                 { Header: "Aksi", accessor: "actions" },
             ];
 
+            // console.log("🚀 ~ fetchUserData ~ usersData:", usersData);
             setUsers(usersData);
+            // console.log("🚀 ~ fetchUserData ~ users setelah setUsers:", users);
+
             setColumns(columns); // Backend sudah menyiapkan format
         } catch (error) {
-            console.error("Error fetching user data:", error);
-            setError("Gagal mengambil data user. " + error.message);
+            // console.error("Error fetching user data:", error);
+            // console.error("Gagal memuat data:", error);
+            setKegiatan([]); // Pastikan tabel diperbarui dengan data kosong
+
+            if (error.response && error.response.status === 404) {
+                Toast.fire({
+                    icon: "warning",
+                    title: error.response.data.message,
+                });
+                setErrorMessage(error.response.data.message);
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: "Terjadi kesalahan!" + error,
+                });
+            }
         } finally {
             setLoading(false);
         }
@@ -255,7 +271,7 @@ export default function Index({ auth }) {
                             users={users}
                             columns={columns}
                             loading={loading}
-                            error={error}
+                            errorMessage={errorMessage}
                         />
                     )}
                 </div>

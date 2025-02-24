@@ -2,6 +2,8 @@ import PaginatedTable from "@/Components/Table";
 import { useMemo } from "react";
 
 const UserSection = ({ users, columns, loading, error }) => {
+    console.log("🚀 ~ UserSection ~ users:", users);
+    console.log("🚀 ~ UserSection ~ columns:", columns);
     const memoizedColumns = useMemo(() => columns, [columns]); // Hindari re-render jika tidak berubah
     // console.log("🚀 ~ UserSection ~ memoizedColumns:", memoizedColumns);
 

@@ -42,11 +42,10 @@ export default function Index({ auth, data_kegiatan }) {
         tanggal_awal: new Date().toISOString().split("T")[0],
         tanggal_akhir: new Date().toISOString().split("T")[0],
     });
-    console.log("🚀 ~ Index ~ tanggal_awal:", tanggal.tanggal_awal);
+    // console.log("🚀 ~ Index ~ tanggal_awal:", tanggal.tanggal_awal);
 
     const [btnLoading, setBtnLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    console.log("🚀 ~ Index ~ errorMessage:", errorMessage);
 
     const resetEditMode = () => {
         setEditMode(false);
@@ -54,7 +53,7 @@ export default function Index({ auth, data_kegiatan }) {
     };
 
     const handleEdit = (data) => {
-        console.log("🚀 ~ handleEdit ~ data:", data);
+        // console.log("🚀 ~ handleEdit ~ data:", data);
         setEditMode(true);
         setSelectedData((prev) => ({
             ...prev, // 🛠️ Pastikan user_id & name_user tetap ada
@@ -99,7 +98,9 @@ export default function Index({ auth, data_kegiatan }) {
                         onError: (errors) => {
                             Swal.fire({
                                 title: "Gagal!",
-                                text: "Terjadi kesalahan saat menghapus data.",
+                                text:
+                                    "Terjadi kesalahan saat menghapus data." +
+                                    errors,
                                 icon: "error",
                                 showCancelButton: true,
                                 confirmButtonColor: "#3085d6",
@@ -115,31 +116,6 @@ export default function Index({ auth, data_kegiatan }) {
     const handleChange = (event) => {
         setTanggal({ ...tanggal, [event.target.id]: event.target.value });
     };
-
-    // const handleFilter = async () => {
-    //     setBtnLoading(true);
-    //     try {
-    //         const response = await axios.post("/api/kegiatan/filter", {
-    //             tanggal_awal: tanggal.tanggal_awal,
-    //             tanggal_akhir: tanggal.tanggal_akhir,
-    //         });
-
-    //         setKegiatan(response.data); // ✅ Perbarui data tabel
-    //     } catch (error) {
-    //         console.error("Gagal memuat data:", error);
-    //         if (error.response && error.response.status === 404) {
-    //             Toast.fire({
-    //                 icon: "warning",
-    //                 title: error.response.data.message,
-    //             });
-    //             setErrorMessage(error.response.data.message); // Simpan pesan error
-    //             setKegiatan([]); // Kosongkan data tabel
-    //         } else {
-    //             Toast.fire({ icon: "error", title: "Terjadi kesalahan!" });
-    //         }
-    //     }
-    //     setBtnLoading(false);
-    // };
 
     const handleFilter = async () => {
         setBtnLoading(true);

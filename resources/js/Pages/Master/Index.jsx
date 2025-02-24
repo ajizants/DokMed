@@ -20,7 +20,6 @@ const Toast = Swal.mixin({
 
 export default function Index({ auth }) {
     const userRole = auth.user.roles?.includes("admin") ? "admin" : "user";
-    console.log("🚀 ~ Index ~ auth:", auth);
     const [activeSection, setActiveSection] = useState("SDKI");
     const [users, setUsers] = useState([]);
     const [columns, setColumns] = useState([]);
@@ -32,7 +31,6 @@ export default function Index({ auth }) {
     };
 
     const handleEdit = (user) => {
-        console.log("🚀 ~ handleEdit ~ user:", user);
         Swal.fire({
             title: "Edit User",
             html: `
@@ -93,7 +91,7 @@ export default function Index({ auth }) {
                         console.error("Gagal mengupdate user:", error);
                         Swal.fire(
                             "Error!",
-                            "Gagal memperbarui data user.",
+                            "Gagal memperbarui data user." + error,
                             "error",
                         );
                     });

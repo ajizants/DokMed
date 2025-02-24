@@ -19,7 +19,6 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
             }),
         );
     }, [data, searchQuery, columns]);
-    console.log("🚀 ~ PaginatedTable ~ errorMessage:", errorMessage);
 
     // Calculate pagination data
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -67,7 +66,7 @@ const PaginatedTable = ({ data, columns, errorMessage }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {errorMessage !== "" ? (
+                        {errorMessage ? (
                             <tr>
                                 <td
                                     colSpan={columns.length + 1}
