@@ -225,7 +225,8 @@ export default function Index({ auth }) {
 
             <div className="py-6">
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-3">
-                    <ul className=" gap-3 border-b-2 border-blue-700">
+                    <ul className=" gap-3">
+                        {/* <ul className=" gap-3 border-b-2 border-blue-700"> */}
                         {[
                             "SDKI",
                             "SLKI",
@@ -243,7 +244,7 @@ export default function Index({ auth }) {
                     </ul>
                 </div>
 
-                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 mb-3">
+                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 mb-3 -mt-1">
                     {activeSection !== "User" ? (
                         <div className="p-1 sm:p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                             <div className="text-center font-bold dark:text-white">

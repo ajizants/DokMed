@@ -5,8 +5,8 @@ const NavButton = ({ label, onClick, isActive }) => {
     const inactiveClasses = "text-gray-500 bg-neutral-300";
     const hoverClasses =
         "hover:bg-white hover:text-blue-500 hover:dark:text-blue-500 hover:dark:bg-gray-800 duration-200 ease-in-out";
-    const activeClasses =
-        "bg-white dark:bg-gray-800 text-blue-500 border-2 border-b-0 rounded border-blue-700";
+    const activeClasses = "bg-white dark:bg-gray-800 text-blue-500";
+    // "bg-white dark:bg-gray-800 text-blue-500 border-2 border-b-0 rounded border-blue-700";
 
     return (
         <>
