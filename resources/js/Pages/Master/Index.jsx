@@ -225,7 +225,7 @@ export default function Index({ auth }) {
 
             <div className="py-6">
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-3">
-                    <ul className="grid grid-cols-1 sm:grid-flow-col sm:auto-cols-max gap-3 border-b-2 border-blue-700">
+                    <ul className=" gap-3 border-b-2 border-blue-700">
                         {[
                             "SDKI",
                             "SLKI",
@@ -237,6 +237,7 @@ export default function Index({ auth }) {
                                 label={label}
                                 onClick={() => handleClick(label)}
                                 isActive={activeSection === label}
+                                className="whitespace-nowrap px-4"
                             />
                         ))}
                     </ul>
