@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request; // Sesuaikan dengan model aktivitas yang kamu pakai
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,14 +15,11 @@ class DashboardController extends Controller
     {
         // Ambil total user
         $totalUsers = User::count();
-        // dd($totalUsers);
 
         // Ambil total user online (contoh: jika ada kolom "is_online")
-        // $totalOnlineUsers = User::where('is_online', true)->count();
         $totalOnlineUsers = DB::table('sessions')
-            ->whereNotNull('user_id')
+            ->where('last_activity', '>=', Carbon::now()->subMinutes(15)->timestamp)
             ->count();
-        // dd($totalOnlineUsers);
 
         $activitiesPerMonth = Kegiatan::where('user_id', Auth::id())
             ->selectRaw("strftime('%m', tanggal) as month, COUNT(*) as total")
@@ -36,8 +34,6 @@ class DashboardController extends Controller
             })->values();
 
         $activitiesPerMonth = collect($activitiesPerMonth);
-
-        // dd($activitiesPerMonth);
 
         return Inertia::render('Dashboard', [
             'totalUsers'         => $totalUsers,

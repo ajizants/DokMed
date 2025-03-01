@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AsesmenAwalController;
 use App\Http\Controllers\AskepController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KegiatanController;
@@ -46,9 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/kegiatan/laporan', [KegiatanController::class, 'show'])->name('laporan_kegiatan.show');
 
     Route::get('/askep', [AskepController::class, 'index'])->name('askep.index');
-    Route::post('/askep', [AskepController::class, 'store'])->name('askep.store');
-
-    Route::post('/asesmen', [AsesmenAwalController::class, 'store'])->name('asesmen.store');
 
     Route::get('/master', [MasterController::class, 'index'])->name('master.index');
 

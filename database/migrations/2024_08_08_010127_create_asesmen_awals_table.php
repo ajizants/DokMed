@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('alergi_makanan')->nullable();
             $table->text('riwayat_penyakit_dahulu')->nullable();
             $table->text('riwayat_penyakit_keluarga')->nullable();
+            $table->text('riwayat_penyakit_sekarang')->nullable();
             $table->timestamps();
         });
     }

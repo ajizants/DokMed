@@ -198,6 +198,7 @@ export default function Index({ auth }) {
                 { Header: "Nama", accessor: "name" },
                 { Header: "Email", accessor: "email" },
                 { Header: "Role", accessor: "roles" },
+                { Header: "Status", accessor: "is_online" },
                 { Header: "Aksi", accessor: "actions" },
             ];
 

@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
+use App\Models\AsesmenAwal;
 use App\Models\Pasien;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,25 +52,25 @@ class PasienController extends Controller
         dd($request->all());
         $validatedData = $request->validated();
 
-        // Create a new patient record in the database
-        $pasien = new Pasien(); // Assuming `Pasien` is your model
-        $pasien->no_rm = $validatedData['no_rm'];
-        $pasien->nik = $validatedData['nik'];
-        $pasien->nama = $validatedData['nama'];
-        $pasien->alamat = $validatedData['alamat'];
-        $pasien->no_hp = $validatedData['no_hp'];
+                                           // Create a new patient record in the database
+        $pasien            = new Pasien(); // Assuming `Pasien` is your model
+        $pasien->no_rm     = $validatedData['no_rm'];
+        $pasien->nik       = $validatedData['nik'];
+        $pasien->nama      = $validatedData['nama'];
+        $pasien->alamat    = $validatedData['alamat'];
+        $pasien->no_hp     = $validatedData['no_hp'];
         $pasien->tgl_lahir = $validatedData['tgl_lahir'];
-        $pasien->gender = $validatedData['gender'];
+        $pasien->gender    = $validatedData['gender'];
         $pasien->pekerjaan = $validatedData['pekerjaan'];
-        $pasien->id_user = $validatedData['id_user']; // Assuming user ID is optional and defaulting to the current authenticated user
-        // $pasien->id_user = $validatedData['id_user'] ?? auth()->id(); // Assuming user ID is optional and defaulting to the current authenticated user
+        $pasien->id_user   = $validatedData['id_user']; // Assuming user ID is optional and defaulting to the current authenticated user
+                                                        // $pasien->id_user = $validatedData['id_user'] ?? auth()->id(); // Assuming user ID is optional and defaulting to the current authenticated user
 
         $pasien->save(); // Save the patient record
 
         // You can also return a response or redirect
         return response()->json([
             'message' => 'Patient data successfully stored',
-            'data' => $pasien,
+            'data'    => $pasien,
         ], 201); // HTTP 201 indicates a resource has been created
     }
 
@@ -82,12 +82,27 @@ class PasienController extends Controller
      */
     public function show($id)
     {
+
         if (strlen($id) === 16) {
             $patient = Pasien::with('user')->where('nik', $id)->first();
+            // $patient = Pasien::with('user','asesmentAwal')->where('nik', $id)->first();
         } elseif (strlen($id) === 6) {
             $patient = Pasien::with('user')->find($id);
+            // $patient = Pasien::with('user','asesmentAwal')->find($id);
         } else {
             return response()->json(['error' => 'Kode salah, no_rm kurang dari 6 digit atau NIK kurang dari 16 digit'], 400);
+        }
+
+        if ($patient->user == null) {
+            return response()->json(['error' => 'Pasien belum menjadi kelolaan anda, ingin menambahkan menjadi kelolaan anda?'], 404);
+        }
+
+        $asesmenAwal = AsesmenAwal::where('no_rm', $id)->first();
+
+        if ($asesmenAwal) {
+            $patient->asesmenAwal = $asesmenAwal;
+        } else {
+            $patient->asesmenAwal = null;
         }
 
         if ($patient) {

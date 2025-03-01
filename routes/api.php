@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AsesmenAwalController;
+use App\Http\Controllers\AskepController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\UserController;
@@ -21,4 +23,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
     Route::post('/kegiatan/filter', [KegiatanController::class, 'filterData']);
+
+    Route::post('/askep', [AskepController::class, 'store'])->name('askep.store');
+
+    Route::post('/asesmen', [AsesmenAwalController::class, 'store'])->name('asesmen.store');
 });
